@@ -1,41 +1,45 @@
-
-.footer-info{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: auto;
-    padding-top: 30px;
-    padding-bottom: 28px;
-
+footer{
     background-color: #F7F7F7;
 }
 
+.footer-info{
+   
+    text-align: center;
+    width: 320px;
+    height: auto;
+    padding-top: 28.71px;
+    padding-bottom: 29.7px;
+    padding-left: 36px;
+    padding-right: 36px;
+
+    
+}
+
 .footer-text{
+    display: inline;
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 14px;
+    line-height: 16px;
     color: #545454;
 
     margin-right: 10px;
     
 }
-:hover{
-    color: #FF6B08;
-    cursor: pointer;
-}
 .footer-text-goit{
+    display: inline;
+
     font-style:normal;
     font-weight: normal;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 14px;
+    line-height: 16px;
     color: #545454;
 
     margin-left: 10px;
 }
 .footer-text-goit-link{
+
     text-decoration: underline;
     font-style:normal;
     color: #545454;
@@ -47,5 +51,58 @@
     &:hover{
         color: #FF6B08;
         cursor: pointer;
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    .footer-info{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        padding-top: 30px;
+        padding-bottom: 28px;
+    
+        // background-color: #F7F7F7;
+    }
+    .footer-text{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #545454;
+    
+        margin-right: 10px;
+        
+    }
+    :hover{
+        color: #FF6B08;
+        cursor: pointer;
+    }
+    .footer-text-goit{
+        font-style:normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+        color: #545454;
+    
+        margin-left: 10px;
+    }
+    .footer-text-goit-link{
+        text-decoration: underline;
+        font-style:normal;
+        color: #545454;
+    
+        &:focus{
+            color: #FF6B08;
+            cursor: pointer;
+        }
+        &:hover{
+            color: #FF6B08;
+            cursor: pointer;
+        }
     }
 }
