@@ -32,6 +32,6 @@ a {
 /* RESETS end */
 
 body {
-  font-family: 'Roboto', sans-serif;
-  font-size: 12px;
+  font-family: $main-font;
+  font-size: $main-fontsize;
 }
