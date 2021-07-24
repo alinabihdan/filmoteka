@@ -1,5 +1,7 @@
-#MacOS attributes
+#Junk
 .DS_Store
+.vscode/
+.idea/
 
 # Logs
 logs
@@ -105,6 +107,3 @@ dist
 
 # TernJS port file
 .tern-port
-
-
-node_modules/
