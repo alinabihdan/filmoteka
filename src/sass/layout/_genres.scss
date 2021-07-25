@@ -1,0 +1,64 @@
+.genres {
+  background-color: #000;
+  padding: 10px 0;
+}
+
+.filter-thumb {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.genre-btn {
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px 15px;
+  position: relative;
+  color: $header-text-color;
+  border: 1px solid $accent-color;
+  background: none;
+  font-weight: 300;
+  font-family: $main-font;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.genre-btn::after,
+.genre-btn::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.genre-btn::before {
+  bottom: 0;
+  left: 0;
+  border-left: 1px solid $accent-color;
+  border-top: 1px solid $accent-color;
+  transition: 0s ease opacity 0.8s, 0.2s ease width 0.4s, 0.2s ease height 0.6s;
+}
+.genre-btn::after {
+  top: 0;
+  right: 0;
+  border-right: 1px solid $accent-color;
+  border-bottom: 1px solid $accent-color;
+  transition: 0s ease opacity 0.4s, 0.2s ease width, 0.2s ease height 0.2s;
+}
+.genre-btn:hover::before,
+.genre-btn:hover::after {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+}
+.genre-btn:hover::before {
+  transition: 0s ease opacity 0s, 0.2s ease height, 0.2s ease width 0.2s;
+}
+.genre-btn:hover:after {
+  transition: 0s ease opacity 0.4s, 0.2s ease height 0.4s, 0.2s ease width 0.6s;
+}
+.genre-btn:hover {
+  background: rgba(255, 107, 8, 0.3);
+}
