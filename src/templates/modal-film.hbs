@@ -1,0 +1,26 @@
+<img class="film-poster"src="https://image.tmdb.org/t/p/w500/{{poster_path}}" alt="{{original_title}}">
+<div class="film-main-content">
+    <h2 class="film-title">{{title}}</h2>
+    <div class="film-information">
+        <ul class="left-column">
+            <li>Vote / Votes</li>
+            <li>Popularity</li>
+            <li>Original Title</li>
+            <li>Genre</li>
+        </ul>
+        <ul class="right-column">
+            <li>
+                <span class="film-vote">{{vote_average}}</span>
+                <span class="left-column"> / </span>
+                <span class="film-votes">{{vote_count}}</span>
+            </li>
+            <li>{{popularity}}</li>
+            <li class="film-original-title">{{original_title}}</li>
+            <li class="film-genres">
+                {{#each genres}}<span class="genres-punctuation">{{this.name}}</span>{{/each}}
+            </li>
+        </ul>
+    </div>
+    <p class="film-description-title">About</p>
+    <p class="film-description">{{overview}}</p>
+</div>
