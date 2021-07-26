@@ -4,9 +4,10 @@
         width: 100vw;
         padding: 20px;
         background-color: rgba(0, 0, 0, 0.25);
-        position: absolute;
+        position: fixed;
         top: 0;
         left: -100%;
+        overflow: scroll;
 
         transition: all 1000ms ease-in;
 
