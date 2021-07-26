@@ -1,0 +1,15 @@
+// ==================Slider from library Swiper===================
+.swiper-container {
+    width: 100%;
+    height: auto;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+.swiper-slide {
+    flex-shrink: 0.07;
+    background-position: center;
+    background-size: cover;
+    width: 500px;
+    height: 300px;
+} 
