@@ -35,3 +35,9 @@ body {
   font-family: $main-font;
   font-size: $main-fontsize;
 }
+
+// class to hide elements
+
+.disappear {
+  display: none;
+}

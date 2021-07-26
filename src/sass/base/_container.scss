@@ -6,7 +6,7 @@
   margin: 0 auto;
 
   @include screen('mobile') {
-    width: 480px;
+    width: 320px;
   }
   @include screen('tablet') {
     width: 768px;

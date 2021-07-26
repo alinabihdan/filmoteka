@@ -1,0 +1,69 @@
+@import 'node_modules/@glidejs/glide/src/assets/sass/glide.core';
+@import 'node_modules/@glidejs/glide/src/assets/sass/glide.theme';
+
+.slider {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
+}
+
+.slider-title {
+  font-family: $main-font;
+  text-align: center;
+  padding-bottom: 20px;
+  color: rgba($color: #000000, $alpha: 0.8);
+  font-weight: 500;
+}
+.glide__slides {
+  align-items: baseline;
+}
+
+.glide__slide {
+  position: relative;
+  width: 99px;
+  height: 149px;
+
+  & + & {
+    margin-left: 5px;
+  }
+
+  @include screen('desktop') {
+    width: 102px;
+  }
+}
+
+.slider-image {
+  width: 100%;
+  border-radius: 3px;
+  object-fit: contain;
+}
+
+.glide__arrow {
+  background-color: $accent-color;
+}
+
+.glide__arrow--left {
+  left: -50px;
+}
+.glide__arrow--right {
+  right: -50px;
+}
+
+.slider-rating {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 20px;
+
+  text-align: center;
+  background-color: $accent-color;
+  color: #000000;
+  font-weight: 500;
+  border-radius: 3px;
+}
