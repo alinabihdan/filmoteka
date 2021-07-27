@@ -14,7 +14,7 @@ function onLibraryButtonClick() {
     refs.searchForm.classList.add('visually-hidden');
     refs.watchedButton.classList.remove('visually-hidden');
     refs.queueButton.classList.remove('visually-hidden');
-
+    refs.sliderSection.classList.add('visually-hidden');
     refs.queueButton.addEventListener('click', onQueueButtonClick);
     renderWatchedList(); //функция которая рендерит список просмотренных фильмов
 }

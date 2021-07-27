@@ -8,6 +8,7 @@ export default {
   genreButtons: document.querySelectorAll('.genre-btn'),
   clearGenresButton: document.getElementById('genre-clear'),
   slider: document.getElementById('slider-list'),
+  sliderSection: document.querySelector('.slider'),
   movieContainer: document.querySelector('.movie-list'),
   libraryButton: document.querySelector('.my-library-link'),
   homeButton: document.querySelector('.home-link'),
