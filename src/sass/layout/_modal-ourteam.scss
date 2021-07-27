@@ -13,3 +13,60 @@
     width: 500px;
     height: 300px;
 } 
+.swiper-pagination-bullet{
+    background: #ff6b01;
+}
+.swiper-card{
+    width: 250px;
+    border: 2px rgb(99, 98, 59) solid;
+    border-radius: 4px;
+    text-align: center;
+    background-color: #fff;
+    color: black;
+    @include font(14px, 24px);
+}
+.swiper-card-img{
+    
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+
+.footer-modal{
+    // display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    background-color: rgb(104, 100, 100);
+
+    padding: 20px 50px 20px 20px;
+    overflow:hidden;
+    @include font(14px, 24px);
+}
+.modal-tittle{
+    text-align: center;
+    text-decoration: underline;
+    text-align: center;
+    color: #ff6b01;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.modal-tittle-second{
+    text-align: center;
+    color: #ff6b01;
+}
+.footer-modal-close-btn{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 130px;
+    height: 130px;
+    fill: #ff6b01;
+    text-align: center;
+}
+.close-btn{
+    align-self: center;
+}
