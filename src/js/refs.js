@@ -18,4 +18,5 @@ export default {
   modalFilmRenderField: document.querySelector('#film-template'),
   modalFilmBlackdrop: document.querySelector('.film-blackdrop'),
   bodyEl: document.querySelector('body'),
+  buttonToTop: document.getElementById('btn-to-top'),
 };
