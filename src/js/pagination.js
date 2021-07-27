@@ -1,7 +1,7 @@
 // selecting required element
 const element = document.querySelector('.pagination ul');
 let totalPages = 20;
-let page = 10;
+let page = 4;
 
 //calling function with passing parameters and adding inside element which is ul tag
 element.innerHTML = createPagination(totalPages, page);
@@ -14,7 +14,7 @@ function createPagination(totalPages, page) {
     //show the next button if the page value is greater than 1
     liTag += `<li class="btn prev" onclick="createPagination(totalPages, ${
       page - 1
-    })"><span><i class="fas fa-angle-left"></i> Prev</span></li>`;
+    })"><span><i class="fas fa-arrow-left"></i></span></li>`;
   }
 
   if (page > 2) {
@@ -71,7 +71,7 @@ function createPagination(totalPages, page) {
     //show the next button if the page value is less than totalPage(20)
     liTag += `<li class="btn next" onclick="createPagination(totalPages, ${
       page + 1
-    })"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+    })"><span><i class="fas fa-arrow-right"></i></span></li>`;
   }
   element.innerHTML = liTag; //add li tag inside ul tag
   return liTag; //reurn the li tag

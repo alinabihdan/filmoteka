@@ -1,33 +1,21 @@
-// @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
-// * {
-//   margin: 0;
-//   padding: 0;
-//   box-sizing: border-box;
-//   font-family: 'Poppins', sans-serif;
-// }
-// body {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   background: #20b2aa;
-//   min-height: 100vh;
-//   padding: 10px;
-// }
+// Pagination styles
+
 .pagination ul {
   width: 100%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   background: #fff;
   padding: 8px;
-  border-radius: 50px;
-  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
 }
+
 .pagination ul li {
-  color: #20b2aa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
   list-style: none;
-  line-height: 45px;
-  text-align: center;
-  font-size: 18px;
+  @include font(12px, 16px);
   font-weight: 500;
   cursor: pointer;
   user-select: none;
@@ -35,11 +23,10 @@
 }
 .pagination ul li.numb {
   list-style: none;
-  height: 45px;
-  width: 45px;
-  margin: 0 3px;
-  line-height: 45px;
-  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  margin: 0;
+  border-radius: 5px;
 }
 .pagination ul li.numb.first {
   margin: 0px 3px 0 -5px;
@@ -48,17 +35,21 @@
   margin: 0px -5px 0 3px;
 }
 .pagination ul li.dots {
-  font-size: 22px;
+  font-size: 12px;
   cursor: default;
 }
 .pagination ul li.btn {
-  padding: 0 20px;
-  border-radius: 50px;
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
 }
-.pagination li.active,
+.pagination li.active {
+  color: #fff;
+  background: #ff6b08;
+}
+
 .pagination ul li.numb:hover,
 .pagination ul li:first-child:hover,
 .pagination ul li:last-child:hover {
-  color: #fff;
-  background: #20b2aa;
+  background: #f7f7f7;
 }
