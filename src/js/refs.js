@@ -15,4 +15,7 @@ export default {
   watchedButton: document.querySelector('.watched-btn'),
   queueButton: document.querySelector('.queue-btn'),
   moviesGallery: document.querySelector('.movies'),
+  modalFilmRenderField: document.querySelector('#film-template'),
+  modalFilmBlackdrop: document.querySelector('.film-blackdrop'),
+  bodyEl: document.querySelector('body'),
 };
