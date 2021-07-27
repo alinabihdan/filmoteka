@@ -34,10 +34,15 @@ a {
 body {
   font-family: $main-font;
   font-size: $main-fontsize;
+
+  &.modal-open {
+    overflow: hidden;
+  }
 }
 
 // class to hide elements
 
-.disappear {
+.disappear,
+.is-hidden {
   display: none;
 }
