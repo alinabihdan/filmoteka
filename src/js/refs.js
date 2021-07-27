@@ -15,4 +15,5 @@ export default {
   watchedButton: document.querySelector('.watched-btn'),
   queueButton: document.querySelector('.queue-btn'),
   moviesGallery: document.querySelector('.movies'),
+  buttonToTop: document.getElementById('btn-to-top'),
 };
