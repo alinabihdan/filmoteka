@@ -18,4 +18,10 @@
     padding-left: 71px;
     padding-right: 71px;
   }
+
+  .header & {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

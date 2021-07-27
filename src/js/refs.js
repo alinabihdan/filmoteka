@@ -9,4 +9,10 @@ export default {
   clearGenresButton: document.getElementById('genre-clear'),
   slider: document.getElementById('slider-list'),
   movieContainer: document.querySelector('.movie-list'),
+  libraryButton: document.querySelector('.my-library-link'),
+  homeButton: document.querySelector('.home-link'),
+  header: document.querySelector('.header'),
+  watchedButton: document.querySelector('.watched-btn'),
+  queueButton: document.querySelector('.queue-btn'),
+  moviesGallery: document.querySelector('.movies'),
 };
