@@ -34,19 +34,26 @@ const swiper = new Swiper('.swiper-container', {
 
 
 
+
 const refs = {
     footerCloseBtn: document.querySelector('#footerCloseBtn'),
-    footerModalWindow: document.querySelector('.footer-modal'),
+    footerModalWindow: document.querySelector('#footer-modal'),
     linkGoIT: document.querySelector('.footer-text-goit-link'),
   };
 
   refs.linkGoIT.addEventListener('click', openGoitModal);
   refs.footerCloseBtn.addEventListener('click', closeGoitModal);
 
-  function openGoitModal(){
+  function openGoitModal(e){
+    e.preventDefault();
     refs.footerModalWindow.classList.remove('footerModalClose');
+    refs.footerModalWindow.classList.add('footer-modal');
+    swiper.update();
+    
   };
 
   function closeGoitModal(){
     refs.footerModalWindow.classList.add('footerModalClose');
+    refs.footerModalWindow.classList.remove('footer-modal');
+
   };

@@ -17,7 +17,9 @@
     background: #ff6b01;
 }
 .swiper-card{
+    margin-top: 10px;
     width: 250px;
+    height: auto;
     border: 2px rgb(99, 98, 59) solid;
     border-radius: 4px;
     text-align: center;
@@ -32,16 +34,17 @@
 }
 
 .footerModalClose{
+    // opacity: 0;
+    // pointer-events: none;
     display: none;
 }
 .footer-modal{
-    // display: none;
+    display: block;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    overflow: hidden;
-    overflow-y: auto;
+    
     transform: translate(-50%, -50%);
     width: 100%;
     height: auto;
@@ -60,8 +63,7 @@
     padding: 20px 50px 20px 20px;
     overflow:hidden;
     @include font(14px, 24px);
-    transition: transform cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    transform: scale(1);
+    
 }
 .modal-tittle{
     text-align: center;
@@ -83,7 +85,4 @@
     height: 130px;
     fill: #ff6b01;
     text-align: center;
-}
-.close-btn{
-    align-self: center;
 }
