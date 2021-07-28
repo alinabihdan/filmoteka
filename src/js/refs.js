@@ -20,5 +20,7 @@ export default {
   modalFilmBlackdrop: document.querySelector('.film-blackdrop'),
   bodyEl: document.querySelector('body'),
   buttonToTop: document.getElementById('btn-to-top'),
+  watchedBtn: document.querySelector('.btn-add-to-watched'),
+  queueBtn: document.querySelector('.btn-add-to-queue'),
   genresContainer: document.getElementById('genre-container'),
 };
