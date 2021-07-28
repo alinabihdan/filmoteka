@@ -29,9 +29,12 @@ class ApiGenres {
 const filmoteka = new ApiGenres();
 
 filmoteka.fetchGenres().then(data => {
-  const markup = genresTemplate(data);
-  console.log(markup);
+  appendButtonsMarkup(data);
 });
+
+function appendButtonsMarkup(data) {
+  refs.genresContainer.insertAdjacentHTML('beforeend', genresTemplate(data));
+}
 // 0: {id: 28, name: "Action"}
 // 1: {id: 12, name: "Adventure"}
 // 2: {id: 16, name: "Animation"}
