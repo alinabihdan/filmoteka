@@ -4,6 +4,7 @@ import modalFilmTpl from '../templates/modal-film.hbs'
 import refs from './refs';
 
 refs.movieContainer.addEventListener('click', fetchAndRenderFilmCard);
+refs.slider.addEventListener('click', fetchAndRenderFilmCard);
 
 function  fetchAndRenderFilmCard (e) {
     if (e.target.nodeName === 'IMG') {
