@@ -1,7 +1,7 @@
 
 import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
-
+import refs from './refs';
 
 import SwiperCore, { EffectCoverflow, Navigation, Pagination } from 'swiper/core';
   // configure Swiper to use modules
@@ -35,11 +35,7 @@ const swiper = new Swiper('.swiper-container', {
 
 
 
-const refs = {
-    footerCloseBtn: document.querySelector('#footerCloseBtn'),
-    footerModalWindow: document.querySelector('#footer-modal'),
-    linkGoIT: document.querySelector('.footer-text-goit-link'),
-  };
+
 
   refs.linkGoIT.addEventListener('click', openGoitModal);
   refs.footerCloseBtn.addEventListener('click', closeGoitModal);

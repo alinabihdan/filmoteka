@@ -81,3 +81,44 @@
     fill: #ff6b01;
     text-align: center;
 }
+
+// ==================socIcon list and link==============================
+
+.socialicon-list {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .socialicon-list-link {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    padding-top: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+  
+    transition-property: background-color;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .socialicon-list-link:hover,
+  .socialicon-list-link:focus {
+    background-color: #ff6b01;
+  }
+  
+  .socialicon-list-link:hover .icon-social,
+  .socialicon-list-link:focus .icon-social {
+    fill: rgb(66, 62, 62);
+  }
+  .social-icon {
+    width: 20px;
+    height: 20px;
+    fill: black;
+    
+    transition-property: fill;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }

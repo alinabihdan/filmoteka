@@ -20,4 +20,7 @@ export default {
   modalFilmBlackdrop: document.querySelector('.film-blackdrop'),
   bodyEl: document.querySelector('body'),
   buttonToTop: document.getElementById('btn-to-top'),
+  footerCloseBtn: document.querySelector('#footerCloseBtn'),
+  footerModalWindow: document.querySelector('#footer-modal'),
+  linkGoIT: document.querySelector('.footer-text-goit-link'),
 };
