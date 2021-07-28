@@ -22,4 +22,5 @@ export default {
   buttonToTop: document.getElementById('btn-to-top'),
   watchedBtn: document.querySelector('.btn-add-to-watched'),
   queueBtn: document.querySelector('.btn-add-to-queue'),
+  genresContainer: document.getElementById('genre-container'),
 };

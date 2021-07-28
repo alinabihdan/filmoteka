@@ -19,6 +19,8 @@ const slider = new Glide('.glide', {
   },
 });
 
+renderTrendySliderMovies();
+
 slider.mount();
 
 // возвращает массив  из 20 объектов фильмов
@@ -27,13 +29,12 @@ function renderTrendySliderMovies() {
   return fetch(url)
     .then(response => response.json())
     .then(({ results }) => {
+      console.log(results);
       return results;
     })
     .then(appendSliderMarkup)
     .catch(error => {});
 }
-
-console.log(renderTrendySliderMovies());
 
 function appendSliderMarkup(results) {
   refs.slider.innerHTML = sliderCardTemplate(results);
