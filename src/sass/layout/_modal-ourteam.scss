@@ -17,10 +17,10 @@
     background: #ff6b01;
 }
 .swiper-card{
-    margin-top: 10px;
+    margin-bottom: 20px;
     width: 250px;
     height: auto;
-    border: 2px rgb(99, 98, 59) solid;
+    border: 2px rgb(139, 135, 4) solid;
     border-radius: 4px;
     text-align: center;
     background-color: #fff;
@@ -34,20 +34,15 @@
 }
 
 .footerModalClose{
-    // opacity: 0;
-    // pointer-events: none;
     display: none;
 }
 .footer-modal{
     display: block;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
     background-color: rgb(104, 100, 100);
 
     padding: 30px 0;
