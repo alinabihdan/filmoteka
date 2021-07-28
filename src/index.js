@@ -6,3 +6,4 @@ import './js/library';
 import './js/pagination';
 import './js/btn-to-close';
 import './js/btn-to-top';
+import './js/localStorageUtl';
