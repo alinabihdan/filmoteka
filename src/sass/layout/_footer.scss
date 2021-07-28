@@ -1,58 +1,101 @@
-footer{
-    background-color: #F7F7F7;
+footer {
+  background-color: #f7f7f7;
 }
 
-.footer-info{
-   
-    text-align: center;
-    width: 320px;
+.footer-info {
+  text-align: center;
+  width: 320px;
+  height: auto;
+  padding-top: 28.71px;
+  padding-bottom: 29.7px;
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+.footer-text {
+  display: inline;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: #545454;
+
+  margin-right: 10px;
+}
+.footer-text-goit {
+  display: inline;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: #545454;
+
+  margin-left: 10px;
+}
+.footer-text-goit-link {
+  text-decoration: underline;
+  font-style: normal;
+  color: #545454;
+
+  &:focus {
+    color: #ff6b08;
+    cursor: pointer;
+  }
+  &:hover {
+    color: #ff6b08;
+    cursor: pointer;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .footer-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     height: auto;
-    padding-top: 28.71px;
-    padding-bottom: 29.7px;
-    padding-left: 36px;
-    padding-right: 36px;
+    padding-top: 30px;
+    padding-bottom: 28px;
 
-    
-}
-
-.footer-text{
-    display: inline;
+    // background-color: #F7F7F7;
+  }
+  .footer-text {
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 16px;
+    line-height: 19px;
     color: #545454;
 
     margin-right: 10px;
-    
-}
-.footer-text-goit{
-    display: inline;
-
-    font-style:normal;
+  }
+  .footer-text-goit {
+    font-style: normal;
     font-weight: normal;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 16px;
+    line-height: 19px;
     color: #545454;
 
     margin-left: 10px;
-}
-.footer-text-goit-link{
-
+  }
+  .footer-text-goit-link {
     text-decoration: underline;
-    font-style:normal;
+    font-style: normal;
     color: #545454;
 
-    &:focus{
-        color: #FF6B08;
-        cursor: pointer;
+    &:focus {
+      color: #ff6b08;
+      cursor: pointer;
     }
-    &:hover{
-        color: #FF6B08;
-        cursor: pointer;
+    &:hover {
+      color: #ff6b08;
+      cursor: pointer;
     }
+  }
 }
+<<<<<<< HEAD
 
 
 @media screen and (min-width: 768px) {
@@ -103,3 +146,5 @@ footer{
         }
     }
 }
+=======
+>>>>>>> 042f1341a829e79e4d4084edbfd7ab78db4179db

@@ -26,6 +26,10 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
+<<<<<<< HEAD
     "swiper": "^6.8.0"
+=======
+    "@glidejs/glide": "^3.4.1"
+>>>>>>> 042f1341a829e79e4d4084edbfd7ab78db4179db
   }
 }
