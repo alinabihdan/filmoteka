@@ -7,6 +7,8 @@ export default {
   sectionGenres: document.getElementById('genres'),
   genreButtons: document.querySelectorAll('.genre-btn'),
   clearGenresButton: document.getElementById('genre-clear'),
+  movieContainer: document.querySelector('.movie-list'),
+  loadMoreBtn: document.querySelector('[data-action="load-more"]'),
   slider: document.getElementById('slider-list'),
   sliderSection: document.querySelector('.slider'),
   movieContainer: document.querySelector('.movie-list'),

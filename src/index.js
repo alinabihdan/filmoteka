@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import './js/movies-gallery';
 import './js/ApiService';
 import './js/slider';
 import './js/modal-film';
