@@ -27,4 +27,6 @@ export default {
   genresContainer: document.getElementById('genre-container'),
   chooseGenreButton: document.querySelector('.choose-button'),
   paginationContainer: document.querySelector('.pagination'),
+  closeBtn: document.querySelector('[data-action = "close"]'),
+  modalWindow: document.querySelector('.film-blackdrop'),
 };
