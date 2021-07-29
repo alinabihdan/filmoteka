@@ -1,11 +1,11 @@
 <ul class="genre-button-list">
     <li class="genre-button-item">
-        <input class="genre-button-input" id="genre-all" type="radio" name="radio" value="1" checked>
+        <input class="genre-button-input visually-hidden"  id="genre-all" type="radio" name="radio" value="1" checked>
         <label class="genre-button-label" for="genre-all">All</label>
     </li>
     {{#each this}}
-    <li class="genre-button-item">
-        <input class="genre-button-input" id="{{name}}" type="radio" name="radio" value="{{id}}">
+    <li class="genre-button-item" data-id="{{id}}">
+        <input class="genre-button-input visually-hidden" id="{{name}}" type="radio" name="radio" value="{{id}}">
         <label class="genre-button-label" for="{{name}}" data-id="{{id}}">{{name}}</label>
     </li>
     {{/each}}

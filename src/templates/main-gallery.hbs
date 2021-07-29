@@ -4,9 +4,7 @@
      <img class="img-card" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}" data-id="{{id}}"/>
       <div class="movie-card">
          <p class="subscribe-item-movie">{{title}}</p>
-         {{#each genre_ids.id}}
-         <span class="subscribe-item">{{this.id}}</span>
-         {{/each}} 
+         <span class="subscribe-item">{{genre_ids}}</span>
          <span class="subscribe-item">&#8402 {{release_date}}</span>
       </div>
   </div>

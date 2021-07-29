@@ -26,4 +26,5 @@ export default {
   queueBtn: document.querySelector('.btn-add-to-queue'),
   genresContainer: document.getElementById('genre-container'),
   chooseGenreButton: document.querySelector('.choose-button'),
+  paginationContainer: document.querySelector('.pagination'),
 };
