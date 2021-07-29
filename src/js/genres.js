@@ -21,8 +21,8 @@ async function onGenreButtonClick(e) {
 
   if (results.length === 0) {
     // onHideBtnClick();
-    clearContainer(refs.moviesGallery);
-    renderMarkup(refs.moviesGallery, oopsTpl);
+    clearContainer(refs.movieContainer);
+    renderMarkup(refs.movieContainer, oopsTpl);
     refs.paginationContainer.style.display = 'none';
     return;
   }
@@ -40,7 +40,7 @@ async function onGenreButtonClick(e) {
     refs.paginationContainer.style.display = 'block';
   }
 
-  refs.moviesGallery.innerHTML = mainGalleryTpl(results);
+  refs.movieContainer.innerHTML = mainGalleryTpl(results);
 }
 
 async function addGenresListeners() {
