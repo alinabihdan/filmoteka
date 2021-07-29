@@ -1,7 +1,7 @@
 const API_KEY = 'api_key=05d7e6695d9ebeb510a995559544df94';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-export default class NewsApiServise {
+export default class MovieApiServise {
     constructor() {
         this.searchQuery = '';
         this.page = 1;

@@ -1,10 +1,10 @@
-import NewsApiServise from './ApiService';
-import movieCardTpl from '../templates/main-gallery.hbs'
+import MovieApiServise from './ApiService';
+import movieCardTpl from '../templates/main-gallery.hbs';
 import refs from './refs';
     
-const newsApiServise = new NewsApiServise();
+const movieApiServise = new MovieApiServise();
 
-newsApiServise.getAllMovies()
+movieApiServise.getAllMovies()
 .then(renderPopularMovie)
 .catch(error => {
     console.log(error);
@@ -18,28 +18,23 @@ function renderPopularMovie (data) {
 }
 
 refs.searchForm.addEventListener('submit', onSearch);
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch (e) {
     e.preventDefault();
 
-    newsApiServise.query = e.currentTarget.elements.query.value;
+    movieApiServise.query = e.currentTarget.elements.query.value;
 
-    if (newsApiServise.query === '') {
+    if (movieApiServise.query === '') {
         return alert('Оповещение: введите название фильма')
     }
-    newsApiServise.resetPage()
+    movieApiServise.resetPage()
 
-    newsApiServise.getMovies().then(resluts => {
+    movieApiServise.getMovies().then(resluts => {
         clearMovieContainer(); 
         renderMovieCard(resluts);
     })
     
     e.currentTarget.elements.query.value = '';
-}
-
-function onLoadMore () {
-    newsApiServise.getMovies().then(renderMovieCard);
 }
 
 function renderMovieCard (resluts) {
@@ -49,3 +44,4 @@ function renderMovieCard (resluts) {
 function clearMovieContainer() {
     refs.movieContainer.innerHTML = '';
 }
+
