@@ -13,6 +13,7 @@ export default {
   sliderSection: document.querySelector('.slider'),
   movieContainer: document.querySelector('.movie-list'),
   libraryButton: document.querySelector('.my-library-link'),
+  logoLink: document.querySelector('.logo-link'),
   homeButton: document.querySelector('.home-link'),
   header: document.querySelector('.header'),
   watchedButton: document.querySelector('.watched-btn'),
