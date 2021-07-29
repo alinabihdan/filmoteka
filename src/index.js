@@ -1,2 +1,2 @@
 import './sass/main.scss';
-import './js/ApiService';
+import './js/movies-gallery';

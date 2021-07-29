@@ -5,4 +5,6 @@ export default {
   sectionGenres: document.getElementById('genres'),
   genreButtons: document.querySelectorAll('.genre-btn'),
   clearGenresButton: document.getElementById('genre-clear'),
+  movieContainer: document.querySelector('.movie-list'),
+  loadMoreBtn: document.querySelector('[data-action="load-more"]'),
 };
