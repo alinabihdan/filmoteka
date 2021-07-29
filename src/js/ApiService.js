@@ -22,7 +22,7 @@ export default class NewsApiServise {
 
 // Запрос на поиск по слову
   getMovies() {
- const url = BASE_URL+'/search/movie?'+API_KEY+`&query=${this.searchQuery}&page=${this.page}`;
+ const url = `${BASE_URL}/search/movie?${API_KEY}&query=${this.searchQuery}&page=${this.page}&language=en-US&language=ru-RU`;
  return fetch(url)
  .then(response => response.json())
  .then(data => {

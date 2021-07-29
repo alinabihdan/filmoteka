@@ -1,10 +1,10 @@
 import refsB from './refs';
 
-const refs = {
-  closeBtn: document.querySelector('[data-action = "close"]'),
-  modalWindow: document.querySelector('.film-blackdrop'),//Тут должен быть класс или айди модалки
-  // modalOverlay: document.querySelector(''), //Тут должен быть класс или айди оверлея модалки 
-}
+// const refs = {
+//   closeBtn: document.querySelector('[data-action = "close"]'),
+//   modalWindow: document.querySelector('.film-blackdrop'),//Тут должен быть класс или айди модалки
+//   // modalOverlay: document.querySelector(''), //Тут должен быть класс или айди оверлея модалки 
+// }
 
 refs.closeBtn.addEventListener('click', closeModal);
 refs.modalWindow.addEventListener('click', overlayClick);
