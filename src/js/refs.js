@@ -26,4 +26,6 @@ export default {
   queueBtn: document.querySelector('.btn-add-to-queue'),
   genresContainer: document.getElementById('genre-container'),
   chooseGenreButton: document.querySelector('.choose-button'),
+  closeBtn: document.querySelector('[data-action = "close"]'),
+  modalWindow: document.querySelector('.film-blackdrop'),
 };
