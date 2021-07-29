@@ -1,5 +1,6 @@
 import Glide from '@glidejs/glide';
 import refs from './refs';
+import filmoteka from './ApiService';
 import sliderCardTemplate from '../templates/slider-film.hbs';
 
 const slider = new Glide('.glide', {
@@ -19,22 +20,14 @@ const slider = new Glide('.glide', {
   },
 });
 
-renderTrendySliderMovies();
-
 slider.mount();
 
-// возвращает массив  из 20 объектов фильмов
-function renderTrendySliderMovies() {
-  const url = refs.BASE_URL + 'trending/all/day?' + refs.API_KEY;
-  return fetch(url)
-    .then(response => response.json())
-    .then(({ results }) => {
-      console.log(results);
-      return results;
-    })
-    .then(appendSliderMarkup)
-    .catch(error => {});
-}
+filmoteka
+  .renderTrendySliderMovies()
+  .then(appendSliderMarkup)
+  .catch(error => {
+    console.error();
+  });
 
 function appendSliderMarkup(results) {
   refs.slider.innerHTML = sliderCardTemplate(results);
