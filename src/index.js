@@ -9,3 +9,4 @@ import './js/btn-to-close';
 import './js/btn-to-top';
 import './js/localStorageUtl';
 import './js/genres';
+import './js/notification';
