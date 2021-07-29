@@ -5,7 +5,7 @@
 }
 
 .movie-list.gallery {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .movie-card {
@@ -28,7 +28,7 @@
   // color: $main-text-color;
 }
 
-.subscribe-item{
+.subscribe-item {
   font-family: $main-font;
   font-weight: 500;
   font-size: $main-fontsize;
@@ -45,31 +45,28 @@
 @media screen and (min-width: 767px) {
   .gallery-item {
     margin: 15px;
-    width: calc((100% - 30 px) / 2);
+    width: calc((100% - 30px) / 2);
   }
   .gallery-item:nth-child(2n) {
-  margin-right: 0;
-  }
-  }
-
-  // Исправить стили 
-  @media screen and (min-width: 1024px) {
-    .movie-list.gallery {
-      margin: -15px;
-      padding-bottom: 50px;
-    }
-    .gallery-item {
-      margin: 15px;
-      width: calc((100% - 60px) / 3);
-    }
-    .gallery-item:nth-child(3n) {
     margin-right: 0;
-    }
-    .img-card{
-      width: 274px;
-      height: 398px;
-    }
-    }
+  }
+}
 
-  
-  
+// Исправить стили
+@media screen and (min-width: 1024px) {
+  .movie-list.gallery {
+    margin: -15px;
+    padding-bottom: 50px;
+  }
+  .gallery-item {
+    margin: 15px;
+    width: calc((100% - 60px) / 3);
+  }
+  .gallery-item:nth-child(3n) {
+    margin-right: 0;
+  }
+  .img-card {
+    width: 274px;
+    height: 398px;
+  }
+}
