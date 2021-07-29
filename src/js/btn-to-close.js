@@ -28,5 +28,5 @@ function overlayClick(e) {
 
 function closeModal() {
   refs.modalWindow.classList.remove('is-active'); //Тут должен быть класс/айди который мы убираем с модалки для того чтобы ее спрятать
-  refsB.bodyEl.classList.remove('modal-open');
+  refs.bodyEl.classList.remove('modal-open');
 }
