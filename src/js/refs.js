@@ -21,4 +21,5 @@ export default {
   bodyEl: document.querySelector('body'),
   buttonToTop: document.getElementById('btn-to-top'),
   genresContainer: document.getElementById('genre-container'),
+  chooseGenreButton: document.querySelector('.choose-button'),
 };
