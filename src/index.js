@@ -10,3 +10,5 @@ import './js/btn-to-top';
 import './js/localStorageUtl';
 import './js/genres';
 import './js/home-and-logo-link';
+import './js/notification';
+
