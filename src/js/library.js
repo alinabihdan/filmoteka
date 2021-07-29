@@ -33,16 +33,16 @@ function onHomeButtonClick() {
 function onQueueButtonClick() {
     refs.watchedButton.addEventListener('click', onWatchedButtonClick);
     refs.queueButton.removeEventListener('click', onQueueButtonClick);
-    refs.watchedButton.classList.remove('is-active');
-    refs.queueButton.classList.add('is-active');
+    refs.watchedButton.classList.remove('is-btn-active');
+    refs.queueButton.classList.add('is-btn-active');
     renderQueueList(); //функция которая рендерит список фильмов "Хочу смотреть"
 }
 
 function onWatchedButtonClick() {
     refs.queueButton.addEventListener('click', onQueueButtonClick);
     refs.watchedButton.removeEventListener('click', onWatchedButtonClick);
-    refs.queueButton.classList.remove('is-active');
-    refs.watchedButton.classList.add('is-active');
+    refs.queueButton.classList.remove('is-btn-active');
+    refs.watchedButton.classList.add('is-btn-active');
     renderWatchedList();
 }
 
