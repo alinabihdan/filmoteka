@@ -3,7 +3,7 @@
 // selecting required element
 const element = document.querySelector('.pagination ul');
 let totalPages = 20;
-let page = 10;
+let page = 1;
 
 startPagination();
 
@@ -17,14 +17,36 @@ function startPagination() {
     numb: document.querySelectorAll('.numb'),
     next: document.querySelector('.next'),
   };
-  console.log(pagRefs);
+  // console.log(pagRefs);
 
+  // numb listener
   pagRefs.numb.forEach(el => {
     el.addEventListener('click', () => {
       page = parseInt(el.textContent);
       startPagination();
     });
   });
+
+  // prev listener
+  if (pagRefs.prev) {
+    pagRefs.prev.addEventListener('click', onPrevClick);
+  }
+
+  // next listener
+  if (pagRefs.next) {
+    pagRefs.next.addEventListener('click', onNextClick);
+  }
+}
+
+// handlers
+function onPrevClick() {
+  page -= 1;
+  startPagination();
+}
+
+function onNextClick() {
+  page += 1;
+  startPagination();
 }
 
 //calling function with passing parameters and adding inside element which is ul tag
