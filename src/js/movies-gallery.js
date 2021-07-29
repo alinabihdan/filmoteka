@@ -1,12 +1,6 @@
 import NewsApiServise from './ApiService';
 import movieCardTpl from '../templates/main-gallery.hbs'
-
-// Перенести рефы и сделать импорт
-const refs = {
-    searchForm: document.getElementById('search-form'),
-    movieContainer: document.querySelector('.movie-list'),
-    loadMoreBtn: document.querySelector('[data-action="load-more"]'),
-}
+import refs from './refs';
     
 const newsApiServise = new NewsApiServise();
 
@@ -29,19 +23,19 @@ refs.loadMoreBtn.addEventListener('click', onLoadMore);
 function onSearch (e) {
     e.preventDefault();
 
-    clearMovieContainer();
     newsApiServise.query = e.currentTarget.elements.query.value;
-    console.log (newsApiServise.query);
 
     if (newsApiServise.query === '') {
         return alert('Оповещение: введите название фильма')
     }
     newsApiServise.resetPage()
-    // console.log(searchQuery);
+
     newsApiServise.getMovies().then(resluts => {
-        clearMovieContainer();
+        clearMovieContainer(); 
         renderMovieCard(resluts);
     })
+    
+    e.currentTarget.elements.query.value = '';
 }
 
 function onLoadMore () {
