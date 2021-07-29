@@ -1,7 +1,7 @@
 const API_KEY = 'api_key=05d7e6695d9ebeb510a995559544df94';
 const BASE_URL = 'https://api.themoviedb.org/3';
 
-export default class NewsApiServise {
+class FilmsApiServise {
     constructor() {
         this.searchQuery = '';
         this.page = 1;
@@ -26,7 +26,7 @@ export default class NewsApiServise {
  return fetch(url)
  .then(response => response.json())
  .then(data => {
-    this.incrementPage();
+    // this.incrementPage();
     // console.log(data.results);
     return data.results;
  });
@@ -58,3 +58,6 @@ getElementByID(external_id){
  }
  }
 
+
+const filmsApiService = new FilmsApiServise;
+export default filmsApiService;

@@ -9,5 +9,4 @@ import './js/btn-to-close';
 import './js/btn-to-top';
 import './js/localStorageUtl';
 import './js/genres';
-
-// import './js/film-finder';
+import './js/home-and-logo-link';

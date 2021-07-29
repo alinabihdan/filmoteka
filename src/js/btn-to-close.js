@@ -1,10 +1,4 @@
-import refsB from './refs';
-
-// const refs = {
-//   closeBtn: document.querySelector('[data-action = "close"]'),
-//   modalWindow: document.querySelector('.film-blackdrop'),//Тут должен быть класс или айди модалки
-//   // modalOverlay: document.querySelector(''), //Тут должен быть класс или айди оверлея модалки 
-// }
+import refs from './refs';
 
 refs.closeBtn.addEventListener('click', closeModal);
 refs.modalWindow.addEventListener('click', overlayClick);
@@ -28,5 +22,5 @@ function overlayClick (e) {
 
 function closeModal() {
   refs.modalWindow.classList.remove('is-active'); //Тут должен быть класс/айди который мы убираем с модалки для того чтобы ее спрятать 
-  refsB.bodyEl.classList.remove('modal-open');
+  refs.bodyEl.classList.remove('modal-open');
 }
