@@ -48,10 +48,6 @@ class LocalStorageUtl {
 
     localStorage.setItem(this.filmsToQueue, JSON.stringify(filmsToQueue));
   }
-
-  onclick() {
-    console.log(6);
-  }
 }
 
 const localStorageUtl = new LocalStorageUtl();
