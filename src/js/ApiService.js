@@ -10,14 +10,9 @@ class FilmsApiServise {
   // Запрос на популярные фильмы за неделю для главной страницы
   getAllMovies() {
     const URL_WEEK = BASE_URL + '/trending/movie/week?' + API_KEY + `&page=${this.page}`;
-    return fetch(URL_WEEK)
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-        return data.results;
-      });
+    return fetch(URL_WEEK).then(response => {
+      return response.json();
+    });
   }
 
   // Запрос на поиск по слову

@@ -1,19 +1,24 @@
 import movieCardTpl from '../templates/main-gallery.hbs';
 import refs from './refs';
 import filmoteka from './ApiService';
+import { transformDate, transformGenre } from './changeDateAndGenres';
 
-filmoteka
-  .getAllMovies()
-  .then(renderPopularMovie)
-  .catch(error => {
-    console.log(error);
-  });
+async function renderPopularMovies() {
+  const { page, results, total_pages, total_results } = await filmoteka.getAllMovies();
 
-function renderPopularMovie(data) {
-  const murkup = movieCardTpl(data);
-  // console.log(murkup);
-  refs.movieContainer.innerHTML = murkup;
+  const genresObj = await filmoteka.fetchGenres();
+  const genresList = [...genresObj];
+  console.log(genresList);
+
+  transformDate(results);
+  transformGenre(results, genresList);
+
+  const markup = movieCardTpl(results);
+  refs.movieContainer.insertAdjacentHTML('beforeend', markup);
 }
+
+// вызываем рендер главной страницы
+renderPopularMovies();
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
@@ -49,4 +54,4 @@ function clearMovieContainer() {
   refs.movieContainer.innerHTML = '';
 }
 
-export { renderPopularMovie };
+export { renderPopularMovies };
