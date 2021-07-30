@@ -6,6 +6,7 @@ function addListenerToLibraryBtn() { // вешает слушатели на к�
 
 function onLibraryButtonClick() {
     refs.homeButton.addEventListener('click', onHomeButtonClick);
+    refs.logoLink.addEventListener('click', onHomeButtonClick);
     refs.queueButton.addEventListener('click', onQueueButtonClick);
     refs.header.classList.replace('home-header', 'my-library-header');
     refs.homeButton.classList.remove('current');
@@ -34,6 +35,7 @@ function onHomeButtonClick() {
     refs.queueButton.removeEventListener('click', onQueueButtonClick);
     refs.backToHomeBtn.removeEventListener('click', onHomeButtonClick);
     refs.backToSearchBtn.removeEventListener('click', onHomeButtonClick);
+    refs.logoLink.removeEventListener('click', onHomeButtonClick);
     refs.sliderSection.classList.remove('visually-hidden');
     refs.sectionGenres.classList.remove('visually-hidden');
     refs.movieContainer.classList.remove('visually-hidden');
