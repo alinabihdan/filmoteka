@@ -3,8 +3,20 @@ import { transformDate, transformGenre } from './changeDateAndGenres';
 import genresTemplate from '../templates/genres.hbs';
 import mainGalleryTpl from '../templates/main-gallery.hbs';
 import oopsTpl from '../templates/oops.hbs';
-// экземпляр класса:
 import filmoteka from './ApiService';
+import { renderPopularMovies } from './movies-gallery';
+
+addGenresListeners();
+
+async function addGenresListeners() {
+  await renderGenreButtons();
+
+  const genreBtnList = document.querySelector('.genre-button-list');
+  const allGenresBtn = document.getElementById('li-genre-all');
+
+  genreBtnList.addEventListener('click', onGenreButtonClick);
+  allGenresBtn.addEventListener('click', onAllGenresBtnClick);
+}
 
 async function renderGenreButtons() {
   const genres = await filmoteka.fetchGenres();
@@ -12,8 +24,17 @@ async function renderGenreButtons() {
   refs.genresContainer.insertAdjacentHTML('beforeend', markup);
 }
 
+async function onAllGenresBtnClick(e) {
+  console.log(e.target);
+  if (e.target.classList.contains('js-genre-all-label')) {
+    filmoteka.resetPage();
+    renderPopularMovies();
+  }
+}
+
 async function onGenreButtonClick(e) {
   // e.target.classList.toggle('checked');
+  if (e.target.nodeName !== 'LABEL') return;
   const buttonId = e.target.dataset.id;
   const { page, results, total_pages, total_results } = await filmoteka.fetchMoviesByGenre(
     buttonId,
@@ -43,12 +64,7 @@ async function onGenreButtonClick(e) {
   refs.movieContainer.innerHTML = mainGalleryTpl(results);
 }
 
-async function addGenresListeners() {
-  await renderGenreButtons();
-
-  const genreBtnList = document.querySelector('.genre-button-list');
-  genreBtnList.addEventListener('click', onGenreButtonClick);
-}
+// нужно прописать логику снятия листенеров
 
 // полезные функции
 function renderMarkup(nameContainer, fnTemplates) {
@@ -58,5 +74,3 @@ function renderMarkup(nameContainer, fnTemplates) {
 function clearContainer(nameContainer) {
   nameContainer.innerHTML = '';
 }
-
-addGenresListeners();
