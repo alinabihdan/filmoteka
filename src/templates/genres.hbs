@@ -1,7 +1,7 @@
 <ul class="genre-button-list">
-    <li class="genre-button-item">
+    <li class="genre-button-item js-genre-all" id="li-genre-all">
         <input class="genre-button-input visually-hidden"  id="genre-all" type="radio" name="radio" value="1" checked>
-        <label class="genre-button-label" for="genre-all">All</label>
+        <label class="genre-button-label js-genre-all-label" for="genre-all">All</label>
     </li>
     {{#each this}}
     <li class="genre-button-item" data-id="{{id}}">
