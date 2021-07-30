@@ -2,7 +2,7 @@
 .queue-list {
   padding-top: 45px;
   padding-bottom: 45px;
-  background-color: $film-card-titles-color;
+  background-color: $footer-background-color;
   text-align: center;
 }
 .watched-text,
@@ -13,7 +13,7 @@
   margin-bottom: 20px;
   color: $main-text-color;
   @include screen('tablet') {
-    min-width: 136px;
+    max-width: 680px;
   }
 }
 .back-to-home-btn,
@@ -25,4 +25,8 @@
   min-height: 44px;
   padding-top: 13px;
   padding-bottom: 11px;
+}
+.watched-img,
+.queue-img {
+  margin: 0 auto;
 }

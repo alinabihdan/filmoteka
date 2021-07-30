@@ -1,13 +1,12 @@
 import refs from './refs';
-import watchedGalleryTpl from '../templates/watched-gallery.hbs';
-import queueGalleryTpl from '../templates/queue-gallery.hbs';
 import galleryTpl from '../templates/main-gallery.hbs';
-function addListenersToHomeAndLibrary() { // вешает слушатели на кнопки "Home" и "Library"
+function addListenerToLibraryBtn() { // вешает слушатели на кнопки "Home" и "Library"
     refs.libraryButton.addEventListener('click', onLibraryButtonClick);
-    refs.homeButton.addEventListener('click', onHomeButtonClick);
 }
 
-function onLibraryButtonClick() { 
+function onLibraryButtonClick() {
+    refs.homeButton.addEventListener('click', onHomeButtonClick);
+    refs.queueButton.addEventListener('click', onQueueButtonClick);
     refs.header.classList.replace('home-header', 'my-library-header');
     refs.homeButton.classList.remove('current');
     refs.libraryButton.classList.add('current');
@@ -15,7 +14,10 @@ function onLibraryButtonClick() {
     refs.watchedButton.classList.remove('visually-hidden');
     refs.queueButton.classList.remove('visually-hidden');
     refs.sliderSection.classList.add('visually-hidden');
-    refs.queueButton.addEventListener('click', onQueueButtonClick);
+    refs.sectionGenres.classList.add('visually-hidden');
+    refs.movieContainer.classList.add('visually-hidden');
+    refs.paginationContainer.classList.add('visually-hidden');
+    refs.watchedContainer.classList.remove('visually-hidden');
     renderWatchedList(); //функция которая рендерит список просмотренных фильмов
 }
 
@@ -25,12 +27,23 @@ function onHomeButtonClick() {
     refs.homeButton.classList.add('current');
     refs.searchForm.classList.remove('visually-hidden');
     refs.watchedButton.classList.add('visually-hidden');
+    refs.watchedButton.classList.add('is-btn-active');
     refs.queueButton.classList.add('visually-hidden');
+    refs.queueButton.classList.remove('is-btn-active');
     refs.watchedButton.removeEventListener('click', onWatchedButtonClick);
     refs.queueButton.removeEventListener('click', onQueueButtonClick);
+    refs.backToHomeBtn.removeEventListener('click', onHomeButtonClick);
+    refs.backToSearchBtn.removeEventListener('click', onHomeButtonClick);
+    refs.sliderSection.classList.remove('visually-hidden');
+    refs.sectionGenres.classList.remove('visually-hidden');
+    refs.movieContainer.classList.remove('visually-hidden');
+    refs.watchedContainer.classList.add('visually-hidden');
+    refs.queueContainer.classList.add('visually-hidden');
+    refs.paginationContainer.classList.remove('visually-hidden');
 }
 
 function onQueueButtonClick() {
+    refs.watchedContainer.classList.add('visually-hidden');
     refs.watchedButton.addEventListener('click', onWatchedButtonClick);
     refs.queueButton.removeEventListener('click', onQueueButtonClick);
     refs.watchedButton.classList.remove('is-btn-active');
@@ -39,6 +52,7 @@ function onQueueButtonClick() {
 }
 
 function onWatchedButtonClick() {
+    refs.queueContainer.classList.add('visually-hidden');
     refs.queueButton.addEventListener('click', onQueueButtonClick);
     refs.watchedButton.removeEventListener('click', onWatchedButtonClick);
     refs.queueButton.classList.remove('is-btn-active');
@@ -47,27 +61,23 @@ function onWatchedButtonClick() {
 }
 
 function renderWatchedList() {
-    refs.moviesGallery.innerHTML = '';
     let watched = localStorage.getItem('watched');
     console.log(watched);
     if (watched === null || '') {
-        const markUp = watchedGalleryTpl();
-        console.log(markUp);
-        refs.moviesGallery.innerHTML = markUp;
-    }
+        refs.watchedContainer.classList.remove('visually-hidden');
+        refs.backToHomeBtn.addEventListener('click', onHomeButtonClick);
+    } 
 // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
 }
 
 function renderQueueList() {
-    refs.moviesGallery.innerHTML = '';
     let queue = localStorage.getItem('queue');
     console.log(queue);
     if (queue === null || '') {
-        const markUp = queueGalleryTpl();
-        console.log(markUp);
-        refs.moviesGallery.innerHTML = markUp;
+        refs.queueContainer.classList.remove('visually-hidden');
+        refs.backToSearchBtn.addEventListener('click', onHomeButtonClick);
     }
 // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
 }
 
-addListenersToHomeAndLibrary();
+addListenerToLibraryBtn();
