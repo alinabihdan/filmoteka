@@ -5,6 +5,7 @@ class FilmsApiServise {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.totalPages = 1;
   }
 
   // Запрос на популярные фильмы за неделю для главной страницы
@@ -64,6 +65,7 @@ class FilmsApiServise {
         return results;
       });
   }
+
   incrementPage() {
     this.page += 1;
   }
@@ -82,6 +84,10 @@ class FilmsApiServise {
 
   resetPage() {
     this.page = 1;
+  }
+
+  setTotalPages(pages) {
+    this.totalPages = pages;
   }
 
   get query() {
