@@ -34,6 +34,7 @@ async function onAllGenresBtnClick(e) {
 
 async function onGenreButtonClick(e) {
   // e.target.classList.toggle('checked');
+  if (e.target.nodeName !== 'LABEL') return;
   const buttonId = e.target.dataset.id;
   const { page, results, total_pages, total_results } = await filmoteka.fetchMoviesByGenre(
     buttonId,
