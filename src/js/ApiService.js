@@ -68,6 +68,18 @@ class FilmsApiServise {
     this.page += 1;
   }
 
+  decrementPage() {
+    this.page -= 1;
+  }
+
+  setPage(newPage) {
+    this.page = newPage;
+  }
+
+  getPage() {
+    return this.page;
+  }
+
   resetPage() {
     this.page = 1;
   }

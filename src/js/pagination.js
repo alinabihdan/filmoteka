@@ -1,14 +1,16 @@
 // PAGINATION module
+import filmoteka from './ApiService';
+import { renderPopularMovies } from './movies-gallery';
 
 // selecting required element
 const element = document.querySelector('.pagination ul');
-let totalPages = 20;
-let page = 1;
 
+// {total_results} =
+let totalPages = 20;
 startPagination();
 
 function startPagination() {
-  createPagination(totalPages, page);
+  createPagination(totalPages, filmoteka.page);
 
   //receiving refs after each func call
   const pagRefs = {
@@ -17,12 +19,12 @@ function startPagination() {
     numb: document.querySelectorAll('.numb'),
     next: document.querySelector('.next'),
   };
-  // console.log(pagRefs);
 
   // numb listener
   pagRefs.numb.forEach(el => {
     el.addEventListener('click', () => {
-      page = parseInt(el.textContent);
+      filmoteka.setPage(parseInt(el.textContent));
+      renderPopularMovies();
       startPagination();
     });
   });
@@ -40,12 +42,14 @@ function startPagination() {
 
 // handlers
 function onPrevClick() {
-  page -= 1;
+  filmoteka.decrementPage();
+  renderPopularMovies();
   startPagination();
 }
 
 function onNextClick() {
-  page += 1;
+  filmoteka.incrementPage();
+  renderPopularMovies();
   startPagination();
 }
 
@@ -55,6 +59,8 @@ function createPagination(totalPages, page) {
   let active;
   let beforePage = page - 1;
   let afterPage = page + 1;
+  console.log('numb page: ' + page);
+
   if (page > 1) {
     //show the next button if the page value is greater than 1
     liTag += `<li class="btn prev"><span><i class="fas fa-arrow-left"></i></span></li>`;
@@ -114,6 +120,7 @@ function createPagination(totalPages, page) {
     //show the next button if the page value is less than totalPage(20)
     liTag += `<li class="btn next"><span><i class="fas fa-arrow-right"></i></span></li>`;
   }
-  element.innerHTML = liTag; //add li tag inside ul tag
+  element.innerHTML = '';
+  element.insertAdjacentHTML('beforeend', liTag); //add li tag inside ul tag
   return liTag; //reurn the li tag
 }

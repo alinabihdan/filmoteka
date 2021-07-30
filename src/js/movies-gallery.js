@@ -14,6 +14,7 @@ async function renderPopularMovies() {
   transformGenre(results, genresList);
 
   const markup = movieCardTpl(results);
+  clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
 }
 
