@@ -8,6 +8,7 @@
     position: fixed;
     top: 0;
     left: -100%;
+    z-index: 12;
     overflow: scroll;
 
     transition: all 1000ms ease-in;

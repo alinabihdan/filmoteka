@@ -1,47 +1,56 @@
-import MovieApiServise from './ApiService';
 import movieCardTpl from '../templates/main-gallery.hbs';
 import refs from './refs';
-    
-const movieApiServise = new MovieApiServise();
+import filmoteka from './ApiService';
+import { transformDate, transformGenre } from './changeDateAndGenres';
 
-movieApiServise.getAllMovies()
-.then(renderPopularMovie)
-.catch(error => {
-    console.log(error);
-  });
+async function renderPopularMovies() {
+  const { page, results, total_pages, total_results } = await filmoteka.getAllMovies();
 
-  
-function renderPopularMovie (data) {
-    const murkup = movieCardTpl(data);
-    // console.log(murkup);
-    refs.movieContainer.innerHTML = murkup;
+  const genresObj = await filmoteka.fetchGenres();
+  const genresList = [...genresObj];
+  console.log(genresList);
+
+  transformDate(results);
+  transformGenre(results, genresList);
+
+  const markup = movieCardTpl(results);
+  refs.movieContainer.insertAdjacentHTML('beforeend', markup);
 }
+
+// вызываем рендер главной страницы
+renderPopularMovies();
 
 refs.searchForm.addEventListener('submit', onSearch);
 
-function onSearch (e) {
-    e.preventDefault();
+function onSearch(e) {
+  e.preventDefault();
 
-    movieApiServise.query = e.currentTarget.elements.query.value;
+  filmoteka.query = e.currentTarget.elements.query.value;
 
-    if (movieApiServise.query === '') {
-        return alert('Оповещение: введите название фильма')
-    }
-    movieApiServise.resetPage()
+  if (filmoteka.query === '') {
+    return alert('Оповещение: введите название фильма');
+  }
 
-    movieApiServise.getMovies().then(resluts => {
-        clearMovieContainer(); 
-        renderMovieCard(resluts);
-    })
-    
-    e.currentTarget.elements.query.value = '';
+  filmoteka.resetPage();
+
+  filmoteka.getMovies().then(resluts => {
+    clearMovieContainer();
+    renderMovieCard(resluts);
+  });
+
+  e.currentTarget.elements.query.value = '';
 }
 
-function renderMovieCard (resluts) {
-  refs.movieContainer.insertAdjacentHTML('beforeend', movieCardTpl (resluts));
+function onLoadMore() {
+  filmoteka.getMovies().then(renderMovieCard);
+}
+
+function renderMovieCard(resluts) {
+  refs.movieContainer.insertAdjacentHTML('beforeend', movieCardTpl(resluts));
 }
 
 function clearMovieContainer() {
-    refs.movieContainer.innerHTML = '';
+  refs.movieContainer.innerHTML = '';
 }
 
+export { renderPopularMovies };
