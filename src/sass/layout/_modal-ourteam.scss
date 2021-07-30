@@ -75,7 +75,15 @@
 }
 #footerCloseBtn > span{
   color: #ff6b01;
-  text-shadow: -2px -1px 0px rgb(107, 58, 2);
+  text-shadow: -2px 0px 0px rgb(8, 8, 8);
+
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover,
+  &:focus{
+    color: black;
+  }
 }
 .footer-modal{
     display: block;
