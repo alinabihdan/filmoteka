@@ -22,6 +22,7 @@ export default {
   moviesGallery: document.querySelector('.movies'),
   modalFilmRenderField: document.querySelector('#film-template'),
   modalFilmBlackdrop: document.querySelector('.film-blackdrop'),
+  filmModalField: document.querySelector('.film-modal'),
   bodyEl: document.querySelector('body'),
   buttonToTop: document.getElementById('btn-to-top'),
   watchedBtn: document.querySelector('.btn-add-to-watched'),
