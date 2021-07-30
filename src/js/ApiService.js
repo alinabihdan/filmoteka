@@ -90,6 +90,10 @@ class FilmsApiServise {
     this.totalPages = pages;
   }
 
+  getTotalPages() {
+    return this.totalPages;
+  }
+
   get query() {
     return this.searchQuery;
   }

@@ -16,6 +16,7 @@ async function renderPopularMovies() {
   const markup = movieCardTpl(results);
   clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
+  // filmoteka.setTotalPages(results);
 }
 
 // вызываем рендер главной страницы

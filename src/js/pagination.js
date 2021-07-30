@@ -6,7 +6,7 @@ import { renderPopularMovies } from './movies-gallery';
 const element = document.querySelector('.pagination ul');
 
 // {total_results} =
-let totalPages = 20;
+const totalPages = filmoteka.getTotalPages();
 startPagination();
 
 function startPagination() {
@@ -59,7 +59,6 @@ function createPagination(totalPages, page) {
   let active;
   let beforePage = page - 1;
   let afterPage = page + 1;
-  console.log('numb page: ' + page);
 
   if (page > 1) {
     //show the next button if the page value is greater than 1
@@ -76,6 +75,10 @@ function createPagination(totalPages, page) {
   }
 
   // how many pages or li show before the current li
+  if (totalPages == 1) {
+    beforePage = page + 1;
+  }
+
   if (page == totalPages) {
     beforePage = beforePage - 2;
   } else if (page == totalPages - 1) {
