@@ -21,7 +21,6 @@ async function renderPopularMovies() {
 renderPopularMovies();
 
 refs.searchForm.addEventListener('submit', onSearch);
-refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
   e.preventDefault();
