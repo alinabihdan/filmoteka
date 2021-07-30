@@ -2,8 +2,8 @@
 .swiper-container {
     width: 100%;
     height: auto;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
 
 .swiper-slide {
@@ -18,14 +18,16 @@
 }
 .swiper-button-prev{
   color: #ff6b01;
+  text-shadow: -2px -1px 0px rgb(107, 58, 2);
 }
 .swiper-button-next{
   color:  #ff6b01;
+  text-shadow: -2px -1px 0px rgb(107, 58, 2);
 }
 
 // =====================Card-style====================
 .swiper-card{
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     width: 250px;
     height: auto;
     border: 2px rgb(139, 135, 4) solid;
@@ -52,16 +54,27 @@
 .swiper-card-profession{
   color: $film-card-titles-color;
   font-size:smaller;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .swiper-card-characteristic{
   color: $footer-text-color;
   margin-bottom: 10px;
 }
 
+// ======================modal-window styles==========
 
 .footerModalClose{
     display: none;
+    
+}
+#footer-modal > div > #footerCloseBtn{
+    top: -4px;
+    right: -4px;
+    
+}
+#footerCloseBtn > span{
+  color: #ff6b01;
+  text-shadow: -2px -1px 0px rgb(107, 58, 2);
 }
 .footer-modal{
     display: block;
@@ -72,33 +85,42 @@
     height: 100%;
     background-color: rgb(104, 100, 100);
 
-    padding: 30px 0;
+    padding: 10px 0;
     overflow:hidden;
     @include font(14px, 24px);
     z-index: 99;
+
+    
+    background-image: url("/images/bg-image-footer-modal.jpg");
+    background-size: cover;
 }
+@media screen and (min-device-pixel-ratio: 2),
+  screen and (min-resolution: 192dpi),
+  screen and (min-resolution: 2dppx) {
+  .footer-modal {
+    background-image: url("/images/bg-image-footer-modal.jpg");
+  }
+}
+
+
 .footer-modal-overlay{
     width: 100%;
     height: auto;
-    background-color: rgb(104, 100, 100);
+    background-color: transparent;
 
-    padding: 20px 50px 20px 20px;
-    overflow:hidden;
+    // overflow:hidden;
     @include font(14px, 24px);
     
 }
 .modal-tittle{
     text-align: center;
-    text-decoration: underline;
-    text-align: center;
     color: #ff6b01;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom:2px solid rgb(78, 75, 75);
+    text-shadow: -2px -1px 0px rgba(0, 0, 0, 1);
 }
-.modal-tittle-second{
-    text-align: center;
-    color: #ff6b01;
-}
+
 .footer-modal-close-btn{
     position: absolute;
     top: 20px;
@@ -114,15 +136,17 @@
 .socialicon-list {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5px;
 }
 .socialicon-list-link {
     display: flex;
     align-items: baseline;
     justify-content: center;
-    padding-top: 10px;
-    width: 44px;
-    height: 44px;
+    padding-top: 5px;
+    width: 33px;
+    height: 33px;
     border-radius: 50%;
     background-color: black;
   
