@@ -1,0 +1,122 @@
+.theme-container label {
+  color: white;
+}
+
+// стили для смены фона
+body.light-theme {
+  background-color: white;
+}
+
+body.dark-theme {
+  background-image: url(../images/it-test-mob.jpeg);
+  color: white;
+
+  @include screen('tablet') {
+    background-image: url(../images/it-tablet.jpeg);
+  }
+  @include screen('desktop') {
+    background-image: url(../images/it-desc.jpg);
+  }
+
+  & .header {
+    background: transparent;
+  }
+}
+
+// // cтили самой кнопки
+.theme-switch__input,
+.theme-switch__label {
+  position: absolute;
+  z-index: 1;
+  right: 40px;
+  bottom: -70px;
+
+  @include screen('tablet') {
+    right: 100px;
+    bottom: -60px;
+  }
+}
+.theme-switch__input {
+  opacity: 0;
+}
+
+.theme-switch__input:hover,
+.theme-switch__input:focus {
+  + .theme-switch__label {
+    background-color: lightSlateGray;
+  }
+
+  + .theme-switch__label span::after {
+    background-color: lighten(lightBlue, 10%);
+  }
+}
+
+.theme-switch__label {
+  //   padding: 20px;
+  //   margin: 60px;
+  transition: background-color 200ms ease-in-out;
+  width: 60px;
+  height: 25px;
+  border-radius: 50px;
+  text-align: center;
+  background-color: slateGray;
+  box-shadow: -4px 4px 15px inset rgba(0, 0, 0, 0.4);
+
+  &::before,
+  &::after {
+    font-size: 2rem;
+    position: absolute;
+    transform: translate3d(0, -50%, 0);
+    top: 50%;
+  }
+
+  &::before {
+    content: '\263C';
+    right: 100%;
+    margin-right: 10px;
+    color: orange;
+  }
+
+  &::after {
+    content: '\263E';
+    left: 100%;
+    margin-left: 10px;
+    color: lightSlateGray;
+  }
+
+  span {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 0;
+    width: 100%;
+  }
+
+  span::after {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    content: '';
+    border-radius: 50%;
+    background-color: lightBlue;
+    transition: transform 200ms, background-color 200ms;
+    box-shadow: -3px 3px 8px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.theme-switch__input:checked ~ .theme-switch__label {
+  background-color: lightSlateGray;
+
+  &::before {
+    color: lightSlateGray;
+  }
+
+  &::after {
+    color: turquoise;
+  }
+
+  span::after {
+    transform: translate3d(35px, 0, 0);
+  }
+}
