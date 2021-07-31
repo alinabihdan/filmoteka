@@ -21,8 +21,8 @@ function overlayClick(e) {
 }
 
 function closeModal() {
-  refs.modalWindow.classList.remove('is-active'); //Тут должен быть класс/айди который мы убираем с модалки для того чтобы ее спрятать 
+  refs.modalWindow.classList.remove('is-active'); //Тут должен быть класс/айди который мы убираем с модалки для того чтобы ее спрятать
   refs.bodyEl.classList.remove('modal-open');
   refs.filmModalField.classList.remove('is-active');
+  refs.buttonToTop.classList.remove('visually-hidden');
 }
-
