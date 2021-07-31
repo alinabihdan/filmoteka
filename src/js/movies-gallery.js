@@ -3,6 +3,7 @@ import refs from './refs';
 import filmoteka from './ApiService';
 import { transformDate, transformGenre } from './changeDateAndGenres';
 import { startPagination } from './pagination';
+import swal from 'sweetalert';
 
 async function renderPopularMovies() {
   const { page, results, total_pages, total_results } = await filmoteka.getAllMovies();
@@ -11,7 +12,7 @@ async function renderPopularMovies() {
   const genresList = [...genresObj];
   console.log(genresList);
 
-  filmoteka.setTotalPages(total_pages);
+  filmoteka.totalPages = total_pages;
   transformDate(results);
   transformGenre(results, genresList);
 
@@ -19,9 +20,11 @@ async function renderPopularMovies() {
 
   clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
-
-  //вызываем пагинацию, передаем туда какой запрос пагинировать
   startPagination(renderPopularMovies);
+
+  const mainTitle = "Привет пользователь!";
+  const mainMessage = "Рады приветствовать тебя на нашей страничке! Она предназначена, чтобы облегчить тебе поиск фильмов для просмотра Жми «ОК» и воспользуйся поиском или выбери фильм из списка 'Популярное за неделю'. Также можешь отсортировать фильмы по жанрам. При клике на постер фильма откроется окно с подробной информацией о фильме. Ты можешь добавить фильм в список 'Уже смотрел!' или 'Хочу смотреть!'. Приятного пользования! С любовью студенты GoIT группы CIV-team!";
+  swal(mainTitle, mainMessage,);
 }
 
 // вызываем рендер главной страницы
@@ -33,33 +36,39 @@ async function onSearch(e) {
   if (e !== undefined) {
     e.preventDefault();
 
-    console.log(e.currentTarget.value);
-
     filmoteka.query = e.currentTarget.elements.query.value;
 
-    if (filmoteka.query === '') {
-      return alert('Оповещение: введите название фильма');
+    if (filmoteka.query === '' || !filmoteka.query.trim()) {
+     swal("Поиск не удался", "Введи правильное название фильма и попробуй еще раз", "error", {button: false, timer: 3000,});
+     return;
     }
 
     filmoteka.resetPage();
   }
-
+  
   const { page, results, total_pages, total_results } = await filmoteka.getMovies();
+  const genresObj = await filmoteka.fetchGenres();
+  const genresList = [...genresObj];
+  console.log(genresList);
 
   filmoteka.totalPages = total_pages;
+  transformDate(results);
+  transformGenre(results, genresList);
+
+  filmoteka.totalPages = total_pages;
+
+  if (results.length === 0) {
+    swal("Поиск не удался", "Введи правильное название фильма и попробуй еще раз", "error", {button: false, timer: 3000,}); 
+    return;
+    }
 
   clearMovieContainer();
   renderMovieCard(results);
 
-  //вызываем пагинацию, передаем туда какой запрос пагинировать
+  document.getElementById("search-input").value = "";
+
   startPagination(onSearch);
 
-  // filmoteka.getMovies().then(resluts => {
-  //   clearMovieContainer();
-  //   renderMovieCard(resluts);
-  // });
-
-  // e.currentTarget.elements.query.value = '';
 }
 
 function onLoadMore() {
