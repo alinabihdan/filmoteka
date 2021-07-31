@@ -28,22 +28,33 @@ renderPopularMovies();
 refs.searchForm.addEventListener('submit', onSearch);
 
 async function onSearch(e) {
-  e.preventDefault();
+  if (e !== undefined) {
+    e.preventDefault();
 
-  filmoteka.query = e.currentTarget.elements.query.value;
+    filmoteka.query = e.currentTarget.elements.query.value;
 
-  if (filmoteka.query === '') {
-    return alert('Оповещение: введите название фильма');
+    if (filmoteka.query === '') {
+      return alert('Оповещение: введите название фильма');
+    }
+
+    filmoteka.resetPage();
   }
 
-  filmoteka.resetPage();
+  const { page, results, total_pages, total_results } = await filmoteka.getMovies();
 
-  filmoteka.getMovies().then(resluts => {
-    clearMovieContainer();
-    renderMovieCard(resluts);
-  });
+  filmoteka.totalPages = total_pages;
 
-  e.currentTarget.elements.query.value = '';
+  clearMovieContainer();
+  renderMovieCard(results);
+
+  startPagination(onSearch);
+
+  // filmoteka.getMovies().then(resluts => {
+  //   clearMovieContainer();
+  //   renderMovieCard(resluts);
+  // });
+
+  // e.currentTarget.elements.query.value = '';
 }
 
 function onLoadMore() {

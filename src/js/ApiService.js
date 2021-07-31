@@ -20,13 +20,14 @@ class FilmsApiServise {
   // Запрос на поиск по слову
   getMovies() {
     const url = `${BASE_URL}/search/movie?${API_KEY}&query=${this.searchQuery}&page=${this.page}&language=en-US&language=ru-RU`;
-    return fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        // this.incrementPage();
-        // console.log(data.results);
-        return data.results;
-      });
+    return fetch(url).then(response => {
+      return response.json();
+    });
+    // .then(data => {
+    // this.incrementPage();
+    // console.log(data.results);
+    // return data.results;
+    // });
   }
 
   //Запрос на фильм по id
