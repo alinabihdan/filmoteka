@@ -10,6 +10,7 @@ class FilmsApiServise {
     this.page = 1;
     this.totalPages = 1;
     this.storageData = {};
+    this.genreId = '';
   }
 
   // Запрос на популярные фильмы за неделю для главной страницы
@@ -82,8 +83,8 @@ class FilmsApiServise {
   }
 
   // запрос на поиск по жанру
-  fetchMoviesByGenre(genreId) {
-    const url = `${BASE_URL}/discover/movie?${API_KEY}&with_genres=${genreId}`;
+  fetchMoviesByGenre() {
+    const url = `${BASE_URL}/discover/movie?${API_KEY}&with_genres=${this.genreId}&page=${this.page}`;
     return fetch(url).then(response => response.json());
   }
 

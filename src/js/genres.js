@@ -5,6 +5,7 @@ import mainGalleryTpl from '../templates/main-gallery.hbs';
 import oopsTpl from '../templates/oops.hbs';
 import filmoteka from './ApiService';
 import { renderPopularMovies } from './movies-gallery';
+import { startPagination } from './pagination';
 
 addGenresListeners();
 
@@ -25,7 +26,7 @@ async function renderGenreButtons() {
 }
 
 async function onAllGenresBtnClick(e) {
-  console.log(e.target);
+  // console.log(e.target);
   if (e.target.classList.contains('js-genre-all-label')) {
     filmoteka.resetPage();
     renderPopularMovies();
@@ -34,11 +35,14 @@ async function onAllGenresBtnClick(e) {
 
 async function onGenreButtonClick(e) {
   // e.target.classList.toggle('checked');
-  if (e.target.nodeName !== 'LABEL') return;
-  const buttonId = e.target.dataset.id;
-  const { page, results, total_pages, total_results } = await filmoteka.fetchMoviesByGenre(
-    buttonId,
-  );
+  if (e !== undefined) {
+    if (e.target.nodeName !== 'LABEL') return;
+    filmoteka.genreId = e.target.dataset.id;
+    filmoteka.resetPage();
+  }
+
+  const { page, results, total_pages, total_results } = await filmoteka.fetchMoviesByGenre();
+  console.log(results);
 
   if (results.length === 0) {
     // onHideBtnClick();
@@ -58,6 +62,9 @@ async function onGenreButtonClick(e) {
   if (total_pages <= 1) {
     refs.paginationContainer.style.display = 'none';
   } else {
+    filmoteka.setTotalPages(total_pages);
+    startPagination(onGenreButtonClick);
+
     refs.paginationContainer.style.display = 'block';
   }
 
