@@ -6,6 +6,7 @@ class FilmsApiServise {
     this.searchQuery = '';
     this.page = 1;
     this.totalPages = 1;
+    this.storageData = {};
   }
 
   // Запрос на популярные фильмы за неделю для главной страницы
@@ -28,15 +29,40 @@ class FilmsApiServise {
       });
   }
 
-  // Запрос на поиск по id+
-  getElementByID(external_id) {
-    const url_id = BASE_URL + '/movie/{external_id}?' + API_KEY + `&page=${this.page}`;
-    return fetch(url_id)
-      .then(response => response.json())
-      .then(data => {
-        return data.results;
+  //Запрос на фильм по id
+  getMovieByID(id) {
+    return fetch(`${BASE_URL}/movie/${id}?${API_KEY}&language=en-US`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Sorry, but we cannot find this film`);
+        }
+        return response.json();
+      })
+      .then(film => {
+        this.storageData = {
+          id: film.id,
+          title: film.title,
+          poster_path: film.poster_path,
+          genres: film.genres,
+          release_date: film.release_date,
+          vote_average: film.vote_average,
+        };
+        return film;
       });
   }
+
+  // getDataForStorage (film) {
+  //       this.storageData = {
+  //       id: film.id,
+  //       title: film.title,
+  //       poster_path: film.poster_path,
+  //       genres: film.genres,
+  //       release_date: film.release_date,
+  //       vote_average: film.vote_average,
+  //       };
+
+  //     return this.storageData;
+  // };
 
   // запрос на все жанры
   fetchGenres() {
