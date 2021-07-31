@@ -1,5 +1,8 @@
 const API_KEY = 'api_key=05d7e6695d9ebeb510a995559544df94';
 const BASE_URL = 'https://api.themoviedb.org/3';
+import {Loader} from '../js/loader';
+
+const loader = new Loader();
 
 class FilmsApiServise {
   constructor() {
@@ -11,18 +14,20 @@ class FilmsApiServise {
 
   // Запрос на популярные фильмы за неделю для главной страницы
   getAllMovies() {
+    loader.openLoader();
     const URL_WEEK = BASE_URL + '/trending/movie/week?' + API_KEY + `&page=${this.page}`;
     return fetch(URL_WEEK).then(response => {
       return response.json();
-    });
+    }).finally(loader.closeLoader());
   }
 
   // Запрос на поиск по слову
   getMovies() {
+    loader.openLoader();
     const url = `${BASE_URL}/search/movie?${API_KEY}&query=${this.searchQuery}&page=${this.page}&language=en-US&language=ru-RU`;
     return fetch(url).then(response => {
       return response.json();
-    });
+    }).finally(loader.closeLoader());
     // .then(data => {
     // this.incrementPage();
     // console.log(data.results);
