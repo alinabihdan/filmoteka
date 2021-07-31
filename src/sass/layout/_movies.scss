@@ -8,13 +8,16 @@
 }
 
 .movie-card {
-  padding-top: 10px;
+  padding: 10px 0;
+  background-color: #fff;
+  text-align: center;
 }
 
 .gallery-item {
   margin-bottom: 20px;
   max-width: 294px;
   margin: 0 auto;
+  margin-right: 4px;
   cursor: pointer;
   transition: transform 500ms ease-in-out;
 }
@@ -33,7 +36,7 @@
   font-size: $main-fontsize;
   line-height: 1.88;
   text-transform: uppercase;
-  // color: $main-text-color;
+  color: $main-text-color;
 }
 
 .subscribe-item {
@@ -42,8 +45,16 @@
   line-height: 1.33;
   color: $accent-color;
 }
+.subscribe-item {
+  word-spacing: 3 px;
+}
 
-@media screen and (min-width: 767px) {
+.card {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
   .movies {
     padding-top: 40px;
   }
@@ -57,6 +68,14 @@
 
   .gallery-item:nth-child(2n) {
     margin-bottom: 30px;
+  }
+
+  .img-card-wrapper {
+    height: 435px;
+  }
+
+  .img-card {
+    height: 100%;
   }
 }
 
@@ -74,5 +93,8 @@
   }
   .img-card {
     width: 274px;
+  }
+  .img-card-wrapper {
+    height: 411px;
   }
 }
