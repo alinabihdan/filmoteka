@@ -1,5 +1,6 @@
 import refs from './refs';
 import galleryTpl from '../templates/main-gallery.hbs';
+import swal from 'sweetalert';
 function addListenerToLibraryBtn() { // вешает слушатели на кнопки "Home" и "Library"
     refs.libraryButton.addEventListener('click', onLibraryButtonClick);
 }
@@ -20,6 +21,9 @@ function onLibraryButtonClick() {
     refs.paginationContainer.classList.add('visually-hidden');
     refs.watchedContainer.classList.remove('visually-hidden');
     renderWatchedList(); //функция которая рендерит список просмотренных фильмов
+
+    const libraryMessage = "Это 'Твоя библиотека' Тут будут хранится фильмы, которые ты добавил(ла) в списки. По умолчанию список 'Уже смотрел(ла)'. При клике на 'QUEUE' переходишь в список 'Хочу смотреть'. Развлекайся!";
+    swal(libraryMessage); 
 }
 
 function onHomeButtonClick() {
@@ -68,6 +72,8 @@ function renderWatchedList() {
     if (watched === null || '') {
         refs.watchedContainer.classList.remove('visually-hidden');
         refs.backToHomeBtn.addEventListener('click', onHomeButtonClick);
+
+        swal("Ей, так не годится", "Дружище, посмотри уже на конец что-нибудь", "warning");
     } 
 // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
 }
@@ -78,6 +84,8 @@ function renderQueueList() {
     if (queue === null || '') {
         refs.queueContainer.classList.remove('visually-hidden');
         refs.backToSearchBtn.addEventListener('click', onHomeButtonClick);
+
+        swal("Ей, так не годится", "Дружище, выбери уже на конец что-нибудь", "warning");
     }
 // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
 }
