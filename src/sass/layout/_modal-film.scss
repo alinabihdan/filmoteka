@@ -1,13 +1,14 @@
 .film {
   &-blackdrop {
     opacity: 0;
+    pointer-events: none;
     width: 100vw;
     height: 100vh;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.25);
     position: fixed;
     top: 0;
-    left: -100%;
+    left: 0;
     z-index: 12;
     overflow: scroll;
 
@@ -22,16 +23,26 @@
     }
 
     &.is-active {
-      left: 0;
+      pointer-events: all;
       opacity: 1;
-      transition: all 1000ms ease-in;
+      transition: all 500ms ease-in;
     }
   }
 
   &-modal {
+    transform: scale(0);
+    transform: rotateX(90deg);
     background-color: #ffffff;
     padding: 48px 20px 41px 20px;
     position: relative;
+
+    transition: all 700ms ease-in;
+
+    &.is-active {
+      transform: scale(1);
+      transform: rotateX(0);  
+      transition: all 1000ms ease-in;
+    }
 
     @media screen and (min-width: 550px) and (max-width: 767px) {
       margin: 0 auto;
