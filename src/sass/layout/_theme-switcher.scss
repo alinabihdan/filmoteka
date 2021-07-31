@@ -21,6 +21,20 @@ body.dark-theme {
   & .header {
     background: transparent;
   }
+
+  & footer {
+    background: transparent;
+  }
+
+  & .footer-text,
+  & .footer-text-goit,
+  & .footer-text-goit-link,
+  & .numb,
+  & .dots,
+  & .btn.prev,
+  & .btn.next {
+    color: white;
+  }
 }
 
 // // cтили самой кнопки
