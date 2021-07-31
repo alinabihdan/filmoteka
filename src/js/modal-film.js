@@ -11,6 +11,7 @@ async function fetchAndRenderFilmCard (e) {
         refs.modalFilmBlackdrop.classList.add('is-active');
         refs.filmModalField.classList.add('is-active');
         refs.bodyEl.classList.add('modal-open');
+        refs.buttonToTop.classList.add('visually-hidden');
 
         listenStorageBtns();
     };
