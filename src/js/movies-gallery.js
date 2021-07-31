@@ -2,6 +2,7 @@ import movieCardTpl from '../templates/main-gallery.hbs';
 import refs from './refs';
 import filmoteka from './ApiService';
 import { transformDate, transformGenre } from './changeDateAndGenres';
+import { startPagination } from './pagination';
 
 async function renderPopularMovies() {
   const { page, results, total_pages, total_results } = await filmoteka.getAllMovies();
@@ -10,13 +11,15 @@ async function renderPopularMovies() {
   const genresList = [...genresObj];
   console.log(genresList);
 
+  filmoteka.totalPages = total_pages;
   transformDate(results);
   transformGenre(results, genresList);
 
   const markup = movieCardTpl(results);
+
   clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
-  // filmoteka.setTotalPages(results);
+  startPagination();
 }
 
 // вызываем рендер главной страницы

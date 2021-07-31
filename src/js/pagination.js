@@ -5,12 +5,10 @@ import { renderPopularMovies } from './movies-gallery';
 // selecting required element
 const element = document.querySelector('.pagination ul');
 
-// {total_results} =
-const totalPages = filmoteka.getTotalPages();
 startPagination();
 
 function startPagination() {
-  createPagination(totalPages, filmoteka.page);
+  createPagination(filmoteka.totalPages, filmoteka.page);
 
   //receiving refs after each func call
   const pagRefs = {
@@ -75,13 +73,13 @@ function createPagination(totalPages, page) {
   }
 
   // how many pages or li show before the current li
-  if (totalPages == 1) {
+  if (filmoteka.totalPages == 1) {
     beforePage = page + 1;
   }
 
-  if (page == totalPages) {
+  if (page == filmoteka.totalPages) {
     beforePage = beforePage - 2;
-  } else if (page == totalPages - 1) {
+  } else if (page == filmoteka.totalPages - 1) {
     beforePage = beforePage - 1;
   }
   // how many pages or li show after the current li
@@ -92,7 +90,7 @@ function createPagination(totalPages, page) {
   }
 
   for (var plength = beforePage; plength <= afterPage; plength++) {
-    if (plength > totalPages) {
+    if (plength > filmoteka.totalPages) {
       //if plength is greater than totalPage length then continue
       continue;
     }
@@ -110,16 +108,16 @@ function createPagination(totalPages, page) {
     liTag += `<li class="numb ${active}"><span>${plength}</span></li>`;
   }
 
-  if (page < totalPages - 1) {
+  if (page < filmoteka.totalPages - 1) {
     //if page value is less than totalPage value by -1 then show the last li or page
-    if (page < totalPages - 2) {
+    if (page < filmoteka.totalPages - 2) {
       //if page value is less than totalPage value by -2 then add this (...) before the last li or page
       liTag += `<li class="dots"><span>...</span></li>`;
     }
-    liTag += `<li class="last numb"><span>${totalPages}</span></li>`;
+    liTag += `<li class="last numb"><span>${filmoteka.totalPages}</span></li>`;
   }
 
-  if (page < totalPages) {
+  if (page < filmoteka.totalPages) {
     //show the next button if the page value is less than totalPage(20)
     liTag += `<li class="btn next"><span><i class="fas fa-arrow-right"></i></span></li>`;
   }
@@ -127,3 +125,5 @@ function createPagination(totalPages, page) {
   element.insertAdjacentHTML('beforeend', liTag); //add li tag inside ul tag
   return liTag; //reurn the li tag
 }
+
+export { startPagination };
