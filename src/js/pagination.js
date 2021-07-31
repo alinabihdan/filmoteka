@@ -43,7 +43,6 @@ function startPagination(renderSource) {
   function onNextClick() {
     filmoteka.incrementPage();
     renderSource();
-    console.log(renderSource);
     startPagination();
   }
 }

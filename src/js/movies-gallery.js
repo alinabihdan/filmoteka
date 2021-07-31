@@ -33,6 +33,8 @@ async function onSearch(e) {
   if (e !== undefined) {
     e.preventDefault();
 
+    console.log(e.currentTarget.value);
+
     filmoteka.query = e.currentTarget.elements.query.value;
 
     if (filmoteka.query === '') {

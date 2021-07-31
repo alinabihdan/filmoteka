@@ -26,7 +26,7 @@ async function renderGenreButtons() {
 }
 
 async function onAllGenresBtnClick(e) {
-  console.log(e.target);
+  // console.log(e.target);
   if (e.target.classList.contains('js-genre-all-label')) {
     filmoteka.resetPage();
     renderPopularMovies();
