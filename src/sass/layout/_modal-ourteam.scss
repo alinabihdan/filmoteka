@@ -45,6 +45,11 @@
   border-top-right-radius: 10px;
   margin-bottom: 10px;
 }
+.thumb{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .swiper-card-alltext{
   padding-left: 10px;
   padding-right: 10px;
