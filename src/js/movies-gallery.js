@@ -19,7 +19,7 @@ async function renderPopularMovies() {
 
   clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
-  startPagination();
+  startPagination(renderPopularMovies);
 }
 
 // вызываем рендер главной страницы
@@ -27,7 +27,7 @@ renderPopularMovies();
 
 refs.searchForm.addEventListener('submit', onSearch);
 
-function onSearch(e) {
+async function onSearch(e) {
   e.preventDefault();
 
   filmoteka.query = e.currentTarget.elements.query.value;

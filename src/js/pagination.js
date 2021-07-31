@@ -1,13 +1,10 @@
 // PAGINATION module
 import filmoteka from './ApiService';
-import { renderPopularMovies } from './movies-gallery';
 
 // selecting required element
 const element = document.querySelector('.pagination ul');
 
-startPagination();
-
-function startPagination() {
+function startPagination(renderSource) {
   createPagination(filmoteka.totalPages, filmoteka.page);
 
   //receiving refs after each func call
@@ -22,7 +19,7 @@ function startPagination() {
   pagRefs.numb.forEach(el => {
     el.addEventListener('click', () => {
       filmoteka.setPage(parseInt(el.textContent));
-      renderPopularMovies();
+      renderSource();
       startPagination();
     });
   });
@@ -36,19 +33,19 @@ function startPagination() {
   if (pagRefs.next) {
     pagRefs.next.addEventListener('click', onNextClick);
   }
-}
 
-// handlers
-function onPrevClick() {
-  filmoteka.decrementPage();
-  renderPopularMovies();
-  startPagination();
-}
+  // handlers
+  function onPrevClick() {
+    filmoteka.decrementPage();
+    renderSource();
+    startPagination();
+  }
 
-function onNextClick() {
-  filmoteka.incrementPage();
-  renderPopularMovies();
-  startPagination();
+  function onNextClick() {
+    filmoteka.incrementPage();
+    renderSource();
+    startPagination();
+  }
 }
 
 //calling function with passing parameters and adding inside element which is ul tag
