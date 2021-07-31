@@ -5,6 +5,7 @@ class FilmsApiServise {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
+    this.totalPages = 1;
     this.storageData = {};
   }
 
@@ -19,24 +20,26 @@ class FilmsApiServise {
   // Запрос на поиск по слову
   getMovies() {
     const url = `${BASE_URL}/search/movie?${API_KEY}&query=${this.searchQuery}&page=${this.page}&language=en-US&language=ru-RU`;
-    return fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        // this.incrementPage();
-        // console.log(data.results);
-        return data.results;
-      });
-  };
+    return fetch(url).then(response => {
+      return response.json();
+    });
+    // .then(data => {
+    // this.incrementPage();
+    // console.log(data.results);
+    // return data.results;
+    // });
+  }
 
-  //Запрос на фильм по id 
-  getMovieByID (id) {
+  //Запрос на фильм по id
+  getMovieByID(id) {
     return fetch(`${BASE_URL}/movie/${id}?${API_KEY}&language=en-US`)
-     .then(response => { 
-        if(!response.ok) {
-            throw new Error(`Sorry, but we cannot find this film`);
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Sorry, but we cannot find this film`);
         }
-        return response.json()})
-      .then(film => { 
+        return response.json();
+      })
+      .then(film => {
         this.storageData = {
           id: film.id,
           title: film.title,
@@ -44,23 +47,23 @@ class FilmsApiServise {
           genres: film.genres,
           release_date: film.release_date,
           vote_average: film.vote_average,
-        }; 
+        };
         return film;
       });
-  };
+  }
 
-// getDataForStorage (film) {
-//       this.storageData = {
-//       id: film.id,
-//       title: film.title,
-//       poster_path: film.poster_path,
-//       genres: film.genres,
-//       release_date: film.release_date,
-//       vote_average: film.vote_average,
-//       }; 
-      
-//     return this.storageData;
-// }; 
+  // getDataForStorage (film) {
+  //       this.storageData = {
+  //       id: film.id,
+  //       title: film.title,
+  //       poster_path: film.poster_path,
+  //       genres: film.genres,
+  //       release_date: film.release_date,
+  //       vote_average: film.vote_average,
+  //       };
+
+  //     return this.storageData;
+  // };
 
   // запрос на все жанры
   fetchGenres() {
@@ -89,12 +92,33 @@ class FilmsApiServise {
         return results;
       });
   }
+
   incrementPage() {
     this.page += 1;
   }
 
+  decrementPage() {
+    this.page -= 1;
+  }
+
+  setPage(newPage) {
+    this.page = newPage;
+  }
+
+  getPage() {
+    return this.page;
+  }
+
   resetPage() {
     this.page = 1;
+  }
+
+  setTotalPages(pages) {
+    this.totalPages = pages;
+  }
+
+  getTotalPages() {
+    return this.totalPages;
   }
 
   get query() {

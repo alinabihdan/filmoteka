@@ -2,6 +2,7 @@ import movieCardTpl from '../templates/main-gallery.hbs';
 import refs from './refs';
 import filmoteka from './ApiService';
 import { transformDate, transformGenre } from './changeDateAndGenres';
+import { startPagination } from './pagination';
 
 async function renderPopularMovies() {
   const { page, results, total_pages, total_results } = await filmoteka.getAllMovies();
@@ -10,11 +11,15 @@ async function renderPopularMovies() {
   const genresList = [...genresObj];
   console.log(genresList);
 
+  filmoteka.totalPages = total_pages;
   transformDate(results);
   transformGenre(results, genresList);
 
   const markup = movieCardTpl(results);
+
+  clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
+  startPagination(renderPopularMovies);
 }
 
 // вызываем рендер главной страницы
@@ -22,23 +27,34 @@ renderPopularMovies();
 
 refs.searchForm.addEventListener('submit', onSearch);
 
-function onSearch(e) {
-  e.preventDefault();
+async function onSearch(e) {
+  if (e !== undefined) {
+    e.preventDefault();
 
-  filmoteka.query = e.currentTarget.elements.query.value;
+    filmoteka.query = e.currentTarget.elements.query.value;
 
-  if (filmoteka.query === '') {
-    return alert('Оповещение: введите название фильма');
+    if (filmoteka.query === '') {
+      return alert('Оповещение: введите название фильма');
+    }
+
+    filmoteka.resetPage();
   }
 
-  filmoteka.resetPage();
+  const { page, results, total_pages, total_results } = await filmoteka.getMovies();
 
-  filmoteka.getMovies().then(resluts => {
-    clearMovieContainer();
-    renderMovieCard(resluts);
-  });
+  filmoteka.totalPages = total_pages;
 
-  e.currentTarget.elements.query.value = '';
+  clearMovieContainer();
+  renderMovieCard(results);
+
+  startPagination(onSearch);
+
+  // filmoteka.getMovies().then(resluts => {
+  //   clearMovieContainer();
+  //   renderMovieCard(resluts);
+  // });
+
+  // e.currentTarget.elements.query.value = '';
 }
 
 function onLoadMore() {
