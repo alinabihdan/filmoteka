@@ -10,7 +10,6 @@ function startPagination(renderSource) {
   //receiving refs after each func call
   const pagRefs = {
     prev: document.querySelector('.prev'),
-    dots: document.querySelectorAll('.dots'),
     numb: document.querySelectorAll('.numb'),
     next: document.querySelector('.next'),
   };
@@ -44,6 +43,7 @@ function startPagination(renderSource) {
   function onNextClick() {
     filmoteka.incrementPage();
     renderSource();
+    console.log(renderSource);
     startPagination();
   }
 }
@@ -106,7 +106,6 @@ function createPagination(totalPages, page) {
       //else leave empty to the active variable
       active = '';
     }
-    console.log(afterPage, totalPages);
     liTag += `<li class="numb ${active}"><span>${plength}</span></li>`;
   }
 

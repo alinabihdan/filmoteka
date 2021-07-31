@@ -11,7 +11,7 @@ async function renderPopularMovies() {
   const genresList = [...genresObj];
   console.log(genresList);
 
-  filmoteka.setTotalPages(total_pages);
+  filmoteka.s``etTotalPages``(total_pages);
   transformDate(results);
   transformGenre(results, genresList);
 
@@ -19,6 +19,8 @@ async function renderPopularMovies() {
 
   clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
+
+  //вызываем пагинацию, передаем туда какой запрос пагинировать
   startPagination(renderPopularMovies);
 }
 
@@ -47,6 +49,7 @@ async function onSearch(e) {
   clearMovieContainer();
   renderMovieCard(results);
 
+  //вызываем пагинацию, передаем туда какой запрос пагинировать
   startPagination(onSearch);
 
   // filmoteka.getMovies().then(resluts => {
