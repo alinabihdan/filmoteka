@@ -11,7 +11,7 @@ async function renderPopularMovies() {
   const genresList = [...genresObj];
   console.log(genresList);
 
-  filmoteka.totalPages = total_pages;
+  filmoteka.setTotalPages(total_pages);
   transformDate(results);
   transformGenre(results, genresList);
 
