@@ -27,6 +27,10 @@
 
 // =====================Card-style====================
 .swiper-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 10px;
     margin-bottom: 5px;
     width: 250px;
     height: auto;
@@ -43,16 +47,15 @@
   max-height: 250px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
 }
-.thumb{
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+// .thumb{
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between;
+// }
 .swiper-card-alltext{
-  padding-left: 10px;
-  padding-right: 10px;
+  margin-bottom: 10px;
 }
 .swiper-card-name{
   font-weight: bold;
@@ -60,11 +63,18 @@
 .swiper-card-profession{
   color: $film-card-titles-color;
   font-size:smaller;
-  margin-bottom: 10px;
+  // margin-bottom: 10px;
 }
 .swiper-card-characteristic{
   color: $footer-text-color;
-  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  // margin-bottom: 10px;
+}
+@media screen and (max-height: 654px) {
+  .swiper-card-characteristic{
+    display: none;
+  }
 }
 
 // ======================modal-window styles==========
@@ -152,7 +162,7 @@
     justify-content: space-around;
     padding-left: 10px;
     padding-right: 10px;
-    padding-bottom: 5px;
+    // padding-bottom: 5px;
 }
 .socialicon-list-link {
     display: flex;
