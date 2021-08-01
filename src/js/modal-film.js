@@ -32,10 +32,15 @@ function listenStorageBtns() {
   const queueBtn = document.querySelector('.btn-add-to-queue');
   const watchedBtn = document.querySelector('.btn-add-to-watched');
 
+<<<<<<< Updated upstream
   watchedBtn.addEventListener('click', () =>
     localStorageUtl.putFilmToWatched(filmoteka.storageData),
   );
   queueBtn.addEventListener('click', () => localStorageUtl.putFilmToQueue(filmoteka.storageData));
+=======
+  queueBtn.addEventListener('click', () => console.log(filmoteka.storageData));
+  watchedBtn.addEventListener('click', () => console.log(filmoteka.storageData));
+>>>>>>> Stashed changes
 }
 
 export { listenStorageBtns };
