@@ -26,13 +26,9 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@glidejs/glide": "^3.4.1",
-    "swiper": "^6.8.0"
-=======
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@glidejs/glide": "^3.4.1",
-    "sweetalert": "^2.1.2"
->>>>>>> 7fe443ea35aac473f48cdbb0ff234842e727095a
+    "sweetalert": "^2.1.2",
+    "swiper": "^6.8.0"
   }
 }

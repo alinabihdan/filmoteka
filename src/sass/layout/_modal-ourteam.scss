@@ -50,7 +50,7 @@
   // margin-bottom: 10px;
 }
 
-.swiper-card-firstsection{
+.swiper-card-section{
   margin-bottom: 10px;
 }
 .swiper-card-name{
@@ -76,11 +76,14 @@
 }
 
 // ======================modal-window styles==========
-
+// .unvisible{
+//   visibility: hidden;
+// }
 .footerModalClose{
     display: none;
-    
 }
+    
+    
 #footer-modal > div > #footerCloseBtn{
     top: -4px;
     right: -4px;
@@ -115,7 +118,22 @@
     
     background-image: url("/images/bg-image-footer-modal.jpg");
     background-size: cover;
+    animation-duration: 0.55s;  /* Время работы анимации */
+    animation-fill-mode: both;  /* Поведение анимации */
+    animation-name: fadeInDown; /* Имя анимации */
 }
+
+@keyframes fadeInDown { /* Сама анимация */
+    0% {                /* Старт анимации */
+        opacity: 0;
+        transform: translate3d(0px, -100%, 0px);
+    }
+    100% {              /* в финале анимации - финал это заданная 0.55s */
+        opacity: 1;
+        transform: none;
+    }
+}
+
 @media screen and (min-device-pixel-ratio: 2),
   screen and (min-resolution: 192dpi),
   screen and (min-resolution: 2dppx) {
