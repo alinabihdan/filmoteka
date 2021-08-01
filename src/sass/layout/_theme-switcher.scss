@@ -8,7 +8,7 @@ body.light-theme {
 }
 
 body.dark-theme {
-  background-image: url(../images/it-test-mob.jpeg);
+  background-image: url(../images/it-mob-1x.jpeg);
   color: white;
 
   @media screen and (min-device-pixel-ratio: 2) and (min-width: 320px),
@@ -64,8 +64,8 @@ body.dark-theme {
   bottom: -70px;
 
   @include screen('tablet') {
-    right: 100px;
-    bottom: -60px;
+    left: 105px;
+    top: 10px;
   }
 }
 .theme-switch__input {
