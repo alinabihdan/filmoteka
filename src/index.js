@@ -1,3 +1,4 @@
+import './js/modal-ourteam';
 import './sass/main.scss';
 import './js/movies-gallery';
 import './js/ApiService';
