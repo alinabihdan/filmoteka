@@ -1,5 +1,6 @@
 import refs from './refs';
 import filmoteka from './ApiService';
+import listenStorageBtns from './modal-film';
 
 class LocalStorageUtl {
   constructor() {
@@ -25,22 +26,26 @@ class LocalStorageUtl {
 
   putFilmToWatched(el) {
     let filmsToWatched = this.getFilmToWatched();
+    const index = filmsToWatched.findIndex(e => e.id === el.id);
 
-    if (filmsToWatched.some(e => e.id === el.id)) {
-      return;
-    } else {
+    if (index === -1) {
       filmsToWatched.push(el);
+    } else {
+      filmsToWatched.splice(index, 1);
     }
+
     localStorage.setItem(this.filmsToWatched, JSON.stringify(filmsToWatched));
   }
 
   putFilmToQueue(el) {
     let filmsToQueue = this.getFilmToQueue();
 
-    if (filmsToQueue.some(e => e.id === el.id)) {
-      return;
-    } else {
+    const index = filmsToQueue.findIndex(e => e.id === el.id);
+
+    if (index === -1) {
       filmsToQueue.push(el);
+    } else {
+      filmsToQueue.splice(index, 1);
     }
 
     localStorage.setItem(this.filmsToQueue, JSON.stringify(filmsToQueue));
