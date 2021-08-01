@@ -1,4 +1,5 @@
 import refs from './refs';
+import filmoteka from './ApiService';
 
 class LocalStorageUtl {
   constructor() {
@@ -22,28 +23,24 @@ class LocalStorageUtl {
     return [];
   }
 
-  putFilmToWatched(id) {
+  putFilmToWatched(el) {
     let filmsToWatched = this.getFilmToWatched();
 
-    const index = filmsToWatched.indexOf(id);
-
-    if (index === -1) {
-      filmsToWatched.push(id);
+    if (filmsToWatched.some(e => e.id === el.id)) {
+      return;
     } else {
-      filmsToWatched.splice(index, 1);
+      filmsToWatched.push(el);
     }
-
     localStorage.setItem(this.filmsToWatched, JSON.stringify(filmsToWatched));
   }
 
-  putFilmToQueue(id) {
+  putFilmToQueue(el) {
     let filmsToQueue = this.getFilmToQueue();
-    const index = filmsToQueue.indexOf(id);
 
-    if (index === -1) {
-      filmsToQueue.push(id);
+    if (filmsToQueue.some(e => e.id === el.id)) {
+      return;
     } else {
-      filmsToQueue.splice(index, 1);
+      filmsToQueue.push(el);
     }
 
     localStorage.setItem(this.filmsToQueue, JSON.stringify(filmsToQueue));
@@ -51,13 +48,4 @@ class LocalStorageUtl {
 }
 
 const localStorageUtl = new LocalStorageUtl();
-
-localStorageUtl.putFilmToWatched('el1');
-localStorageUtl.putFilmToWatched('el2');
-localStorageUtl.putFilmToWatched('el23');
-
-localStorageUtl.putFilmToQueue('el2');
-localStorageUtl.putFilmToQueue('el5');
-
-// refs.watchedBtn.addEventListener('click', localStorageUtl.putFilmToWatched);
-// refs.queueBtn.addEventListener('click', localStorageUtl.putFilmToQueue);
+export default localStorageUtl;
