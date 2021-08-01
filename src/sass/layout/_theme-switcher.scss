@@ -36,12 +36,19 @@ body.dark-theme {
     screen and (min-resolution: 2dppx) and (min-width: 1024px) {
   }
 
-  & .header {
+  & .header,
+  & footer {
     background: transparent;
   }
 
-  & footer {
-    background: transparent;
+  & .watched-list,
+  & .queue-list {
+    background: black;
+  }
+
+  & .watched-text,
+  & .queue-text {
+    color: white;
   }
 
   & .footer-text,
@@ -64,8 +71,8 @@ body.dark-theme {
   bottom: -70px;
 
   @include screen('tablet') {
-    left: 105px;
-    top: 10px;
+    right: 105px;
+    bottom: 0;
   }
 }
 .theme-switch__input {
