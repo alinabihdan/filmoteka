@@ -35,8 +35,7 @@ a {
 body {
   font-family: $main-font;
   font-size: $main-fontsize;
-  transition: color 150ms cubic-bezier(0.165, 0.84, 0.44, 1),
-    background-color 150ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: color 150ms ease-in-out, background-color 150ms ease-in-out;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
