@@ -59,19 +59,6 @@ class FilmsApiServise {
       }).finally(loader.closeLoader());
   }
 
-  // getDataForStorage (film) {
-  //       this.storageData = {
-  //       id: film.id,
-  //       title: film.title,
-  //       poster_path: film.poster_path,
-  //       genres: film.genres,
-  //       release_date: film.release_date,
-  //       vote_average: film.vote_average,
-  //       };
-
-  //     return this.storageData;
-  // };
-
   // запрос на все жанры
   fetchGenres() {
     loader.openLoader();
