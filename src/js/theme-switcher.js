@@ -9,10 +9,12 @@ const body = document.querySelector('body');
 
 switchBtn.addEventListener('change', e => {
   if (e.target.checked) {
+    localStorage.setItem('theme', Theme.DARK);
     body.classList.add(Theme.DARK);
     main.classList.remove(Theme.LIGHT);
     // classChange(Theme.DARK, Theme.LIGHT);
   } else {
+    localStorage.setItem('theme', Theme.LIGHT);
     body.classList.remove(Theme.DARK);
     main.classList.add(Theme.LIGHT);
     // classChange(Theme.LIGHT, Theme.DARK);
