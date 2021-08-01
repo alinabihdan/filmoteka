@@ -37,4 +37,6 @@ export default {
   paginationContainer: document.querySelector('.pagination'),
   closeBtn: document.querySelector('[data-action = "close"]'),
   modalWindow: document.querySelector('.film-blackdrop'),
+  watchedList: document.querySelector('.watched-list'),
+  queueList: document.querySelector('.queue-list'),
 };
