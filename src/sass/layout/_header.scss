@@ -1,5 +1,6 @@
 .header {
-  background-color: #0000008f;
+  position: relative;
+  background-color: transparent;
   width: 100%;
   min-height: 230px;
   background-repeat: no-repeat;
@@ -135,7 +136,7 @@
   & .input {
     width: 100%;
     height: 20px;
-    padding: 0;
+    padding: 0 10px;
     border: 0px;
     border-bottom: 0.5px solid $header-text-color;
     background-color: transparent;
@@ -164,7 +165,7 @@
   padding: 0;
   border-width: 0;
   background-color: transparent;
-  pointer-events: none;
+  cursor: pointer;
 }
 
 .search-icon {

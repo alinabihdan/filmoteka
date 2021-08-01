@@ -1,14 +1,15 @@
  {{#each this}}
 <li class="gallery-item">
  <div class="card">
-     <img src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}" data-id="{{id}}"/>
-      <div class="movie-card">
-         <p class="subscribe-item">{{title}}</p>
-         {{#each genre_ids}}
-         <span class="subscribe-item">{{name}}</span>
-         {{/each}}
-         <span class="subscribe-item">{{release_date}}</span>
-      </div>
+    <div class="img-card-wrapper">
+      <img class="img-card" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}" data-id="{{id}}"/>
+    </div>
+    <div class="movie-card">
+      <p class="subscribe-item-movie">{{title}}</p>
+        <span class="subscribe-item genres">{{genre_ids}}</span>
+        <span>&nbsp;</span>
+        <span class="subscribe-item"> &#8402 &nbsp;{{release_date}} </span>
+    </div>
   </div>
 </li>
 {{/each}}

@@ -1,21 +1,32 @@
 <section class="movies">
   <div class="container">
     <!-- Тут будет рендерится галлерея -->
-    <ul class="movie-list" id="movie-list">
-      Test
-    </ul>
+    <ul class="movie-list" id="movie-list"></ul>
+    <!--  -->
+    
+    <div class="watched-list visually-hidden">
+      <p class="watched-text">Ваш список просмотренных фильмов пуст. Посмотрите уже наконец что-нибудь!</p>
+      <img class="watched-img" src="./images/KHABY_LAME.webp" alt="KHABY_LAME">
+      <a class="button link is-btn-active back-to-home-btn" href="#">Back to home</a>
+    </div>
+    <div class="queue-list visually-hidden">
+      <p class="queue-text">В Вашем списке "Хочу посмотреть" пока нет ничего. Перейдите к поиску и выберите наконец-то
+        фильм, который хотите посмотреть!</p>
+      <img class="queue-img" src="./images/KHABY_LAME.webp" alt="KHABY_LAME">
+      <a class="button link is-btn-active back-to-search-btn" href="#">Back to search</a>
+    </div>
 
     <!-- Внизу должна быть пагинация -->
     <div class="pagination">
       <ul>
         <!--pages or li are comes from javascript -->
       </ul>
-      <!-- Кнопка "вернуться вверх" -->
-      <button class="btn-to-top is-hidden" id="btn-to-top">
-        <svg class="icon-to-top" width="30" height="30">
-          <use href="./images/sprite.svg#icon-arrow-up"></use>
-        </svg>
-      </button>
     </div>
+    <!-- Кнопка "вернуться вверх" -->
+    <button class="btn-to-top is-hidden" id="btn-to-top">
+      <svg class="icon-to-top" width="30" height="30">
+        <use href="./images/sprite.svg#icon-arrow-up"></use>
+      </svg>
+    </button>
   </div>
 </section>

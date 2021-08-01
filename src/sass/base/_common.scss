@@ -18,6 +18,7 @@ ul,
 li {
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 ul {
@@ -34,10 +35,25 @@ a {
 body {
   font-family: $main-font;
   font-size: $main-fontsize;
+  transition: color 150ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  background-color: 150ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 
   &.modal-open {
     overflow: hidden;
   }
+}
+
+main {
+  transition: color 150ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  background-color: 150ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 // class to hide elements
@@ -45,4 +61,9 @@ body {
 .disappear,
 .is-hidden {
   display: none;
+}
+
+@font-face {
+  font-family: neon;
+  src: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/707108/neon.ttf);
 }

@@ -1,11 +1,13 @@
 // Pagination styles
+.pagination {
+  background-color: transparent;
+}
 
 .pagination ul {
   width: 100%;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background: #fff;
   padding: 8px;
 }
 

@@ -1,40 +1,63 @@
 .genres {
-  padding: 10px 0;
+  padding: 20px 0 10px;
 }
 
-.filter-thumb {
+.genre-button-list {
+  margin: -5px;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
   flex-wrap: wrap;
-  margin: -7px;
+  justify-content: center;
+
+  @include screen('desktop') {
+    margin: -10px;
+  }
 }
 
-.genre-btn {
-  margin: 7px;
-  display: inline-block;
-  border: none;
-  border-radius: 45px;
-  font-size: 10px;
+.genre-button-item {
+  width: 114px;
+  margin: 5px;
+  font-size: 6px;
+  letter-spacing: 3px;
+  border-radius: 20px;
+  font-weight: 600;
   text-transform: uppercase;
   text-align: center;
-  letter-spacing: 3px;
-  font-weight: 600;
   color: #524f4e;
   background: white;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-  transition: 0.3s;
+
+  @include screen('tablet') {
+    width: auto;
+    font-size: 8px;
+  }
+
+  @include screen('desktop') {
+    font-size: 10px;
+    margin: 10px;
+  }
 }
 
-.genre-btn:hover {
+.genre-button-label {
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 200ms ease-in-out;
+}
+
+// Hover, focus
+.genre-button-label:focus,
+.genre-button-label:hover {
   background: $accent-color;
-  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.4);
   color: white;
-  transform: translateY(-7px);
 }
 
-.genre-btn:active {
+// Checked
+input[type='radio']:checked + .genre-button-label {
   background: $accent-color;
-  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.4);
   color: white;
 }

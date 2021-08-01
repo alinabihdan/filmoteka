@@ -10,7 +10,7 @@
     border: 1px solid $accent-color;
   }
 }
-.is-active {
+.is-btn-active {
   background-color: $accent-color;
   border: 1px solid $accent-color;
 }
@@ -56,4 +56,9 @@
 
 .btn-to-top.is-hidden {
   display: none;
+}
+
+.choose-button {
+  display: block;
+  margin: 0 auto;
 }

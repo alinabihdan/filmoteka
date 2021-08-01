@@ -1,34 +1,38 @@
-import { func } from 'assert-plus';
-import { lowerFirst } from 'lodash';
 import modalFilmTpl from '../templates/modal-film.hbs'
 import refs from './refs';
+import filmoteka from './ApiService';
 
 refs.movieContainer.addEventListener('click', fetchAndRenderFilmCard);
+refs.slider.addEventListener('click', fetchAndRenderFilmCard);
 
-function  fetchAndRenderFilmCard (e) {
+async function fetchAndRenderFilmCard (e) {
     if (e.target.nodeName === 'IMG') {
-        renderFilmCard(e.target.dataset.id);
+        await renderFilmCard(e.target.dataset.id);
         refs.modalFilmBlackdrop.classList.add('is-active');
+        refs.filmModalField.classList.add('is-active');
         refs.bodyEl.classList.add('modal-open');
+        refs.buttonToTop.classList.add('visually-hidden');
+
+        listenStorageBtns();
     };
 };
 
 async function renderFilmCard (id) {
-    try {
-        const film = await fetchFilm(id);
-        refs.modalFilmRenderField.innerHTML = modalFilmTpl(film);
+    try{
+    const film = await filmoteka.getMovieByID(id);
+    refs.modalFilmRenderField.innerHTML = modalFilmTpl(film);
+    console.log(filmoteka.storageData);
     } catch {
-        return alert("Soory somewhere there is a mistake");
-    };
-};
-
-async function fetchFilm (id) {
-    const response = await fetch(`${refs.BASE_URL}movie/${id}?${refs.API_KEY}&language=en-US`);
-    
-    if(!response.ok) {
-        throw new Error(`Sorry, but something went wrong ${response.status}`);
+        return alert ('Sorry there is a mistake');
     }
-
-    const film = await response.json();
-    return await film;
 };
+
+function listenStorageBtns () {
+    const queueBtn = document.querySelector('.btn-add-to-queue');
+    const watchedBtn = document.querySelector('.btn-add-to-watched');
+
+    queueBtn.addEventListener('click', () => console.log(filmoteka.storageData));
+    watchedBtn.addEventListener('click', () => console.log(filmoteka.storageData));
+}; 
+
+export {listenStorageBtns}
