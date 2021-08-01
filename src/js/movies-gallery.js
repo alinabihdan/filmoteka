@@ -68,6 +68,7 @@ async function onSearch(e) {
     return;
   }
 
+  refs.sectionGenres.classList.add('visually-hidden');
   clearMovieContainer();
   renderMovieCard(results);
 

@@ -22,6 +22,7 @@ async function addGenresListeners() {
 async function renderGenreButtons() {
   const genres = await filmoteka.fetchGenres();
   const markup = genresTemplate(genres);
+  refs.genresContainer.classList.remove('visually-hidden');
   refs.genresContainer.insertAdjacentHTML('beforeend', markup);
 }
 
