@@ -22,9 +22,9 @@ async function renderPopularMovies() {
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
   startPagination(renderPopularMovies);
 
-  const mainTitle = "Привет пользователь!";
-  const mainMessage = "Рады приветствовать тебя на нашей страничке! Она предназначена, чтобы облегчить тебе поиск фильмов для просмотра Жми «ОК» и воспользуйся поиском или выбери фильм из списка 'Популярное за неделю'. Также можешь отсортировать фильмы по жанрам. При клике на постер фильма откроется окно с подробной информацией о фильме. Ты можешь добавить фильм в список 'Уже смотрел!' или 'Хочу смотреть!'. Приятного пользования! С любовью студенты GoIT группы CIV-team!";
-  swal(mainTitle, mainMessage,);
+  // const mainTitle = "Привет пользователь!";
+  // const mainMessage = "Рады приветствовать тебя на нашей страничке! Она предназначена, чтобы облегчить тебе поиск фильмов для просмотра Жми «ОК» и воспользуйся поиском или выбери фильм из списка 'Популярное за неделю'. Также можешь отсортировать фильмы по жанрам. При клике на постер фильма откроется окно с подробной информацией о фильме. Ты можешь добавить фильм в список 'Уже смотрел!' или 'Хочу смотреть!'. Приятного пользования! С любовью студенты GoIT группы CIV-team!";
+  // swal(mainTitle, mainMessage,);
 }
 
 // вызываем рендер главной страницы
@@ -39,13 +39,16 @@ async function onSearch(e) {
     filmoteka.query = e.currentTarget.elements.query.value;
 
     if (filmoteka.query === '' || !filmoteka.query.trim()) {
-     swal("Поиск не удался", "Введи правильное название фильма и попробуй еще раз", "error", {button: false, timer: 3000,});
-     return;
+      swal('Поиск не удался', 'Введи правильное название фильма и попробуй еще раз', 'error', {
+        button: false,
+        timer: 3000,
+      });
+      return;
     }
 
     filmoteka.resetPage();
   }
-  
+
   const { page, results, total_pages, total_results } = await filmoteka.getMovies();
   const genresObj = await filmoteka.fetchGenres();
   const genresList = [...genresObj];
@@ -58,17 +61,19 @@ async function onSearch(e) {
   filmoteka.totalPages = total_pages;
 
   if (results.length === 0) {
-    swal("Поиск не удался", "Введи правильное название фильма и попробуй еще раз", "error", {button: false, timer: 3000,}); 
+    swal('Поиск не удался', 'Введи правильное название фильма и попробуй еще раз', 'error', {
+      button: false,
+      timer: 3000,
+    });
     return;
-    }
+  }
 
   clearMovieContainer();
   renderMovieCard(results);
 
-  document.getElementById("search-input").value = "";
+  document.getElementById('search-input').value = '';
 
   startPagination(onSearch);
-
 }
 
 function onLoadMore() {

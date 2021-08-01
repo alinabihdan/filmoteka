@@ -42,7 +42,7 @@ async function onGenreButtonClick(e) {
   }
 
   const { page, results, total_pages, total_results } = await filmoteka.fetchMoviesByGenre();
-  console.log(results);
+  console.log({ results });
 
   if (results.length === 0) {
     // onHideBtnClick();

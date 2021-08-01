@@ -38,6 +38,7 @@ class FilmsApiServise {
 
   //Запрос на фильм по id
   getMovieByID(id) {
+    loader.openLoader();
     return fetch(`${BASE_URL}/movie/${id}?${API_KEY}&language=en-US`)
       .then(response => {
         if (!response.ok) {
@@ -55,7 +56,7 @@ class FilmsApiServise {
           vote_average: film.vote_average,
         };
         return film;
-      });
+      }).finally(loader.closeLoader());
   }
 
   // getDataForStorage (film) {
@@ -73,30 +74,33 @@ class FilmsApiServise {
 
   // запрос на все жанры
   fetchGenres() {
+    loader.openLoader();
     const url = `${BASE_URL}/genre/movie/list?${API_KEY}&language=en-US`;
     return fetch(url)
       .then(response => response.json())
       .then(data => {
         this.genres = [...data.genres];
         return data.genres;
-      });
+      }).finally(loader.closeLoader());
   }
 
   // запрос на поиск по жанру
   fetchMoviesByGenre() {
+    loader.openLoader();
     const url = `${BASE_URL}/discover/movie?${API_KEY}&with_genres=${this.genreId}&page=${this.page}`;
-    return fetch(url).then(response => response.json());
+    return fetch(url).then(response => response.json()).finally(loader.closeLoader());
   }
 
   // запрос на популярные за день для слайдера
   renderTrendySliderMovies() {
+    loader.openLoader();
     const url = `${BASE_URL}/trending/all/day?${API_KEY}`;
     return fetch(url)
       .then(response => response.json())
       .then(({ results }) => {
         console.log(results);
         return results;
-      });
+      }).finally(loader.closeLoader());
   }
 
   incrementPage() {
