@@ -11,6 +11,9 @@
   padding: 10px 0;
   background-color: #fff;
   text-align: center;
+  border: 1px solid #e9e8e8;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .gallery-item {
@@ -25,6 +28,11 @@
 .gallery-item:focus {
   transform: scale(1.1);
   box-shadow: 2px 5px 5px 0px rgba(68, 66, 66, 0.2);
+  .movie-card {
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+  }
 }
 
 .gallery-item:nth-child(1n) {
