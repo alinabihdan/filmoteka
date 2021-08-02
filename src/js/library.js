@@ -1,7 +1,4 @@
 import refs from './refs';
-import galleryTpl from '../templates/main-gallery.hbs';
-import filmoteka from './ApiService';
-import renderPopularMovie from './movies-gallery';
 import swal from 'sweetalert';
 function addListenerToLibraryBtn() { // вешает слушатели на кнопки "Home" и "Library"
     refs.libraryButton.addEventListener('click', onLibraryButtonClick);
@@ -48,7 +45,6 @@ function onHomeButtonClick() {
     refs.watchedContainer.classList.add('visually-hidden');
     refs.queueContainer.classList.add('visually-hidden');
     refs.paginationContainer.classList.remove('visually-hidden');
-    renderMoviesGallery();
 }
 
 function onQueueButtonClick() {
