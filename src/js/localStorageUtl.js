@@ -53,4 +53,16 @@ class LocalStorageUtl {
 }
 
 const localStorageUtl = new LocalStorageUtl();
+
+// localStorageUtl.putFilmToWatched('el1');
+// localStorageUtl.putFilmToWatched('el2');
+// localStorageUtl.putFilmToWatched('el23');
+
+// localStorageUtl.putFilmToQueue('el2');
+// localStorageUtl.putFilmToQueue('el5');
+
+// refs.watchedBtn.addEventListener('click', localStorageUtl.putFilmToWatched);
+// refs.queueBtn.addEventListener('click', localStorageUtl.putFilmToQueue);
+
 export default localStorageUtl;
+
