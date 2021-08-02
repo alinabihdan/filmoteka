@@ -1,13 +1,13 @@
 // PAGINATION module
 import filmoteka from './ApiService';
+import { startAutoScroll } from './autoscroll';
+export { startAutoScroll } from './autoscroll';
 
 // selecting required element
 const element = document.querySelector('.pagination ul');
 
 function startPagination(renderSource) {
   createPagination(filmoteka.totalPages, filmoteka.page);
-
-  console.log('pagination started, ' + element + ' is ready');
 
   //receiving refs after each func call
   const pagRefs = {
@@ -21,6 +21,7 @@ function startPagination(renderSource) {
     el.addEventListener('click', () => {
       filmoteka.setPage(parseInt(el.textContent));
       renderSource();
+      setTimeout(startAutoScroll, 0);
       startPagination();
     });
   });
@@ -39,12 +40,14 @@ function startPagination(renderSource) {
   function onPrevClick() {
     filmoteka.decrementPage();
     renderSource();
+    setTimeout(startAutoScroll, 0);
     startPagination();
   }
 
   function onNextClick() {
     filmoteka.incrementPage();
     renderSource();
+    setTimeout(startAutoScroll, 0);
     startPagination();
   }
 }

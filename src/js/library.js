@@ -52,7 +52,6 @@ function onHomeButtonClick() {
     refs.watchedContainer.classList.add('visually-hidden');
     refs.queueContainer.classList.add('visually-hidden');
     refs.paginationContainer.classList.remove('visually-hidden');
-    renderMoviesGallery();
 }
 
 function onQueueButtonClick() {

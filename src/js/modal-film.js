@@ -1,6 +1,7 @@
-import modalFilmTpl from '../templates/modal-film.hbs'
+import modalFilmTpl from '../templates/modal-film.hbs';
 import refs from './refs';
 import filmoteka from './ApiService';
+import localStorageUtl from './localStorageUtl';
 
 if (!localStorage.filmsToWatched || localStorage.filmsToWatched === null) {
     localStorage.setItem('filmsToWatched', '[]');
@@ -20,9 +21,9 @@ async function fetchAndRenderFilmCard(e) {
         refs.bodyEl.classList.add('modal-open');
         refs.buttonToTop.classList.add('visually-hidden');
 
-        listenStorageBtns();
-    };
-};
+    listenStorageBtns();
+  }
+}
 
 async function renderFilmCard(id) {
     try {

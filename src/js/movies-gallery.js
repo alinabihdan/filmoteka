@@ -3,6 +3,7 @@ import refs from './refs';
 import filmoteka from './ApiService';
 import { transformDate, transformGenre } from './changeDateAndGenres';
 import { startPagination } from './pagination';
+import { startAutoScroll } from './autoscroll';
 import swal from 'sweetalert';
 
 async function renderPopularMovies() {
@@ -21,6 +22,7 @@ async function renderPopularMovies() {
   clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
   startPagination(renderPopularMovies);
+  // startAutoScroll();
 
   if (sessionStorage.mainNotification !== 'showed') {
     const mainTitle = "Привет пользователь!";
@@ -61,8 +63,6 @@ async function onSearch(e) {
   transformDate(results);
   transformGenre(results, genresList);
 
-  filmoteka.totalPages = total_pages;
-
   if (results.length === 0) {
     swal('Поиск не удался', 'Введи правильное название фильма и попробуй еще раз', 'error', {
       button: false,
@@ -74,7 +74,7 @@ async function onSearch(e) {
   refs.sectionGenres.classList.add('visually-hidden');
   clearMovieContainer();
   renderMovieCard(results);
-
+  startAutoScroll();
   document.getElementById('search-input').value = '';
 
   startPagination(onSearch);

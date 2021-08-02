@@ -1,4 +1,6 @@
 import refs from './refs';
+import filmoteka from './ApiService';
+import listenStorageBtns from './modal-film';
 
 class LocalStorageUtl {
   constructor() {
@@ -22,13 +24,12 @@ class LocalStorageUtl {
     return [];
   }
 
-  putFilmToWatched(id) {
+  putFilmToWatched(el) {
     let filmsToWatched = this.getFilmToWatched();
-
-    const index = filmsToWatched.indexOf(id);
+    const index = filmsToWatched.findIndex(e => e.id === el.id);
 
     if (index === -1) {
-      filmsToWatched.push(id);
+      filmsToWatched.push(el);
     } else {
       filmsToWatched.splice(index, 1);
     }
@@ -36,12 +37,13 @@ class LocalStorageUtl {
     localStorage.setItem(this.filmsToWatched, JSON.stringify(filmsToWatched));
   }
 
-  putFilmToQueue(id) {
+  putFilmToQueue(el) {
     let filmsToQueue = this.getFilmToQueue();
-    const index = filmsToQueue.indexOf(id);
+
+    const index = filmsToQueue.findIndex(e => e.id === el.id);
 
     if (index === -1) {
-      filmsToQueue.push(id);
+      filmsToQueue.push(el);
     } else {
       filmsToQueue.splice(index, 1);
     }
@@ -61,3 +63,6 @@ const localStorageUtl = new LocalStorageUtl();
 
 // refs.watchedBtn.addEventListener('click', localStorageUtl.putFilmToWatched);
 // refs.queueBtn.addEventListener('click', localStorageUtl.putFilmToQueue);
+
+export default localStorageUtl;
+
