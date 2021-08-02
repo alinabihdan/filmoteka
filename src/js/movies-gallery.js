@@ -3,6 +3,7 @@ import refs from './refs';
 import filmoteka from './ApiService';
 import { transformDate, transformGenre } from './changeDateAndGenres';
 import { startPagination } from './pagination';
+import { startAutoScroll } from './autoscroll';
 import swal from 'sweetalert';
 
 async function renderPopularMovies() {
@@ -21,10 +22,14 @@ async function renderPopularMovies() {
   clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
   startPagination(renderPopularMovies);
+  // startAutoScroll();
 
-  // const mainTitle = "Привет пользователь!";
-  // const mainMessage = "Рады приветствовать тебя на нашей страничке! Она предназначена, чтобы облегчить тебе поиск фильмов для просмотра Жми «ОК» и воспользуйся поиском или выбери фильм из списка 'Популярное за неделю'. Также можешь отсортировать фильмы по жанрам. При клике на постер фильма откроется окно с подробной информацией о фильме. Ты можешь добавить фильм в список 'Уже смотрел!' или 'Хочу смотреть!'. Приятного пользования! С любовью студенты GoIT группы CIV-team!";
-  // swal(mainTitle, mainMessage,);
+  if (sessionStorage.mainNotification !== 'showed') {
+    const mainTitle = "Привет пользователь!";
+    const mainMessage = "Рады приветствовать тебя на нашей страничке! Она предназначена, чтобы облегчить тебе поиск фильмов для просмотра Жми «ОК» и воспользуйся поиском или выбери фильм из списка 'Популярное за неделю'. Также можешь отсортировать фильмы по жанрам. При клике на постер фильма откроется окно с подробной информацией о фильме. Ты можешь добавить фильм в список 'Уже смотрел!' или 'Хочу смотреть!'. Приятного пользования! С любовью студенты GoIT группы CIV-team!";
+    swal(mainTitle, mainMessage);
+    sessionStorage.setItem('mainNotification', 'showed');
+  } 
 }
 
 // вызываем рендер главной страницы
@@ -58,8 +63,6 @@ async function onSearch(e) {
   transformDate(results);
   transformGenre(results, genresList);
 
-  filmoteka.totalPages = total_pages;
-
   if (results.length === 0) {
     swal('Поиск не удался', 'Введи правильное название фильма и попробуй еще раз', 'error', {
       button: false,
@@ -71,7 +74,7 @@ async function onSearch(e) {
   refs.sectionGenres.classList.add('visually-hidden');
   clearMovieContainer();
   renderMovieCard(results);
-
+  startAutoScroll();
   document.getElementById('search-input').value = '';
 
   startPagination(onSearch);

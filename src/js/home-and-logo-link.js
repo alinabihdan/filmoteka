@@ -9,4 +9,5 @@ async function onHomeAndLogoBtnClick() {
   filmoteka.resetPage();
   await refs.sectionGenres.classList.remove('visually-hidden');
   renderPopularMovies();
-}
+};
+

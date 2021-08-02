@@ -49,7 +49,7 @@ async function onGenreButtonClick(e) {
     // onHideBtnClick();
     clearContainer(refs.movieContainer);
     renderMarkup(refs.movieContainer, oopsTpl);
-    refs.paginationContainer.style.display = 'none';
+    // refs.paginationContainer.style.display = 'none';
     return;
   }
 
