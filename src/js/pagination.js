@@ -7,6 +7,8 @@ const element = document.querySelector('.pagination ul');
 function startPagination(renderSource) {
   createPagination(filmoteka.totalPages, filmoteka.page);
 
+  console.log('pagination started, ' + element + ' is ready');
+
   //receiving refs after each func call
   const pagRefs = {
     prev: document.querySelector('.prev'),
@@ -72,9 +74,6 @@ function createPagination(totalPages, page) {
   }
 
   // how many pages or li show before the current li
-  // if (filmoteka.totalPages == 1) {
-  //   beforePage = 1;
-  // }
 
   if (filmoteka.totalPages > 2) {
     afterPage += 1;

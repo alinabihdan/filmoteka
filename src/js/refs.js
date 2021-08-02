@@ -25,6 +25,9 @@ export default {
   filmModalField: document.querySelector('.film-modal'),
   bodyEl: document.querySelector('body'),
   buttonToTop: document.getElementById('btn-to-top'),
+  footerCloseBtn: document.querySelector('#footerCloseBtn'),
+  footerModalWindow: document.querySelector('#footer-modal'),
+  linkGoIT: document.querySelector('.footer-text-goit-link'),
   watchedBtn: document.querySelector('.btn-add-to-watched'),
   queueBtn: document.querySelector('.btn-add-to-queue'),
   backToHomeBtn: document.querySelector('.back-to-home-btn'),
@@ -34,4 +37,6 @@ export default {
   paginationContainer: document.querySelector('.pagination'),
   closeBtn: document.querySelector('[data-action = "close"]'),
   modalWindow: document.querySelector('.film-blackdrop'),
+  watchedList: document.querySelector('.watched-list'),
+  queueList: document.querySelector('.queue-list'),
 };

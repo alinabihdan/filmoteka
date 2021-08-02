@@ -5,6 +5,8 @@ import localStorageUtl from './localStorageUtl';
 
 refs.movieContainer.addEventListener('click', fetchAndRenderFilmCard);
 refs.slider.addEventListener('click', fetchAndRenderFilmCard);
+refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
+refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
 
 async function fetchAndRenderFilmCard(e) {
   if (e.target.nodeName === 'IMG') {
@@ -32,10 +34,10 @@ function listenStorageBtns() {
   const queueBtn = document.querySelector('.btn-add-to-queue');
   const watchedBtn = document.querySelector('.btn-add-to-watched');
 
-  watchedBtn.addEventListener('click', () =>
-    localStorageUtl.putFilmToWatched(filmoteka.storageData),
+  watchedBtn.addEventListener('click', () => localStorageUtl.putFilmToWatched(filmoteka.storageData),
   );
   queueBtn.addEventListener('click', () => localStorageUtl.putFilmToQueue(filmoteka.storageData));
-}
+}; 
+
 
 export { listenStorageBtns };

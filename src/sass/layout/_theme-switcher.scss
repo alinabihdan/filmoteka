@@ -8,7 +8,7 @@ body.light-theme {
 }
 
 body.dark-theme {
-  background-image: url(../images/it-test-mob.jpeg);
+  background-image: url(../images/it-mob-1x.jpeg);
   color: white;
 
   @media screen and (min-device-pixel-ratio: 2) and (min-width: 320px),
@@ -36,12 +36,19 @@ body.dark-theme {
     screen and (min-resolution: 2dppx) and (min-width: 1024px) {
   }
 
-  & .header {
+  & .header,
+  & footer {
     background: transparent;
   }
 
-  & footer {
-    background: transparent;
+  & .watched-list,
+  & .queue-list {
+    background: black;
+  }
+
+  & .watched-text,
+  & .queue-text {
+    color: white;
   }
 
   & .footer-text,
@@ -64,8 +71,8 @@ body.dark-theme {
   bottom: -70px;
 
   @include screen('tablet') {
-    right: 100px;
-    bottom: -60px;
+    right: 105px;
+    bottom: 0;
   }
 }
 .theme-switch__input {
