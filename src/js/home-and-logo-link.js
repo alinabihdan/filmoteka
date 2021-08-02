@@ -5,7 +5,9 @@ import { renderPopularMovies } from './movies-gallery';
 refs.homeButton.addEventListener('click', onHomeAndLogoBtnClick);
 refs.logoLink.addEventListener('click', onHomeAndLogoBtnClick);
 
-function onHomeAndLogoBtnClick() {
+async function onHomeAndLogoBtnClick() {
   filmoteka.resetPage();
+  await refs.sectionGenres.classList.remove('visually-hidden');
   renderPopularMovies();
 };
+
