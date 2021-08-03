@@ -62,10 +62,3 @@
   display: block;
   margin: 0 auto;
 }
-
-.swal-button {
-  background-color: $accent-color;
-  &:not([disabled]):hover {
-    background-color: $error-color;
-  }
-}
