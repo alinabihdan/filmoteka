@@ -11,7 +11,7 @@ if (!localStorage.filmsToWatched || localStorage.filmsToWatched === null) {
 refs.movieContainer.addEventListener('click', fetchAndRenderFilmCard);
 refs.slider.addEventListener('click', fetchAndRenderFilmCard);
 refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
-refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
+refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
 
 async function fetchAndRenderFilmCard(e) {
     if (e.target.nodeName === 'IMG') {
@@ -38,40 +38,56 @@ async function renderFilmCard(id) {
 function listenStorageBtns() {
     const queueBtn = document.querySelector('.btn-add-to-queue');
     const watchedBtn = document.querySelector('.btn-add-to-watched');
+    const film = filmoteka.storageData;
+    const queueFilmes = JSON.parse(localStorage.filmsToQueue);
+    const watchedFilmes = JSON.parse(localStorage.filmsToWatched);
 
-    queueBtn.addEventListener('click', () => {
-        const movie = filmoteka.storageData;
-        const id = filmoteka.storageData.id;
-        const filmes = JSON.parse(localStorage.filmsToQueue);
-        const index = filmes.findIndex(film => id === film.id);
-        if (index === -1) {
-            filmes.push(movie);
-            console.log(filmes);
-            localStorage.filmsToQueue = JSON.stringify(filmes);
-            queueBtn.textContent = "delete from queue";
-        } else {
-            filmes.splice(index, 1);
-            localStorage.filmsToQueue = JSON.stringify(filmes);
-            queueBtn.textContent = "add to queue";
-        }
-    });
-    watchedBtn.addEventListener('click', () => {
-        const movie = filmoteka.storageData;
-        const id = filmoteka.storageData.id;
-        const filmes = JSON.parse(localStorage.filmsToWatched);
-        const index = filmes.findIndex(film => id === film.id);
-        if (index === -1) {
-            filmes.push(movie);
-            console.log(filmes);
-            localStorage.filmsToWatched = JSON.stringify(filmes);
-            watchedBtn.textContent = "delete from watched";
-        } else {
-            filmes.splice(index, 1);
-            localStorage.filmsToWatched = JSON.stringify(filmes);
-            watchedBtn.textContent = "add to watched";
-        }
-    });
+
+    isInLocalStorage(queueFilmes, film, queueBtn, 'queue');
+    isInLocalStorage(watchedFilmes, film, watchedBtn, 'watched');
+
+    queueBtn.addEventListener('click', () => onQueueButtonClick(film, queueBtn));
+    watchedBtn.addEventListener('click', () => onWatchedButtonClick(film, watchedBtn));
 
 };
 
-export { listenStorageBtns }
+function onQueueButtonClick(film, button) {
+    const filmes = JSON.parse(localStorage.filmsToQueue);
+    const index = filmes.findIndex(movie => film.id === movie.id);
+    if (index === -1) {
+        filmes.push(film);
+        console.log(filmes);
+        localStorage.filmsToQueue = JSON.stringify(filmes);
+        button.textContent = "delete from queue";
+    } else {
+        filmes.splice(index, 1);
+        localStorage.filmsToQueue = JSON.stringify(filmes);
+        button.textContent = "add to queue";
+    }
+}
+
+function onWatchedButtonClick(film, button) {
+    const filmes = JSON.parse(localStorage.filmsToWatched);
+    const index = filmes.findIndex(movie => film.id === movie.id);
+    if (index === -1) {
+        filmes.push(film);
+        console.log(filmes);
+        localStorage.filmsToWatched = JSON.stringify(filmes);
+        button.textContent = "delete from watched";
+    } else {
+        filmes.splice(index, 1);
+        localStorage.filmsToWatched = JSON.stringify(filmes);
+        button.textContent = "add to watched";
+    }
+}
+
+function isInLocalStorage(filmes, film, button, list) {
+    const index = filmes.findIndex(movie => film.id === movie.id);
+    if (index !== -1) {
+        button.textContent = `delete from ${list}`;
+    } else {
+        return
+    }
+    }
+
+export { listenStorageBtns, fetchAndRenderFilmCard }
