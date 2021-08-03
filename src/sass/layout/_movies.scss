@@ -1,44 +1,87 @@
+// section
 .movies {
   padding-top: 20px;
-  padding-bottom: 20px;
-}
+  padding-bottom: 40px;
 
-.movie-list {
-  margin-bottom: 40px;
-}
+  @include screen('tablet') {
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
 
-.movie-card {
-  padding: 10px 0;
-  background-color: #fff;
-  text-align: center;
-  border: 1px solid #e9e8e8;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-}
-
-.gallery-item {
-  margin-bottom: 20px;
-  max-width: 294px;
-  margin: 0 auto;
-  margin-right: 4px;
-  cursor: pointer;
-  transition: transform 500ms ease-in-out;
-}
-.gallery-item:hover,
-.gallery-item:focus {
-  transform: scale(1.1);
-  box-shadow: 2px 5px 5px 0px rgba(68, 66, 66, 0.2);
-  .movie-card {
-    border-bottom: none;
-    border-left: none;
-    border-right: none;
+  @include screen('desktop') {
+    padding-top: 50px;
   }
 }
 
-.gallery-item:nth-child(1n) {
-  margin-bottom: 20px;
+// ul - список фильмов
+.movie-list {
+  margin-bottom: 40px;
+  @include screen('tablet') {
+    margin: -15px -15px 45px -15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+  }
+
+  @include screen('desktop') {
+    // margin: -15px -15px 45px -15px;
+  }
 }
 
+// элементы списка - лишки
+.gallery-item {
+  background-color: #fff;
+  overflow: hidden;
+  border: 1px solid #e9e8e8;
+  border-radius: 4px;
+  box-shadow: 0px 1px 3px rgb(0 0 0 / 12%), 0px 1px 1px rgb(0 0 0 / 14%),
+    0px 2px 1px rgb(0 0 0 / 20%);
+  max-width: 294px;
+  transition: transform 500ms ease-in-out;
+
+  @include screen('tablet') {
+    margin: 15px;
+    width: calc((100% - 60px) / 2);
+  }
+
+  @include screen('desktop') {
+    width: calc((100% - 90px) / 3);
+  }
+}
+.gallery-item:hover,
+.gallery-item:focus {
+  border-color: rgba(68, 66, 66, 0.4);
+  transform: scale(1.1);
+  box-shadow: 2px 5px 5px 0px rgba(68, 66, 66, 0.4);
+}
+
+// обертка картинки
+.img-card-wrapper {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  overflow: hidden;
+  @include screen('tablet') {
+    width: 100%;
+    height: 432px;
+  }
+}
+// картинка
+.img-card {
+  height: 100%;
+  width: 102%;
+  object-fit: cover;
+}
+
+// карточка информации о фильме
+.movie-card {
+  padding: 10px 2px;
+  background-color: #fff;
+  text-align: center;
+  border-top: 1px solid #e9e8e8;
+}
+
+// заголовок - имя фильма
 .subscribe-item-movie {
   font-weight: 500;
   font-size: $main-fontsize;
@@ -47,62 +90,10 @@
   color: $main-text-color;
 }
 
+// жанры и дата
 .subscribe-item {
   font-weight: 500;
   font-size: $main-fontsize;
   line-height: 1.33;
   color: $accent-color;
-}
-.subscribe-item {
-  word-spacing: 3 px;
-}
-
-.card {
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-@media screen and (min-width: 768px) {
-  .movies {
-    padding-top: 40px;
-  }
-
-  .movie-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 50px;
-  }
-
-  .gallery-item:nth-child(2n) {
-    margin-bottom: 30px;
-  }
-
-  .img-card-wrapper {
-    height: 435px;
-  }
-
-  .img-card {
-    height: 100%;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .movie-list {
-    margin: -15px;
-    padding-bottom: 50px;
-  }
-  .gallery-item {
-    margin: 15px;
-    width: calc((100% - 90px) / 3);
-  }
-  .gallery-item:nth-child(3n) {
-    margin-right: 0;
-  }
-  .img-card {
-    width: 274px;
-  }
-  .img-card-wrapper {
-    height: 411px;
-  }
 }

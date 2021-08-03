@@ -3,6 +3,7 @@
   position: absolute;
   left: 50px;
   top: 10px;
+  z-index: 2;
 
   @include screen('tablet') {
     left: 450px;
