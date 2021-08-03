@@ -61,8 +61,12 @@
   width: 100%;
   justify-content: space-between;
   align-items: flex-end;
-  padding-top: 46px;
+  padding-top: 56px;
   padding-bottom: 43px;
+
+  @include screen('tablet') {
+    padding-top: 62px;
+  }
 }
 
 .logo-link {
@@ -91,12 +95,13 @@
 
 .site-nav {
   display: flex;
-  min-width: 133px;
+  min-width: 170px;
   justify-content: space-between;
 }
 
 .home-link,
-.my-library-link {
+.my-library-link,
+.login-link {
   font-weight: 500;
   font-size: $main-fontsize;
   line-height: 1.88;

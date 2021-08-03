@@ -66,15 +66,15 @@ body.dark-theme {
 .theme-switch__input,
 .theme-switch__label {
   position: absolute;
-  right: 0;
+  right: 50px;
+  top: 10px;
   // z-index: 1;
   // right: 40px;
   // bottom: -70px;
 
-  // @include screen('tablet') {
-  //   right: 105px;
-  //   bottom: 0;
-  // }
+  @include screen('tablet') {
+    right: 105px;
+  }
 }
 .theme-switch__input {
   opacity: 0;

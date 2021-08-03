@@ -1,11 +1,20 @@
 .lang-switch__input,
 .lang-switch__label {
   position: absolute;
-  left: 0;
+  left: 50px;
+  top: 10px;
+
+  @include screen('tablet') {
+    left: 450px;
+  }
+
+  @include screen('desktop') {
+    left: 700px;
+  }
 }
 
 .lang-switch__input {
-  opacity: 0;
+  display: none;
 }
 
 .lang-switch__input:hover,
@@ -25,6 +34,7 @@
   text-align: center;
   background-color: slateGray;
   box-shadow: -4px 4px 15px inset rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 
   &::before,
   &::after {
