@@ -40,7 +40,12 @@
   max-width: 294px;
   transition: transform 500ms ease-in-out;
 
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
   @include screen('tablet') {
+    margin-bottom: 0;
     margin: 15px;
     width: calc((100% - 60px) / 2);
   }
