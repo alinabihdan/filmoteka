@@ -1,6 +1,6 @@
 const API_KEY = 'api_key=05d7e6695d9ebeb510a995559544df94';
 const BASE_URL = 'https://api.themoviedb.org/3';
-import {Loader} from '../js/loader';
+import { Loader } from '../js/loader';
 
 const loader = new Loader();
 
@@ -16,24 +16,23 @@ class FilmsApiServise {
   // Запрос на популярные фильмы за неделю для главной страницы
   getAllMovies() {
     loader.openLoader();
-    const URL_WEEK = BASE_URL + '/trending/movie/week?' + API_KEY + `&page=${this.page}`;
-    return fetch(URL_WEEK).then(response => {
-      return response.json();
-    }).finally(loader.closeLoader());
+    const URL_WEEK = `${BASE_URL}/trending/movie/week?${API_KEY}&page=${this.page}&language=en-US`;
+    return fetch(URL_WEEK)
+      .then(response => {
+        return response.json();
+      })
+      .finally(loader.closeLoader());
   }
 
   // Запрос на поиск по слову
   getMovies() {
     loader.openLoader();
-    const url = `${BASE_URL}/search/movie?${API_KEY}&query=${this.searchQuery}&page=${this.page}&language=en-US&language=ru-RU`;
-    return fetch(url).then(response => {
-      return response.json();
-    }).finally(loader.closeLoader());
-    // .then(data => {
-    // this.incrementPage();
-    // console.log(data.results);
-    // return data.results;
-    // });
+    const url = `${BASE_URL}/search/movie?${API_KEY}&query=${this.searchQuery}&page=${this.page}&language=en-US`;
+    return fetch(url)
+      .then(response => {
+        return response.json();
+      })
+      .finally(loader.closeLoader());
   }
 
   //Запрос на фильм по id
@@ -56,7 +55,8 @@ class FilmsApiServise {
           vote_average: film.vote_average,
         };
         return film;
-      }).finally(loader.closeLoader());
+      })
+      .finally(loader.closeLoader());
   }
 
   // запрос на все жанры
@@ -68,26 +68,30 @@ class FilmsApiServise {
       .then(data => {
         this.genres = [...data.genres];
         return data.genres;
-      }).finally(loader.closeLoader());
+      })
+      .finally(loader.closeLoader());
   }
 
   // запрос на поиск по жанру
   fetchMoviesByGenre() {
     loader.openLoader();
-    const url = `${BASE_URL}/discover/movie?${API_KEY}&with_genres=${this.genreId}&page=${this.page}`;
-    return fetch(url).then(response => response.json()).finally(loader.closeLoader());
+    const url = `${BASE_URL}/discover/movie?${API_KEY}&with_genres=${this.genreId}&page=${this.page}&language=en-US`;
+    return fetch(url)
+      .then(response => response.json())
+      .finally(loader.closeLoader());
   }
 
   // запрос на популярные за день для слайдера
   renderTrendySliderMovies() {
     loader.openLoader();
-    const url = `${BASE_URL}/trending/all/day?${API_KEY}`;
+    const url = `${BASE_URL}/trending/all/day?${API_KEY}&language=en-US`;
     return fetch(url)
       .then(response => response.json())
       .then(({ results }) => {
         console.log(results);
         return results;
-      }).finally(loader.closeLoader());
+      })
+      .finally(loader.closeLoader());
   }
 
   incrementPage() {

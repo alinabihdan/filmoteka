@@ -46,19 +46,35 @@ body.dark-theme {
     background: black;
   }
 
-  & .watched-text,
-  & .queue-text {
-    color: white;
+  & .film-blackdrop {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  & .film-modal {
+    background-color: black;
   }
 
+  & .watched-text,
+  & .queue-text,
+  & .right-column,
   & .footer-text,
   & .footer-text-goit,
   & .footer-text-goit-link,
   & .numb,
   & .dots,
   & .btn.prev,
-  & .btn.next {
+  & .btn.next,
+  & .material-icons {
     color: white;
+  }
+
+  & .btn-add-to-watched,
+  & .btn-add-to-queue {
+    color: white;
+    border-color: white;
+  }
+
+  & .film-votes {
+    color: black;
   }
 }
 
