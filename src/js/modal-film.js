@@ -59,10 +59,13 @@ function onQueueButtonClick(film, button) {
         console.log(filmes);
         localStorage.filmsToQueue = JSON.stringify(filmes);
         button.textContent = "delete from queue";
+        swal("ADD TO QUEUE", "", "success", {button: false, timer: 1000,});
     } else {
         filmes.splice(index, 1);
         localStorage.filmsToQueue = JSON.stringify(filmes);
         button.textContent = "add to queue";
+        swal("DELETE FROM QUEUE", "", "success", {button: false, timer: 1000,});
+
     }
 }
 
@@ -74,10 +77,12 @@ function onWatchedButtonClick(film, button) {
         console.log(filmes);
         localStorage.filmsToWatched = JSON.stringify(filmes);
         button.textContent = "delete from watched";
+        swal("ADD TO WATCHED", "", "success", {button: false, timer: 1000,});
     } else {
         filmes.splice(index, 1);
         localStorage.filmsToWatched = JSON.stringify(filmes);
         button.textContent = "add to watched";
+        swal("DELETE FROM WATCHED", "", "success", {button: false, timer: 1000,});
     }
 }
 
