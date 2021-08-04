@@ -97,9 +97,6 @@ async function renderWatchedList() {
   const filmes = await JSON.parse(localStorage.getItem('filmsToWatched'));
   const paginatedFilmes = paginateArray(filmes, localStorageUtl.page, localStorageUtl.cardsPerPage);
 
-  // console.log(filmes);
-  // console.log(paginatedFilmes);
-
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
   });
@@ -137,9 +134,6 @@ async function renderWatchedList() {
 async function renderQueueList() {
   const filmes = await JSON.parse(localStorage.getItem('filmsToQueue'));
   const paginatedFilmes = paginateArray(filmes, localStorageUtl.page, localStorageUtl.cardsPerPage);
-
-  console.log(filmes);
-  console.log(paginatedFilmes);
 
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
