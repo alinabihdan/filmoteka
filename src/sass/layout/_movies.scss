@@ -40,12 +40,13 @@
   max-width: 294px;
   transition: transform 500ms ease-in-out;
 
-  &:not(:last-child) {
-    margin-bottom: 20px;
+  @media screen and (max-width: 767px) {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
   }
 
   @include screen('tablet') {
-    margin-bottom: 0;
     margin: 15px;
     width: calc((100% - 60px) / 2);
   }
@@ -80,7 +81,7 @@
 
 // карточка информации о фильме
 .movie-card {
-  padding: 10px 2px;
+  padding: 10px 5px;
   background-color: #fff;
   text-align: center;
   border-top: 1px solid #e9e8e8;
@@ -97,8 +98,13 @@
 
 // жанры и дата
 .subscribe-item {
+  word-spacing: 2px;
   font-weight: 500;
   font-size: $main-fontsize;
-  line-height: 1.33;
+  line-height: 1.73;
   color: $accent-color;
+}
+
+.subscribe-item.genres {
+  margin-right: 5px;
 }
