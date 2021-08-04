@@ -5,7 +5,7 @@ import queueWhenNoneTpl from '../templates/queue-list.hbs';
 import { onHomeButtonClick } from './library';
 import refs from './refs';
 import filmoteka from './ApiService';
-import localStorageUtl from './localStorageUtl';
+import { closeModal, overlayClick } from './btn-to-close';
 
 if (!localStorage.filmsToWatched || localStorage.filmsToWatched === null) {
     localStorage.setItem('filmsToWatched', '[]');
@@ -18,8 +18,10 @@ refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
 refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
 
 async function fetchAndRenderFilmCard(e) {
-    if (e.target.nodeName === 'IMG') {
+    if (e.target.id === 'open-modal-film-btn') {
         await renderFilmCard(e.target.dataset.id);
+        refs.closeBtn.addEventListener('click', closeModal);
+        refs.modalWindow.addEventListener('click', overlayClick);
         refs.modalFilmBlackdrop.classList.add('is-active');
         refs.filmModalField.classList.add('is-active');
         refs.bodyEl.classList.add('modal-open');
@@ -27,6 +29,7 @@ async function fetchAndRenderFilmCard(e) {
 
     listenStorageBtns();
   }
+    return
 }
 
 async function renderFilmCard(id) {
