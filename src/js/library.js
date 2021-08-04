@@ -3,6 +3,9 @@ import galleryTpl from '../templates/watched-and-queue.hbs';
 import filmoteka from './ApiService';
 import renderPopularMovie from './movies-gallery';
 import swal from 'sweetalert';
+import localStorageUtl from './localStorageUtl';
+import { startLocalPagination } from './pagination';
+
 function addListenerToLibraryBtn() {
   // вешает слушатели на кнопки "Home" и "Library"
   refs.libraryButton.addEventListener('click', onLibraryButtonClick);
@@ -21,7 +24,7 @@ function onLibraryButtonClick() {
   refs.sliderSection.classList.add('visually-hidden');
   refs.sectionGenres.classList.add('visually-hidden');
   refs.movieContainer.classList.add('visually-hidden');
-  refs.paginationContainer.classList.add('visually-hidden');
+  // refs.paginationContainer.classList.add('visually-hidden');
   refs.watchedContainer.classList.remove('visually-hidden');
   renderWatchedList(); //функция которая рендерит список просмотренных фильмов
 
@@ -53,7 +56,7 @@ function onHomeButtonClick() {
   refs.movieContainer.classList.remove('visually-hidden');
   refs.watchedContainer.classList.add('visually-hidden');
   refs.queueContainer.classList.add('visually-hidden');
-  refs.paginationContainer.classList.remove('visually-hidden');
+  // refs.paginationContainer.classList.remove('visually-hidden');
 }
 
 function onQueueButtonClick() {
@@ -76,13 +79,17 @@ function onWatchedButtonClick() {
 
 function renderWatchedList() {
   const filmes = JSON.parse(localStorage.getItem('filmsToWatched'));
+  const paginatedFilmes = paginateArray(filmes, localStorageUtl.page, localStorageUtl.cardsPerPage);
+
   console.log(filmes);
+  console.log(paginatedFilmes);
+
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
   });
   filmes.map(film => {
     const genresList = film.genres.map(genre => genre.name);
-    console.log(genresList);
+    // console.log(genresList);
     film.genres = genresList.join(', ');
   });
   if (filmes.length === 0) {
@@ -94,20 +101,24 @@ function renderWatchedList() {
     refs.watchedContainer.classList.replace('watched-list', 'movie-list');
     refs.watchedContainer.classList.remove('visually-hidden');
     refs.watchedContainer.innerHTML = '';
-    refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(filmes));
+    refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
+
+    localStorageUtl.setTotalPages(filmes);
+    console.log(localStorageUtl.totalPages);
+    startLocalPagination(renderWatchedList);
   }
   // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
 }
 
 function renderQueueList() {
   const filmes = JSON.parse(localStorage.getItem('filmsToQueue'));
-  console.log(filmes);
+  // console.log(filmes);
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
   });
   filmes.map(film => {
     const genresList = film.genres.map(genre => genre.name);
-    console.log(genresList);
+    // console.log(genresList);
     film.genres = genresList.join(', ');
   });
   if (filmes.length === 0) {
@@ -133,6 +144,13 @@ function renderMoviesGallery() {
     .catch(error => {
       console.log(error);
     });
+}
+
+function paginateArray(array, page, cardsPerPage) {
+  page--;
+  let start = page * cardsPerPage;
+  let end = start + cardsPerPage;
+  return array.slice(start, end);
 }
 
 addListenerToLibraryBtn();
