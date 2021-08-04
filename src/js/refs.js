@@ -12,6 +12,7 @@ export default {
   queueContainer: document.querySelector('.queue-list'),
   loadMoreBtn: document.querySelector('[data-action="load-more"]'),
   slider: document.getElementById('slider-list'),
+  sliderItem: document.querySelector('.glide__slide'),
   sliderSection: document.querySelector('.slider'),
   libraryButton: document.querySelector('.my-library-link'),
   logoLink: document.querySelector('.logo-link'),
