@@ -1,7 +1,7 @@
 {{#each this}}
 <li class="glide__slide slider__card" data-id='{{id}}'>
         <img class="slider-image" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}"
-            data-id="{{id}}"/>
+            data-id="{{id}}" onError="this.onerror=null;this.src='https://st.depositphotos.com/2185383/4533/v/950/depositphotos_45330099-stock-illustration-cinema-concept-poster.jpg;'" />
         <span class="slider-rating">{{vote_average}}</span>
 </li>
 {{/each}}
