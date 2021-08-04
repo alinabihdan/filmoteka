@@ -6,6 +6,9 @@ class LocalStorageUtl {
   constructor() {
     this.filmsToWatched = 'filmsToWatched';
     this.filmsToQueue = 'filmsToQueue';
+    this.cardsPerPage = 20;
+    this.totalPages = 1;
+    this.page = 1;
   }
 
   getFilmToWatched() {
@@ -50,6 +53,26 @@ class LocalStorageUtl {
 
     localStorage.setItem(this.filmsToQueue, JSON.stringify(filmsToQueue));
   }
+
+  incrementPage() {
+    this.page += 1;
+  }
+
+  decrementPage() {
+    this.page -= 1;
+  }
+
+  setPage(newPage) {
+    this.page = newPage;
+  }
+
+  resetPage() {
+    this.page = 1;
+  }
+
+  setTotalPages(array) {
+    this.totalPages = Math.ceil(array.length / this.cardsPerPage);
+  }
 }
 
 const localStorageUtl = new LocalStorageUtl();
@@ -65,4 +88,3 @@ const localStorageUtl = new LocalStorageUtl();
 // refs.queueBtn.addEventListener('click', localStorageUtl.putFilmToQueue);
 
 export default localStorageUtl;
-

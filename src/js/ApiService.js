@@ -88,7 +88,7 @@ class FilmsApiServise {
     return fetch(url)
       .then(response => response.json())
       .then(({ results }) => {
-        console.log(results);
+        // console.log(results);
         return results;
       })
       .finally(loader.closeLoader());

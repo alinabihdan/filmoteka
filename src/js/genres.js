@@ -44,7 +44,7 @@ async function onGenreButtonClick(e) {
   }
 
   const { page, results, total_pages, total_results } = await filmoteka.fetchMoviesByGenre();
-  console.log({ results });
+  // console.log({ results });
 
   if (results.length === 0) {
     // onHideBtnClick();
@@ -56,7 +56,7 @@ async function onGenreButtonClick(e) {
 
   const genresObj = await filmoteka.fetchGenres();
   const genresList = [...genresObj];
-  console.log(genresList);
+  // console.log(genresList);
 
   transformDate(results);
   transformGenre(results, genresList);

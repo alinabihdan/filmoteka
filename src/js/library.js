@@ -5,6 +5,8 @@ import queueWhenNoneTpl from '../templates/queue-list.hbs';
 import filmoteka from './ApiService';
 import renderPopularMovie from './movies-gallery';
 import swal from 'sweetalert';
+import localStorageUtl from './localStorageUtl';
+import { startLocalPagination } from './pagination';
 import { fetchAndRenderFilmCard } from './modal-film';
 
 function addListenerToLibraryBtn() {
@@ -24,8 +26,10 @@ function onLibraryButtonClick() {
   refs.sliderSection.classList.add('visually-hidden');
   refs.sectionGenres.classList.add('visually-hidden');
   refs.movieContainer.classList.add('visually-hidden');
-  refs.paginationContainer.classList.add('visually-hidden');
+  // refs.paginationContainer.classList.add('visually-hidden');
   refs.watchedContainer.classList.remove('visually-hidden');
+
+  localStorageUtl.resetPage();
   refs.watchedContainer.classList.replace('watched-list', 'movie-list');
   renderWatchedList(); //функция которая рендерит список просмотренных фильмов
 
@@ -55,7 +59,7 @@ export function onHomeButtonClick() {
   refs.movieContainer.classList.remove('visually-hidden');
   refs.watchedContainer.classList.add('visually-hidden');
   refs.queueContainer.classList.add('visually-hidden');
-  refs.paginationContainer.classList.remove('visually-hidden');
+  // refs.paginationContainer.classList.remove('visually-hidden');
   refs.watchedContainer.classList.replace('movie-list', 'watched-list');
   refs.queueContainer.classList.replace('movie-list', 'queue-list');
   renderMoviesGallery();
@@ -71,29 +75,34 @@ function onQueueButtonClick() {
   refs.queueButton.removeEventListener('click', onQueueButtonClick);
   refs.watchedButton.classList.remove('is-btn-active');
   refs.queueButton.classList.add('is-btn-active');
+
+  localStorageUtl.resetPage();
   renderQueueList(); //функция которая рендерит список фильмов "Хочу смотреть"
 }
 
 function onWatchedButtonClick() {
-  refs.queueContainer.classList.replace('movie-list','queue-list');
+  refs.queueContainer.classList.replace('movie-list', 'queue-list');
   refs.queueContainer.classList.add('visually-hidden');
   refs.watchedContainer.classList.replace('watched-list', 'movie-list');
   refs.queueButton.addEventListener('click', onQueueButtonClick);
   refs.watchedButton.removeEventListener('click', onWatchedButtonClick);
   refs.queueButton.classList.remove('is-btn-active');
   refs.watchedButton.classList.add('is-btn-active');
+
+  localStorageUtl.resetPage();
   renderWatchedList();
 }
 
-function renderWatchedList() {
-  const filmes = JSON.parse(localStorage.getItem('filmsToWatched'));
-  console.log(filmes);
+async function renderWatchedList() {
+  const filmes = await JSON.parse(localStorage.getItem('filmsToWatched'));
+  const paginatedFilmes = paginateArray(filmes, localStorageUtl.page, localStorageUtl.cardsPerPage);
+
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
   });
   filmes.map(film => {
     const genresList = film.genres.map(genre => genre.name);
-    console.log(genresList);
+    // console.log(genresList);
     film.genres = genresList.join(', ');
   });
 
@@ -107,27 +116,31 @@ function renderWatchedList() {
     const backToHomeBtn = document.getElementById('back-to-home-btn');
     backToHomeBtn.addEventListener('click', onHomeButtonClick);
     refs.watchedContainer.classList.replace('movie-list', 'watched-list');
-//    swal('Ей, так не годится', 'Дружище, посмотри уже на конец что-нибудь', 'warning');
+    //    swal('Ей, так не годится', 'Дружище, посмотри уже на конец что-нибудь', 'warning');
   } else {
     refs.watchedContainer.classList.replace('watched-list', 'movie-list');
     refs.watchedContainer.classList.remove('visually-hidden');
 
     refs.watchedContainer.innerHTML = '';
-    refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(filmes));
+    refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
     refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
+
+    localStorageUtl.setTotalPages(filmes);
+    startLocalPagination(renderWatchedList);
   }
   // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
 }
 
-function renderQueueList() {
-  const filmes = JSON.parse(localStorage.getItem('filmsToQueue'));
-  console.log(filmes);
+async function renderQueueList() {
+  const filmes = await JSON.parse(localStorage.getItem('filmsToQueue'));
+  const paginatedFilmes = paginateArray(filmes, localStorageUtl.page, localStorageUtl.cardsPerPage);
+
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
   });
   filmes.map(film => {
     const genresList = film.genres.map(genre => genre.name);
-    console.log(genresList);
+    // console.log(genresList);
     film.genres = genresList.join(', ');
   });
 
@@ -141,14 +154,17 @@ function renderQueueList() {
     const backToSearchBtn = document.getElementById('back-to-search-btn');
     backToSearchBtn.addEventListener('click', onHomeButtonClick);
     refs.queueContainer.classList.replace('movie-list', 'queue-list');
-//    swal('Ей, так не годится', 'Дружище, выбери уже на конец что-нибудь', 'warning');
+    //    swal('Ей, так не годится', 'Дружище, выбери уже на конец что-нибудь', 'warning');
   } else {
     refs.queueContainer.classList.replace('queue-list', 'movie-list');
     refs.queueContainer.classList.remove('visually-hidden');
 
     refs.queueContainer.innerHTML = '';
-    refs.queueContainer.insertAdjacentHTML('beforeend', galleryTpl(filmes));
+    refs.queueContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
     refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
+
+    localStorageUtl.setTotalPages(filmes);
+    startLocalPagination(renderQueueList);
   }
   // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
 }
@@ -161,6 +177,13 @@ function renderMoviesGallery() {
     .catch(error => {
       console.log(error);
     });
+}
+
+function paginateArray(array, page, cardsPerPage) {
+  page--;
+  let start = page * cardsPerPage;
+  let end = start + cardsPerPage;
+  return array.slice(start, end);
 }
 
 addListenerToLibraryBtn();

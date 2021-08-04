@@ -11,7 +11,7 @@ async function renderPopularMovies() {
 
   const genresObj = await filmoteka.fetchGenres();
   const genresList = [...genresObj];
-  console.log(genresList);
+  // console.log(genresList);
 
   filmoteka.totalPages = total_pages;
   transformDate(results);
@@ -22,7 +22,6 @@ async function renderPopularMovies() {
   clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
   startPagination(renderPopularMovies);
-  // startAutoScroll();
 
   if (sessionStorage.mainNotification !== 'showed') {
     const mainTitle = 'Привет, Пользователь!';
@@ -58,7 +57,7 @@ async function onSearch(e) {
   const { page, results, total_pages, total_results } = await filmoteka.getMovies();
   const genresObj = await filmoteka.fetchGenres();
   const genresList = [...genresObj];
-  console.log(genresList);
+  // console.log(genresList);
 
   filmoteka.totalPages = total_pages;
   transformDate(results);
