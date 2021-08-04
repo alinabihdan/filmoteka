@@ -1,13 +1,15 @@
 import refs from './refs';
 import galleryTpl from '../templates/watched-and-queue.hbs';
+import watchedWhenNoneTpl from '../templates/watched-list.hbs';
+import queueWhenNoneTpl from '../templates/queue-list.hbs';
 import filmoteka from './ApiService';
 import renderPopularMovie from './movies-gallery';
 import swal from 'sweetalert';
 import localStorageUtl from './localStorageUtl';
 import { startLocalPagination } from './pagination';
+import { fetchAndRenderFilmCard } from './modal-film';
 
 function addListenerToLibraryBtn() {
-  // вешает слушатели на кнопки "Home" и "Library"
   refs.libraryButton.addEventListener('click', onLibraryButtonClick);
 }
 
@@ -28,6 +30,7 @@ function onLibraryButtonClick() {
   refs.watchedContainer.classList.remove('visually-hidden');
 
   localStorageUtl.resetPage();
+  refs.watchedContainer.classList.replace('watched-list', 'movie-list');
   renderWatchedList(); //функция которая рендерит список просмотренных фильмов
 
   if (sessionStorage.libraryNotification !== 'showed') {
@@ -39,7 +42,7 @@ function onLibraryButtonClick() {
   }
 }
 
-function onHomeButtonClick() {
+export function onHomeButtonClick() {
   refs.header.classList.replace('my-library-header', 'home-header');
   refs.libraryButton.classList.remove('current');
   refs.homeButton.classList.add('current');
@@ -50,8 +53,6 @@ function onHomeButtonClick() {
   refs.queueButton.classList.remove('is-btn-active');
   refs.watchedButton.removeEventListener('click', onWatchedButtonClick);
   refs.queueButton.removeEventListener('click', onQueueButtonClick);
-  refs.backToHomeBtn.removeEventListener('click', onHomeButtonClick);
-  refs.backToSearchBtn.removeEventListener('click', onHomeButtonClick);
   refs.logoLink.removeEventListener('click', onHomeButtonClick);
   refs.sliderSection.classList.remove('visually-hidden');
   refs.sectionGenres.classList.remove('visually-hidden');
@@ -59,10 +60,17 @@ function onHomeButtonClick() {
   refs.watchedContainer.classList.add('visually-hidden');
   refs.queueContainer.classList.add('visually-hidden');
   // refs.paginationContainer.classList.remove('visually-hidden');
+  refs.watchedContainer.classList.replace('movie-list', 'watched-list');
+  refs.queueContainer.classList.replace('movie-list', 'queue-list');
+  renderMoviesGallery();
+  refs.watchedList.removeEventListener('click', fetchAndRenderFilmCard);
+  refs.queueList.removeEventListener('click', fetchAndRenderFilmCard);
 }
 
 function onQueueButtonClick() {
+  refs.watchedContainer.classList.replace('movie-list', 'watched-list');
   refs.watchedContainer.classList.add('visually-hidden');
+  refs.queueContainer.classList.replace('queue-list', 'movie-list');
   refs.watchedButton.addEventListener('click', onWatchedButtonClick);
   refs.queueButton.removeEventListener('click', onQueueButtonClick);
   refs.watchedButton.classList.remove('is-btn-active');
@@ -73,7 +81,9 @@ function onQueueButtonClick() {
 }
 
 function onWatchedButtonClick() {
+  refs.queueContainer.classList.replace('movie-list', 'queue-list');
   refs.queueContainer.classList.add('visually-hidden');
+  refs.watchedContainer.classList.replace('watched-list', 'movie-list');
   refs.queueButton.addEventListener('click', onQueueButtonClick);
   refs.watchedButton.removeEventListener('click', onWatchedButtonClick);
   refs.queueButton.classList.remove('is-btn-active');
@@ -98,19 +108,27 @@ async function renderWatchedList() {
     // console.log(genresList);
     film.genres = genresList.join(', ');
   });
-  if (filmes.length === 0) {
-    refs.watchedContainer.classList.remove('visually-hidden');
-    refs.backToHomeBtn.addEventListener('click', onHomeButtonClick);
 
-    swal('Ей, так не годится', 'Дружище, посмотри уже на конец что-нибудь', 'warning');
+  if (filmes.length === 0) {
+    refs.watchedList.removeEventListener('click', fetchAndRenderFilmCard);
+    refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
+    refs.watchedContainer.classList.remove('visually-hidden');
+    refs.watchedContainer.innerHTML = '';
+
+    refs.watchedContainer.insertAdjacentHTML('beforeend', watchedWhenNoneTpl());
+    const backToHomeBtn = document.getElementById('back-to-home-btn');
+    backToHomeBtn.addEventListener('click', onHomeButtonClick);
+    refs.watchedContainer.classList.replace('movie-list', 'watched-list');
+    //    swal('Ей, так не годится', 'Дружище, посмотри уже на конец что-нибудь', 'warning');
   } else {
     refs.watchedContainer.classList.replace('watched-list', 'movie-list');
     refs.watchedContainer.classList.remove('visually-hidden');
+
     refs.watchedContainer.innerHTML = '';
     refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
+    refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
 
     localStorageUtl.setTotalPages(filmes);
-    // console.log('total pages=' + localStorageUtl.totalPages, 'page=' + localStorageUtl.page);
     startLocalPagination(renderWatchedList);
   }
   // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
@@ -131,20 +149,27 @@ async function renderQueueList() {
     // console.log(genresList);
     film.genres = genresList.join(', ');
   });
-  if (filmes.length === 0) {
-    refs.queueContainer.classList.remove('visually-hidden');
-    refs.backToSearchBtn.addEventListener('click', onHomeButtonClick);
 
-    swal('Ей, так не годится', 'Дружище, выбери уже на конец что-нибудь', 'warning');
+  if (filmes.length === 0) {
+    refs.queueList.removeEventListener('click', fetchAndRenderFilmCard);
+    refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
+    refs.queueContainer.classList.remove('visually-hidden');
+    refs.queueContainer.innerHTML = '';
+
+    refs.queueContainer.insertAdjacentHTML('beforeend', queueWhenNoneTpl());
+    const backToSearchBtn = document.getElementById('back-to-search-btn');
+    backToSearchBtn.addEventListener('click', onHomeButtonClick);
+    refs.queueContainer.classList.replace('movie-list', 'queue-list');
+    //    swal('Ей, так не годится', 'Дружище, выбери уже на конец что-нибудь', 'warning');
   } else {
     refs.queueContainer.classList.replace('queue-list', 'movie-list');
     refs.queueContainer.classList.remove('visually-hidden');
 
     refs.queueContainer.innerHTML = '';
     refs.queueContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
+    refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
 
     localStorageUtl.setTotalPages(filmes);
-    console.log('total pages=' + localStorageUtl.totalPages, 'page=' + localStorageUtl.page);
     startLocalPagination(renderQueueList);
   }
   // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
@@ -168,3 +193,5 @@ function paginateArray(array, page, cardsPerPage) {
 }
 
 addListenerToLibraryBtn();
+
+export { renderQueueList, renderWatchedList };

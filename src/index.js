@@ -14,3 +14,4 @@ import './js/home-and-logo-link';
 import './js/notification';
 import './js/theme-switcher';
 import './js/autoscroll';
+import './js/lang-switcher';

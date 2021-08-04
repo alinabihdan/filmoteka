@@ -14,7 +14,6 @@ function transformGenre(results, genresList) {
       const idx = genresList.indexOf(genresListItem);
       array[index] = genresList[idx].name;
     });
-    // console.log(result);
     result.genre_ids = genresToTransform.join(', ');
   });
 }

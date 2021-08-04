@@ -16,7 +16,7 @@ class FilmsApiServise {
   // Запрос на популярные фильмы за неделю для главной страницы
   getAllMovies() {
     loader.openLoader();
-    const URL_WEEK = BASE_URL + '/trending/movie/week?' + API_KEY + `&page=${this.page}`;
+    const URL_WEEK = `${BASE_URL}/trending/movie/week?${API_KEY}&page=${this.page}&language=en-US`;
     return fetch(URL_WEEK)
       .then(response => {
         return response.json();
@@ -27,7 +27,7 @@ class FilmsApiServise {
   // Запрос на поиск по слову
   getMovies() {
     loader.openLoader();
-    const url = `${BASE_URL}/search/movie?${API_KEY}&query=${this.searchQuery}&page=${this.page}&language=en-US&language=ru-RU`;
+    const url = `${BASE_URL}/search/movie?${API_KEY}&query=${this.searchQuery}&page=${this.page}&language=en-US`;
     return fetch(url)
       .then(response => {
         return response.json();
@@ -75,7 +75,7 @@ class FilmsApiServise {
   // запрос на поиск по жанру
   fetchMoviesByGenre() {
     loader.openLoader();
-    const url = `${BASE_URL}/discover/movie?${API_KEY}&with_genres=${this.genreId}&page=${this.page}`;
+    const url = `${BASE_URL}/discover/movie?${API_KEY}&with_genres=${this.genreId}&page=${this.page}&language=en-US`;
     return fetch(url)
       .then(response => response.json())
       .finally(loader.closeLoader());
@@ -84,7 +84,7 @@ class FilmsApiServise {
   // запрос на популярные за день для слайдера
   renderTrendySliderMovies() {
     loader.openLoader();
-    const url = `${BASE_URL}/trending/all/day?${API_KEY}`;
+    const url = `${BASE_URL}/trending/all/day?${API_KEY}&language=en-US`;
     return fetch(url)
       .then(response => response.json())
       .then(({ results }) => {

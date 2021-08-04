@@ -61,8 +61,12 @@
   width: 100%;
   justify-content: space-between;
   align-items: flex-end;
-  padding-top: 46px;
+  padding-top: 56px;
   padding-bottom: 43px;
+
+  @include screen('tablet') {
+    padding-top: 62px;
+  }
 }
 
 .logo-link {
@@ -91,7 +95,7 @@
 
 .site-nav {
   display: flex;
-  min-width: 133px;
+  min-width: 135px;
   justify-content: space-between;
 }
 

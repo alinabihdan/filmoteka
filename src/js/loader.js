@@ -1,5 +1,5 @@
 export class Loader {
-  constructor(selector = ".loader") {
+  constructor(selector = '.loader') {
     this.isOpen = false;
     this.loaderRef = document.querySelector(selector);
   }
@@ -17,8 +17,10 @@ export class Loader {
   }
 
   closeLoader() {
-    this.loaderRef.classList.remove('is-loader-open');
-    this.isOpen = false;
+    setTimeout(() => {
+      this.loaderRef.classList.remove('is-loader-open');
+      this.isOpen = false;
+    }, 550);
   }
 
   status() {
