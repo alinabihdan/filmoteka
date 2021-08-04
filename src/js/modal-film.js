@@ -1,4 +1,8 @@
 import modalFilmTpl from '../templates/modal-film.hbs';
+import galleryTpl from '../templates/watched-and-queue.hbs';
+import watchedWhenNoneTpl from '../templates/watched-list.hbs';
+import queueWhenNoneTpl from '../templates/queue-list.hbs';
+import { onHomeButtonClick } from './library';
 import refs from './refs';
 import filmoteka from './ApiService';
 import localStorageUtl from './localStorageUtl';
@@ -46,12 +50,12 @@ function listenStorageBtns() {
     isInLocalStorage(queueFilmes, film, queueBtn, 'queue');
     isInLocalStorage(watchedFilmes, film, watchedBtn, 'watched');
 
-    queueBtn.addEventListener('click', () => onQueueButtonClick(film, queueBtn));
-    watchedBtn.addEventListener('click', () => onWatchedButtonClick(film, watchedBtn));
+    queueBtn.addEventListener('click', () => onModalQueueButtonClick(film, queueBtn));
+    watchedBtn.addEventListener('click', () => onModalWatchedButtonClick(film, watchedBtn));
 
 };
 
-function onQueueButtonClick(film, button) {
+function onModalQueueButtonClick(film, button) {
     const filmes = JSON.parse(localStorage.filmsToQueue);
     const index = filmes.findIndex(movie => film.id === movie.id);
     if (index === -1) {
@@ -59,17 +63,18 @@ function onQueueButtonClick(film, button) {
         console.log(filmes);
         localStorage.filmsToQueue = JSON.stringify(filmes);
         button.textContent = "delete from queue";
-        swal("ADD TO QUEUE", "", "success", {button: false, timer: 1000,});
+        swal("ADD TO QUEUE", "", "success", { button: false, timer: 1000, });
+        renderQueueList();
     } else {
         filmes.splice(index, 1);
         localStorage.filmsToQueue = JSON.stringify(filmes);
         button.textContent = "add to queue";
-        swal("DELETE FROM QUEUE", "", "success", {button: false, timer: 1000,});
-
+        swal("DELETE FROM QUEUE", "", "success", { button: false, timer: 1000, });
+        renderQueueList();
     }
 }
 
-function onWatchedButtonClick(film, button) {
+function onModalWatchedButtonClick(film, button) {
     const filmes = JSON.parse(localStorage.filmsToWatched);
     const index = filmes.findIndex(movie => film.id === movie.id);
     if (index === -1) {
@@ -77,12 +82,14 @@ function onWatchedButtonClick(film, button) {
         console.log(filmes);
         localStorage.filmsToWatched = JSON.stringify(filmes);
         button.textContent = "delete from watched";
-        swal("ADD TO WATCHED", "", "success", {button: false, timer: 1000,});
+        swal("ADD TO WATCHED", "", "success", { button: false, timer: 1000, });
+        renderWatchedList();
     } else {
         filmes.splice(index, 1);
         localStorage.filmsToWatched = JSON.stringify(filmes);
         button.textContent = "add to watched";
-        swal("DELETE FROM WATCHED", "", "success", {button: false, timer: 1000,});
+        swal("DELETE FROM WATCHED", "", "success", { button: false, timer: 1000, });
+        renderWatchedList();
     }
 }
 
@@ -93,6 +100,74 @@ function isInLocalStorage(filmes, film, button, list) {
     } else {
         return
     }
-    }
+}
 
-export { listenStorageBtns, fetchAndRenderFilmCard }
+function renderQueueList() {
+  const filmes = JSON.parse(localStorage.getItem('filmsToQueue'));
+  console.log(filmes);
+  filmes.map(film => {
+    film.release_date = film.release_date.slice(0, 4);
+  });
+  filmes.map(film => {
+    const genresList = film.genres.map(genre => genre.name);
+    console.log(genresList);
+    film.genres = genresList.join(', ');
+  });
+
+  if (filmes.length === 0) {
+    refs.queueContainer.classList.replace('movie-list', 'queue-list');
+      
+    refs.queueContainer.innerHTML = '';
+    refs.queueContainer.insertAdjacentHTML('beforeend', queueWhenNoneTpl());
+      
+    const backToSearchBtn = document.getElementById('back-to-search-btn');
+    backToSearchBtn.addEventListener('click', onHomeButtonClick);
+      
+    refs.queueList.removeEventListener('click', fetchAndRenderFilmCard);
+
+  } else {
+    refs.queueContainer.classList.replace('queue-list', 'movie-list');
+
+    refs.queueContainer.innerHTML = '';
+    refs.queueContainer.insertAdjacentHTML('beforeend', galleryTpl(filmes));
+    
+    refs.watchedList.removeEventListener('click', fetchAndRenderFilmCard);
+    refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
+  }
+}
+
+function renderWatchedList() {
+  const filmes = JSON.parse(localStorage.getItem('filmsToWatched'));
+  console.log(filmes);
+  filmes.map(film => {
+    film.release_date = film.release_date.slice(0, 4);
+  });
+  filmes.map(film => {
+    const genresList = film.genres.map(genre => genre.name);
+    console.log(genresList);
+    film.genres = genresList.join(', ');
+  });
+
+  if (filmes.length === 0) {
+    refs.watchedContainer.classList.replace('movie-list', 'watched-list');
+    
+    refs.watchedContainer.innerHTML = '';
+    refs.watchedContainer.insertAdjacentHTML('beforeend', watchedWhenNoneTpl());
+    
+    const backToHomeBtn = document.getElementById('back-to-home-btn');
+    backToHomeBtn.addEventListener('click', onHomeButtonClick);
+      
+    refs.watchedList.removeEventListener('click', fetchAndRenderFilmCard);
+  
+  } else {
+    refs.watchedContainer.classList.replace('watched-list', 'movie-list');
+
+    refs.watchedContainer.innerHTML = '';
+    refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(filmes));
+    
+    refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
+    refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
+  }
+}
+
+export { listenStorageBtns, fetchAndRenderFilmCard, }
