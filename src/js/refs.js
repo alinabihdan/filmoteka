@@ -30,8 +30,6 @@ export default {
   linkGoIT: document.querySelector('.footer-text-goit-link'),
   watchedBtn: document.querySelector('.btn-add-to-watched'),
   queueBtn: document.querySelector('.btn-add-to-queue'),
-  backToHomeBtn: document.querySelector('.back-to-home-btn'),
-  backToSearchBtn: document.querySelector('.back-to-search-btn'),
   genresContainer: document.getElementById('genre-container'),
   chooseGenreButton: document.querySelector('.choose-button'),
   paginationContainer: document.querySelector('.pagination'),

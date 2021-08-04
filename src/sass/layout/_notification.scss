@@ -1,0 +1,12 @@
+.swal-modal {
+  background-color: $footer-background-color;
+  border: 3px solid $main-text-color;
+  color: $main-text-color;
+}
+
+.swal-button {
+  background-color: $accent-color;
+  &:not([disabled]):hover {
+    background-color: $error-color;
+  }
+}
