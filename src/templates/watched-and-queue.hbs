@@ -1,10 +1,10 @@
  {{#each this}}
 <li class="gallery-item">
  <div class="card">
-     <img class="img-card" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}" data-id="{{id}}"/>
+     <img class="img-card" src="https://image.tmdb.org/t/p/w500{{poster_path}}" alt="{{title}}" data-id="{{id}}" onError="this.onerror=null;this.src='https://st.depositphotos.com/2185383/4533/v/950/depositphotos_45330099-stock-illustration-cinema-concept-poster.jpg;'" />
       <div class="movie-card">
          <p class="subscribe-item-movie">{{title}}</p>
-         <span class="subscribe-item">{{genres}}</span>&nbsp;
+         <span class="subscribe-item genres">{{genres}}</span>&nbsp;
          <span class="subscribe-item"> &#8402 &nbsp;{{release_date}} </span>
          <span class="film-vote">{{vote_average}}</span>
       </div>

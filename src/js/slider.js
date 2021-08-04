@@ -7,9 +7,11 @@ const slider = new Glide('.glide', {
   type: 'slider',
   startAt: 0,
   perView: 8,
+  gap: 30,
   autoplay: 3000,
   hoverpause: true,
   bound: true,
+  // peek: 107,
   breakpoints: {
     1024: {
       perView: 8,
