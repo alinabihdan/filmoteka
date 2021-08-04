@@ -67,7 +67,7 @@ function startLocalPagination(renderSource) {
     el.addEventListener('click', () => {
       localStorageUtl.setPage(parseInt(el.textContent));
       renderSource();
-      setTimeout(startAutoScroll, 0);
+      // setTimeout(startAutoScroll, 0);
       startLocalPagination();
     });
   });
@@ -86,14 +86,14 @@ function startLocalPagination(renderSource) {
   function onPrevClick() {
     localStorageUtl.decrementPage();
     renderSource();
-    setTimeout(startAutoScroll, 0);
+    // setTimeout(startAutoScroll, 0);
     startLocalPagination();
   }
 
   function onNextClick() {
     localStorageUtl.incrementPage();
     renderSource();
-    setTimeout(startAutoScroll, 0);
+    // setTimeout(startAutoScroll, 0);
     startLocalPagination();
   }
 }

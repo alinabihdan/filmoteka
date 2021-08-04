@@ -26,6 +26,8 @@ function onLibraryButtonClick() {
   refs.movieContainer.classList.add('visually-hidden');
   // refs.paginationContainer.classList.add('visually-hidden');
   refs.watchedContainer.classList.remove('visually-hidden');
+
+  localStorageUtl.resetPage();
   renderWatchedList(); //функция которая рендерит список просмотренных фильмов
 
   if (sessionStorage.libraryNotification !== 'showed') {
@@ -65,6 +67,8 @@ function onQueueButtonClick() {
   refs.queueButton.removeEventListener('click', onQueueButtonClick);
   refs.watchedButton.classList.remove('is-btn-active');
   refs.queueButton.classList.add('is-btn-active');
+
+  localStorageUtl.resetPage();
   renderQueueList(); //функция которая рендерит список фильмов "Хочу смотреть"
 }
 
@@ -74,15 +78,17 @@ function onWatchedButtonClick() {
   refs.watchedButton.removeEventListener('click', onWatchedButtonClick);
   refs.queueButton.classList.remove('is-btn-active');
   refs.watchedButton.classList.add('is-btn-active');
+
+  localStorageUtl.resetPage();
   renderWatchedList();
 }
 
-function renderWatchedList() {
-  const filmes = JSON.parse(localStorage.getItem('filmsToWatched'));
+async function renderWatchedList() {
+  const filmes = await JSON.parse(localStorage.getItem('filmsToWatched'));
   const paginatedFilmes = paginateArray(filmes, localStorageUtl.page, localStorageUtl.cardsPerPage);
 
-  console.log(filmes);
-  console.log(paginatedFilmes);
+  // console.log(filmes);
+  // console.log(paginatedFilmes);
 
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
@@ -104,15 +110,19 @@ function renderWatchedList() {
     refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
 
     localStorageUtl.setTotalPages(filmes);
-    console.log(localStorageUtl.totalPages);
+    // console.log('total pages=' + localStorageUtl.totalPages, 'page=' + localStorageUtl.page);
     startLocalPagination(renderWatchedList);
   }
   // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
 }
 
-function renderQueueList() {
-  const filmes = JSON.parse(localStorage.getItem('filmsToQueue'));
-  // console.log(filmes);
+async function renderQueueList() {
+  const filmes = await JSON.parse(localStorage.getItem('filmsToQueue'));
+  const paginatedFilmes = paginateArray(filmes, localStorageUtl.page, localStorageUtl.cardsPerPage);
+
+  console.log(filmes);
+  console.log(paginatedFilmes);
+
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
   });
@@ -131,7 +141,11 @@ function renderQueueList() {
     refs.queueContainer.classList.remove('visually-hidden');
 
     refs.queueContainer.innerHTML = '';
-    refs.queueContainer.insertAdjacentHTML('beforeend', galleryTpl(filmes));
+    refs.queueContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
+
+    localStorageUtl.setTotalPages(filmes);
+    console.log('total pages=' + localStorageUtl.totalPages, 'page=' + localStorageUtl.page);
+    startLocalPagination(renderQueueList);
   }
   // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
 }
