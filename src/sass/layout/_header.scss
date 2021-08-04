@@ -95,13 +95,12 @@
 
 .site-nav {
   display: flex;
-  min-width: 170px;
+  min-width: 135px;
   justify-content: space-between;
 }
 
 .home-link,
-.my-library-link,
-.login-link {
+.my-library-link {
   font-weight: 500;
   font-size: $main-fontsize;
   line-height: 1.88;
