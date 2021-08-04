@@ -27,6 +27,7 @@
 
 // =====================Card-style====================
 .swiper-card{
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -34,8 +35,8 @@
     margin-bottom: 5px;
     width: 250px;
     height: auto;
-    border: 2px rgb(139, 135, 4) solid;
-    border-radius: 10px;
+    border: 3px rgb(139, 135, 4) solid;
+    border-radius: 11px;
     text-align: center;
     background-color: #fff;
     color: black;
@@ -45,9 +46,32 @@
 .swiper-card-img{
   width: 100%;
   max-height: 250px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 9px;
+  border-top-right-radius: 8px;
   // margin-bottom: 10px;
+  z-index: 1;
+}
+.swiper-card-img-bw{
+  position: absolute;
+  top:0;
+  width: 100%;
+  max-height: 250px;
+  border-top-left-radius: 9px;
+  border-top-right-radius: 8px;
+  // margin-bottom: 10px;
+  z-index: 2;
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover,
+  &:focus{
+    opacity: 0;
+  };
+}
+.swiper-slide-active > div.swiper-card-firstsection > img.swiper-card-img-bw{
+  opacity: 0;
 }
 
 .swiper-card-section{
@@ -61,13 +85,13 @@
 .swiper-card-profession{
   color: $film-card-titles-color;
   font-size:smaller;
-  // margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 .swiper-card-characteristic{
   color: $footer-text-color;
   padding-left: 10px;
   padding-right: 10px;
-  // margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 @media screen and (max-height: 654px) {
   .swiper-card-characteristic{
