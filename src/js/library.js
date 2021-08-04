@@ -5,9 +5,9 @@ import queueWhenNoneTpl from '../templates/queue-list.hbs';
 import filmoteka from './ApiService';
 import renderPopularMovie from './movies-gallery';
 import swal from 'sweetalert';
-import fetchAndRenderFilmCard from './modal-film';
+import { fetchAndRenderFilmCard } from './modal-film';
+
 function addListenerToLibraryBtn() {
-  // вешает слушатель на кнопку "Library"
   refs.libraryButton.addEventListener('click', onLibraryButtonClick);
 }
 
@@ -26,6 +26,7 @@ function onLibraryButtonClick() {
   refs.movieContainer.classList.add('visually-hidden');
   refs.paginationContainer.classList.add('visually-hidden');
   refs.watchedContainer.classList.remove('visually-hidden');
+  refs.watchedContainer.classList.replace('watched-list', 'movie-list');
   renderWatchedList(); //функция которая рендерит список просмотренных фильмов
 
   if (sessionStorage.libraryNotification !== 'showed') {
@@ -37,7 +38,7 @@ function onLibraryButtonClick() {
   }
 }
 
-function onHomeButtonClick() {
+export function onHomeButtonClick() {
   refs.header.classList.replace('my-library-header', 'home-header');
   refs.libraryButton.classList.remove('current');
   refs.homeButton.classList.add('current');
@@ -55,13 +56,17 @@ function onHomeButtonClick() {
   refs.watchedContainer.classList.add('visually-hidden');
   refs.queueContainer.classList.add('visually-hidden');
   refs.paginationContainer.classList.remove('visually-hidden');
+  refs.watchedContainer.classList.replace('movie-list', 'watched-list');
+  refs.queueContainer.classList.replace('movie-list', 'queue-list');
   renderMoviesGallery();
   refs.watchedList.removeEventListener('click', fetchAndRenderFilmCard);
   refs.queueList.removeEventListener('click', fetchAndRenderFilmCard);
 }
 
 function onQueueButtonClick() {
+  refs.watchedContainer.classList.replace('movie-list', 'watched-list');
   refs.watchedContainer.classList.add('visually-hidden');
+  refs.queueContainer.classList.replace('queue-list', 'movie-list');
   refs.watchedButton.addEventListener('click', onWatchedButtonClick);
   refs.queueButton.removeEventListener('click', onQueueButtonClick);
   refs.watchedButton.classList.remove('is-btn-active');
@@ -70,7 +75,9 @@ function onQueueButtonClick() {
 }
 
 function onWatchedButtonClick() {
+  refs.queueContainer.classList.replace('movie-list','queue-list');
   refs.queueContainer.classList.add('visually-hidden');
+  refs.watchedContainer.classList.replace('watched-list', 'movie-list');
   refs.queueButton.addEventListener('click', onQueueButtonClick);
   refs.watchedButton.removeEventListener('click', onWatchedButtonClick);
   refs.queueButton.classList.remove('is-btn-active');
@@ -100,7 +107,7 @@ function renderWatchedList() {
     const backToHomeBtn = document.getElementById('back-to-home-btn');
     backToHomeBtn.addEventListener('click', onHomeButtonClick);
     refs.watchedContainer.classList.replace('movie-list', 'watched-list');
-    swal('Ей, так не годится', 'Дружище, посмотри уже на конец что-нибудь', 'warning');
+//    swal('Ей, так не годится', 'Дружище, посмотри уже на конец что-нибудь', 'warning');
   } else {
     refs.watchedContainer.classList.replace('watched-list', 'movie-list');
     refs.watchedContainer.classList.remove('visually-hidden');
@@ -125,6 +132,8 @@ function renderQueueList() {
   });
 
   if (filmes.length === 0) {
+    refs.queueList.removeEventListener('click', fetchAndRenderFilmCard);
+    refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
     refs.queueContainer.classList.remove('visually-hidden');
     refs.queueContainer.innerHTML = '';
 
@@ -132,7 +141,7 @@ function renderQueueList() {
     const backToSearchBtn = document.getElementById('back-to-search-btn');
     backToSearchBtn.addEventListener('click', onHomeButtonClick);
     refs.queueContainer.classList.replace('movie-list', 'queue-list');
-    swal('Ей, так не годится', 'Дружище, выбери уже на конец что-нибудь', 'warning');
+//    swal('Ей, так не годится', 'Дружище, выбери уже на конец что-нибудь', 'warning');
   } else {
     refs.queueContainer.classList.replace('queue-list', 'movie-list');
     refs.queueContainer.classList.remove('visually-hidden');
