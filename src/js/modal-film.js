@@ -5,7 +5,7 @@ import queueWhenNoneTpl from '../templates/queue-list.hbs';
 import { onHomeButtonClick } from './library';
 import refs from './refs';
 import filmoteka from './ApiService';
-import localStorageUtl from './localStorageUtl';
+import { fetchTrailerFilm } from './trailers';
 
 if (!localStorage.filmsToWatched || localStorage.filmsToWatched === null) {
     localStorage.setItem('filmsToWatched', '[]');
@@ -45,6 +45,8 @@ function listenStorageBtns() {
     const film = filmoteka.storageData;
     const queueFilmes = JSON.parse(localStorage.filmsToQueue);
     const watchedFilmes = JSON.parse(localStorage.filmsToWatched);
+    const traillerBtn = document.getElementById('tailler-btn');
+
 
 
     isInLocalStorage(queueFilmes, film, queueBtn, 'queue');
@@ -52,8 +54,13 @@ function listenStorageBtns() {
 
     queueBtn.addEventListener('click', () => onModalQueueButtonClick(film, queueBtn));
     watchedBtn.addEventListener('click', () => onModalWatchedButtonClick(film, watchedBtn));
-
+    traillerBtn.addEventListener('click', hadleClickTrailer);
 };
+
+function hadleClickTrailer(e) {
+  const id = e.target.dataset.id;
+   fetchTrailerFilm(id);
+}
 
 function onModalQueueButtonClick(film, button) {
     const filmes = JSON.parse(localStorage.filmsToQueue);
