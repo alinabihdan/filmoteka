@@ -1,5 +1,5 @@
 import refs from './refs';
-import { Languages } from './lang-switcher';
+// import { Languages } from './lang-switcher';
 import { transformDate, transformGenre } from './changeDateAndGenres';
 import genresTemplate from '../templates/genres.hbs';
 import mainGalleryTpl from '../templates/main-gallery.hbs';
