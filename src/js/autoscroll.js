@@ -19,7 +19,6 @@ function startAutoScroll(local) {
       behavior: 'smooth',
     });
   }
-  console.log('hi from autoscroll, anchor=' + autoScrollAnchor.firstElementChild);
 }
 
 export { startAutoScroll };
