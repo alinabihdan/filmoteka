@@ -1,7 +1,7 @@
 import refs from './refs';
 
-// refs.closeBtn.addEventListener('click', closeModal);
-// refs.modalWindow.addEventListener('click', overlayClick);
+refs.closeBtn.addEventListener('click', closeModal);
+refs.modalWindow.addEventListener('click', overlayClick);
 // refs.modalOverlay.addEventListener('click', closeModal);
 window.addEventListener('keydown', keyPress);
 
@@ -25,9 +25,4 @@ function closeModal() {
   refs.bodyEl.classList.remove('modal-open');
   refs.filmModalField.classList.remove('is-active');
   refs.buttonToTop.classList.remove('visually-hidden');
-        
-  refs.closeBtn.removeEventListener('click', closeModal);
-  refs.modalWindow.removeEventListener('click', overlayClick);
 }
-
-export {overlayClick, closeModal}
