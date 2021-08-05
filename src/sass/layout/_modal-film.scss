@@ -25,6 +25,10 @@
       padding: 70px 71px;
     }
 
+    @media screen and (min-width: 1440px) {
+      padding: 150px 75px;
+    }
+
     &.is-active {
       pointer-events: all;
       opacity: 1;
