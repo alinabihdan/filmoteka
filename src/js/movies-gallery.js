@@ -16,11 +16,12 @@ async function renderPopularMovies() {
   filmoteka.totalPages = total_pages;
   transformDate(results);
   transformGenre(results, genresList);
-
   const markup = movieCardTpl(results);
 
   clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
+  verificationAddToWatchedButtons();
+  verificationAddToQueueButtons();
   startPagination(renderPopularMovies);
   // startAutoScroll();
 
@@ -33,6 +34,41 @@ async function renderPopularMovies() {
   }
 }
 
+async function verificationAddToWatchedButtons() {
+  const watchedFilms = JSON.parse(localStorage.getItem('filmsToWatched'));
+  console.log(watchedFilms);
+  const buttonsAddToWatched = document.querySelectorAll('#overlay-btn-add-to-watched');
+  console.log(buttonsAddToWatched);
+  buttonsAddToWatched.forEach(buttonAddToWatched => {
+    const id = buttonAddToWatched.dataset.id;
+    console.log(id);
+    watchedFilms.forEach(watchedFilm => {
+      console.log(watchedFilm.id);
+      if (`${watchedFilm.id}` === id) {
+        buttonAddToWatched.textContent = 'delete from watched';
+      }
+      return
+    });
+  })
+}
+
+async function verificationAddToQueueButtons() {
+  const queueFilms = JSON.parse(localStorage.getItem('filmsToQueue'));
+  console.log(queueFilms);
+  const buttonsAddToQueue = document.querySelectorAll('#overlay-btn-add-to-queue');
+  console.log(buttonsAddToQueue);
+  buttonsAddToQueue.forEach(buttonAddToQueue => {
+    const id = buttonAddToQueue.dataset.id;
+    console.log(id);
+    queueFilms.forEach(queueFilm => {
+      console.log(queueFilm.id);
+      if (`${queueFilm.id}` === id) {
+        buttonAddToQueue.textContent = 'delete from queue';
+      }
+      return
+    });
+  })
+}
 // вызываем рендер главной страницы
 renderPopularMovies();
 
@@ -93,4 +129,4 @@ function clearMovieContainer() {
   refs.movieContainer.innerHTML = '';
 }
 
-export { renderPopularMovies };
+export { renderPopularMovies, verificationAddToWatchedButtons, verificationAddToQueueButtons};

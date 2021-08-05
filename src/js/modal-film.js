@@ -6,6 +6,7 @@ import { onHomeButtonClick } from './library';
 import refs from './refs';
 import filmoteka from './ApiService';
 import { closeModal, overlayClick } from './btn-to-close';
+import { verificationAddToWatchedButtons, verificationAddToQueueButtons } from './movies-gallery';
 
 if (!localStorage.filmsToWatched || localStorage.filmsToWatched === null) {
     localStorage.setItem('filmsToWatched', '[]');
@@ -20,14 +21,24 @@ refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
 async function fetchAndRenderFilmCard(e) {
     if (e.target.id === 'open-modal-film-btn') {
         await renderFilmCard(e.target.dataset.id);
-        refs.closeBtn.addEventListener('click', closeModal);
-        refs.modalWindow.addEventListener('click', overlayClick);
         refs.modalFilmBlackdrop.classList.add('is-active');
         refs.filmModalField.classList.add('is-active');
         refs.bodyEl.classList.add('modal-open');
         refs.buttonToTop.classList.add('visually-hidden');
 
     listenStorageBtns();
+    } else if (e.target.id === 'overlay-btn-add-to-watched') {
+      const addToWatchedBtn = e.target;
+      const id = e.target.dataset.id;
+      await filmoteka.getMovieByID(id);
+      const film = filmoteka.storageData;
+      onModalWatchedButtonClick(film, addToWatchedBtn);
+  } else if (e.target.id === 'overlay-btn-add-to-queue') {
+      const addToQueueBtn = e.target;
+      const id = e.target.dataset.id;
+      await filmoteka.getMovieByID(id);
+      const film = filmoteka.storageData;
+      onModalQueueButtonClick(film, addToQueueBtn);
   }
     return
 }
@@ -58,7 +69,7 @@ function listenStorageBtns() {
 
 };
 
-function onModalQueueButtonClick(film, button) {
+async function onModalQueueButtonClick(film, button) {
     const filmes = JSON.parse(localStorage.filmsToQueue);
     const index = filmes.findIndex(movie => film.id === movie.id);
     if (index === -1) {
@@ -77,7 +88,7 @@ function onModalQueueButtonClick(film, button) {
     }
 }
 
-function onModalWatchedButtonClick(film, button) {
+async function onModalWatchedButtonClick(film, button) {
     const filmes = JSON.parse(localStorage.filmsToWatched);
     const index = filmes.findIndex(movie => film.id === movie.id);
     if (index === -1) {
@@ -105,7 +116,7 @@ function isInLocalStorage(filmes, film, button, list) {
     }
 }
 
-function renderQueueList() {
+async function renderQueueList() {
   const filmes = JSON.parse(localStorage.getItem('filmsToQueue'));
   console.log(filmes);
   filmes.map(film => {
@@ -133,13 +144,14 @@ function renderQueueList() {
 
     refs.queueContainer.innerHTML = '';
     refs.queueContainer.insertAdjacentHTML('beforeend', galleryTpl(filmes));
-    
-    refs.watchedList.removeEventListener('click', fetchAndRenderFilmCard);
+    verificationAddToWatchedButtons();
+    verificationAddToQueueButtons();
+    refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
     refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
   }
 }
 
-function renderWatchedList() {
+async function renderWatchedList() {
   const filmes = JSON.parse(localStorage.getItem('filmsToWatched'));
   console.log(filmes);
   filmes.map(film => {
@@ -167,7 +179,8 @@ function renderWatchedList() {
 
     refs.watchedContainer.innerHTML = '';
     refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(filmes));
-    
+    verificationAddToWatchedButtons();
+    verificationAddToQueueButtons();
     refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
     refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
   }
