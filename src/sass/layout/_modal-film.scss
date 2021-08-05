@@ -40,7 +40,7 @@
 
     &.is-active {
       transform: scale(1);
-      transform: rotateX(0);  
+      transform: rotateX(0);
       transition: all 300ms ease-in;
     }
 
@@ -219,7 +219,8 @@
   color: #000000;
 }
 
-.action-buttons {
+.action-buttons,
+.trailler-btn-div {
   display: flex;
   align-items: center;
 
@@ -241,8 +242,18 @@
   }
 }
 
+.trailler-btn-div {
+  justify-content: center;
+  margin-top: 15px;
+
+  @media screen and (min-width: 1024px) {
+    justify-content: start;
+  }
+}
+
 .btn-add-to-watched,
-.btn-add-to-queue {
+.btn-add-to-queue,
+.trailler-btn {
   width: 110px;
   height: 44px;
   font-weight: 500;
@@ -273,5 +284,11 @@
 .btn-add-to-watched {
   @include screen('desktop') {
     margin-right: 15px;
+  }
+}
+
+.trailler-btn {
+  @include screen('desktop') {
+    margin-left: 68px;
   }
 }
