@@ -33,7 +33,6 @@ async function renderFilmCard(id) {
     try {
         const film = await filmoteka.getMovieByID(id);
         refs.modalFilmRenderField.innerHTML = modalFilmTpl(film);
-        console.log(filmoteka.storageData);
     } catch {
         return alert('Sorry there is a mistake');
     }
@@ -67,7 +66,6 @@ function onModalQueueButtonClick(film, button) {
     const index = filmes.findIndex(movie => film.id === movie.id);
     if (index === -1) {
         filmes.push(film);
-        console.log(filmes);
         localStorage.filmsToQueue = JSON.stringify(filmes);
         button.textContent = "delete from queue";
         swal("ADD TO QUEUE", "", "success", { button: false, timer: 1000, });
@@ -86,7 +84,6 @@ function onModalWatchedButtonClick(film, button) {
     const index = filmes.findIndex(movie => film.id === movie.id);
     if (index === -1) {
         filmes.push(film);
-        console.log(filmes);
         localStorage.filmsToWatched = JSON.stringify(filmes);
         button.textContent = "delete from watched";
         swal("ADD TO WATCHED", "", "success", { button: false, timer: 1000, });
@@ -111,13 +108,11 @@ function isInLocalStorage(filmes, film, button, list) {
 
 function renderQueueList() {
   const filmes = JSON.parse(localStorage.getItem('filmsToQueue'));
-  console.log(filmes);
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
   });
   filmes.map(film => {
     const genresList = film.genres.map(genre => genre.name);
-    console.log(genresList);
     film.genres = genresList.join(', ');
   });
 
@@ -145,13 +140,11 @@ function renderQueueList() {
 
 function renderWatchedList() {
   const filmes = JSON.parse(localStorage.getItem('filmsToWatched'));
-  console.log(filmes);
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
   });
   filmes.map(film => {
     const genresList = film.genres.map(genre => genre.name);
-    console.log(genresList);
     film.genres = genresList.join(', ');
   });
 
