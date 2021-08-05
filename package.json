@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.4.1",
-    "basiclightbox": "^5.0.4",
     "sweetalert": "^2.1.2",
     "swiper": "^6.8.0"
   }
