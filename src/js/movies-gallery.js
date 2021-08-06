@@ -21,7 +21,10 @@ async function renderPopularMovies() {
 
   clearMovieContainer();
   refs.movieContainer.insertAdjacentHTML('beforeend', markup);
+  verificationAddToWatchedButtons();
+  verificationAddToQueueButtons();
   startPagination(renderPopularMovies);
+  // startAutoScroll();
 
   if (sessionStorage.mainNotification !== 'showed') {
     const mainTitle = 'Привет, Пользователь!';
@@ -32,6 +35,33 @@ async function renderPopularMovies() {
   }
 }
 
+async function verificationAddToWatchedButtons() {
+  const watchedFilms = JSON.parse(localStorage.getItem('filmsToWatched'));
+  const buttonsAddToWatched = document.querySelectorAll('#overlay-btn-add-to-watched');
+  buttonsAddToWatched.forEach(buttonAddToWatched => {
+    const id = buttonAddToWatched.dataset.id;
+    watchedFilms.forEach(watchedFilm => {
+      if (`${watchedFilm.id}` === id) {
+        buttonAddToWatched.textContent = 'delete from watched';
+      }
+      return
+    });
+  })
+}
+
+async function verificationAddToQueueButtons() {
+  const queueFilms = JSON.parse(localStorage.getItem('filmsToQueue'));
+  const buttonsAddToQueue = document.querySelectorAll('#overlay-btn-add-to-queue');
+  buttonsAddToQueue.forEach(buttonAddToQueue => {
+    const id = buttonAddToQueue.dataset.id;
+    queueFilms.forEach(queueFilm => {
+      if (`${queueFilm.id}` === id) {
+        buttonAddToQueue.textContent = 'delete from queue';
+      }
+      return
+    });
+  })
+}
 // вызываем рендер главной страницы
 renderPopularMovies();
 
@@ -92,4 +122,4 @@ function clearMovieContainer() {
   refs.movieContainer.innerHTML = '';
 }
 
-export { renderPopularMovies };
+export { renderPopularMovies, verificationAddToWatchedButtons, verificationAddToQueueButtons};
