@@ -111,6 +111,7 @@ async function renderWatchedList() {
     refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
     refs.watchedContainer.classList.remove('visually-hidden');
     refs.watchedContainer.innerHTML = '';
+    refs.paginationContainer.classList.add('visually-hidden');
 
     refs.watchedContainer.insertAdjacentHTML('beforeend', watchedWhenNoneTpl());
     const backToHomeBtn = document.getElementById('back-to-home-btn');
@@ -125,6 +126,7 @@ async function renderWatchedList() {
     refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
     refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
 
+    refs.paginationContainer.classList.remove('visually-hidden');
     localStorageUtl.setTotalPages(filmes);
     startLocalPagination(renderWatchedList);
   }
@@ -134,6 +136,7 @@ async function renderWatchedList() {
 async function renderQueueList() {
   const filmes = await JSON.parse(localStorage.getItem('filmsToQueue'));
   const paginatedFilmes = paginateArray(filmes, localStorageUtl.page, localStorageUtl.cardsPerPage);
+  refs.paginationContainer.classList.remove('visually-hidden');
 
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
@@ -150,6 +153,8 @@ async function renderQueueList() {
     refs.queueContainer.classList.remove('visually-hidden');
     refs.queueContainer.innerHTML = '';
 
+    refs.paginationContainer.classList.add('visually-hidden');
+
     refs.queueContainer.insertAdjacentHTML('beforeend', queueWhenNoneTpl());
     const backToSearchBtn = document.getElementById('back-to-search-btn');
     backToSearchBtn.addEventListener('click', onHomeButtonClick);
@@ -162,6 +167,7 @@ async function renderQueueList() {
     refs.queueContainer.innerHTML = '';
     refs.queueContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
     refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
+    refs.paginationContainer.classList.remove('visually-hidden');
 
     localStorageUtl.setTotalPages(filmes);
     startLocalPagination(renderQueueList);
