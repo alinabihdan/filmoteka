@@ -3,7 +3,7 @@ import galleryTpl from '../templates/watched-and-queue.hbs';
 import watchedWhenNoneTpl from '../templates/watched-list.hbs';
 import queueWhenNoneTpl from '../templates/queue-list.hbs';
 import filmoteka from './ApiService';
-import renderPopularMovie from './movies-gallery';
+import { renderPopularMovie, verificationAddToWatchedButtons, verificationAddToQueueButtons } from './movies-gallery';
 import swal from 'sweetalert';
 import localStorageUtl from './localStorageUtl';
 import { startLocalPagination } from './pagination';
@@ -117,20 +117,20 @@ async function renderWatchedList() {
     const backToHomeBtn = document.getElementById('back-to-home-btn');
     backToHomeBtn.addEventListener('click', onHomeButtonClick);
     refs.watchedContainer.classList.replace('movie-list', 'watched-list');
-    //    swal('Ей, так не годится', 'Дружище, посмотри уже на конец что-нибудь', 'warning');
   } else {
     refs.watchedContainer.classList.replace('watched-list', 'movie-list');
     refs.watchedContainer.classList.remove('visually-hidden');
 
     refs.watchedContainer.innerHTML = '';
     refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
+    verificationAddToWatchedButtons();
+    verificationAddToQueueButtons();
     refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
 
     refs.paginationContainer.classList.remove('visually-hidden');
     localStorageUtl.setTotalPages(filmes);
     startLocalPagination(renderWatchedList);
   }
-  // тут будет функция которая будет рендерить галерею фильмов из сохраненных в соответственном массиве в LocalStorage
 }
 
 async function renderQueueList() {
@@ -166,6 +166,8 @@ async function renderQueueList() {
 
     refs.queueContainer.innerHTML = '';
     refs.queueContainer.insertAdjacentHTML('beforeend', galleryTpl(paginatedFilmes));
+    verificationAddToWatchedButtons();
+    verificationAddToQueueButtons();
     refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
     refs.paginationContainer.classList.remove('visually-hidden');
 
@@ -191,6 +193,19 @@ function paginateArray(array, page, cardsPerPage) {
   let end = start + cardsPerPage;
   return array.slice(start, end);
 }
+// function getLocalStoragefilmes(key) {
+//   const filmes = JSON.parse(localStorage.getItem(key));
+//   // console.log(filmes);
+//   filmes.map(film => {
+//     film.release_date = film.release_date.slice(0, 4);
+//   });
+//   filmes.map(film => {
+//     const genresList = film.genres.map(genre => genre.name);
+//     // console.log(genresList);
+//     film.genres = genresList.join(', ');
+//   });
+//   return filmes;
+// }
 
 addListenerToLibraryBtn();
 

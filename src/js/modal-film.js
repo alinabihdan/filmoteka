@@ -6,6 +6,8 @@ import { onHomeButtonClick } from './library';
 import refs from './refs';
 import filmoteka from './ApiService';
 import { fetchTrailerFilm } from './trailers';
+import { closeModal, overlayClick } from './btn-to-close';
+import { renderPopularMovies, verificationAddToWatchedButtons, verificationAddToQueueButtons } from './movies-gallery';
 
 if (!localStorage.filmsToWatched || localStorage.filmsToWatched === null) {
     localStorage.setItem('filmsToWatched', '[]');
@@ -18,7 +20,7 @@ refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
 refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
 
 async function fetchAndRenderFilmCard(e) {
-    if (e.target.nodeName === 'IMG') {
+    if (e.target.id === 'open-modal-film-btn' || e.target.nodeName === 'IMG') {
         await renderFilmCard(e.target.dataset.id);
         refs.modalFilmBlackdrop.classList.add('is-active');
         refs.filmModalField.classList.add('is-active');
@@ -26,7 +28,20 @@ async function fetchAndRenderFilmCard(e) {
         refs.buttonToTop.classList.add('visually-hidden');
 
     listenStorageBtns();
+    } else if (e.target.id === 'overlay-btn-add-to-watched') {
+      const addToWatchedBtn = e.target;
+      const id = e.target.dataset.id;
+      await filmoteka.getMovieByID(id);
+      const film = filmoteka.storageData;
+      onModalWatchedButtonClick(film, addToWatchedBtn);
+  } else if (e.target.id === 'overlay-btn-add-to-queue') {
+      const addToQueueBtn = e.target;
+      const id = e.target.dataset.id;
+      await filmoteka.getMovieByID(id);
+      const film = filmoteka.storageData;
+      onModalQueueButtonClick(film, addToQueueBtn);
   }
+    return
 }
 
 async function renderFilmCard(id) {
@@ -61,7 +76,7 @@ function hadleClickTrailer(e) {
    fetchTrailerFilm(id);
 }
 
-function onModalQueueButtonClick(film, button) {
+async function onModalQueueButtonClick(film, button) {
     const filmes = JSON.parse(localStorage.filmsToQueue);
     const index = filmes.findIndex(movie => film.id === movie.id);
     if (index === -1) {
@@ -70,16 +85,18 @@ function onModalQueueButtonClick(film, button) {
         button.textContent = "delete from queue";
         swal("ADD TO QUEUE", "", "success", { button: false, timer: 1000, });
         renderQueueList();
+        renderPopularMovies();
     } else {
         filmes.splice(index, 1);
         localStorage.filmsToQueue = JSON.stringify(filmes);
         button.textContent = "add to queue";
         swal("DELETE FROM QUEUE", "", "success", { button: false, timer: 1000, });
         renderQueueList();
+        renderPopularMovies();
     }
 }
 
-function onModalWatchedButtonClick(film, button) {
+async function onModalWatchedButtonClick(film, button) {
     const filmes = JSON.parse(localStorage.filmsToWatched);
     const index = filmes.findIndex(movie => film.id === movie.id);
     if (index === -1) {
@@ -88,12 +105,14 @@ function onModalWatchedButtonClick(film, button) {
         button.textContent = "delete from watched";
         swal("ADD TO WATCHED", "", "success", { button: false, timer: 1000, });
         renderWatchedList();
+        renderPopularMovies();
     } else {
         filmes.splice(index, 1);
         localStorage.filmsToWatched = JSON.stringify(filmes);
         button.textContent = "add to watched";
         swal("DELETE FROM WATCHED", "", "success", { button: false, timer: 1000, });
         renderWatchedList();
+        renderPopularMovies();
     }
 }
 
@@ -106,7 +125,7 @@ function isInLocalStorage(filmes, film, button, list) {
     }
 }
 
-function renderQueueList() {
+async function renderQueueList() {
   const filmes = JSON.parse(localStorage.getItem('filmsToQueue'));
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
@@ -133,12 +152,14 @@ function renderQueueList() {
     refs.queueContainer.innerHTML = '';
     refs.queueContainer.insertAdjacentHTML('beforeend', galleryTpl(filmes));
     
-    refs.watchedList.removeEventListener('click', fetchAndRenderFilmCard);
+    refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
     refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
+    verificationAddToWatchedButtons();
+    verificationAddToQueueButtons();
   }
 }
 
-function renderWatchedList() {
+async function renderWatchedList() {
   const filmes = JSON.parse(localStorage.getItem('filmsToWatched'));
   filmes.map(film => {
     film.release_date = film.release_date.slice(0, 4);
@@ -165,6 +186,8 @@ function renderWatchedList() {
     refs.watchedContainer.innerHTML = '';
     refs.watchedContainer.insertAdjacentHTML('beforeend', galleryTpl(filmes));
     
+    verificationAddToWatchedButtons();
+    verificationAddToQueueButtons();
     refs.queueList.addEventListener('click', fetchAndRenderFilmCard);
     refs.watchedList.addEventListener('click', fetchAndRenderFilmCard);
   }
