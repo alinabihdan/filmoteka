@@ -14,7 +14,8 @@ function fetchTrailerFilm(id) {
     return fetch(`${BASE_URL}/movie/${id}/videos?${API_KEY}`)
     .then(response => response.json())
     .then(videos => {
-      const trailerKey = videos.results[0].key;
+      const video = videos.results.find(result => result.type === "Trailer" && result.name.includes('Trailer'));
+      const trailerKey = video.key;
       const trailer = basicLightbox.create(`
   <iframe width="75%" height="75%" src='https://www.youtube.com/embed/${trailerKey}'frameborder="0" allowfullscreen class="trailer_video"></iframe>
 `);
