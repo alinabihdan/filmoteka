@@ -73,8 +73,6 @@ async function onGenreButtonClick(e) {
   refs.movieContainer.innerHTML = mainGalleryTpl(results);
 }
 
-// нужно прописать логику снятия листенеров
-
 // полезные функции
 function renderMarkup(nameContainer, fnTemplates) {
   nameContainer.insertAdjacentHTML('beforeend', fnTemplates());
