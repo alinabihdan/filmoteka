@@ -48,6 +48,7 @@ async function renderFilmCard(id) {
     try {
         const film = await filmoteka.getMovieByID(id);
         refs.modalFilmRenderField.innerHTML = modalFilmTpl(film);
+        refs.modalFilmBlackdrop.style.backgroundImage = `url(https://image.tmdb.org/t/p/w500${film.backdrop_path})`;
     } catch {
         return alert('Sorry there is a mistake');
     }
