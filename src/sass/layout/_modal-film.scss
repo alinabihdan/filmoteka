@@ -6,9 +6,6 @@
     height: 100vh;
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.25);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
     position: fixed;
     top: 0;
     left: 0;
@@ -42,7 +39,7 @@
   &-modal {
     transform: scale(0);
     transform: rotateX(90deg);
-    background-color: #ffffff80;
+    background-color: #ffffff;
     padding: 48px 20px 41px 20px;
     position: relative;
 
@@ -220,7 +217,7 @@
 }
 
 .left-column {
-  color: #ff6b01;
+  color: #8c8c8c;
   white-space: nowrap;
 }
 

@@ -50,7 +50,6 @@ class FilmsApiServise {
           id: film.id,
           title: film.title,
           poster_path: film.poster_path,
-          backdrop_path: film.backdrop_path,
           genres: film.genres,
           release_date: film.release_date,
           vote_average: film.vote_average,
