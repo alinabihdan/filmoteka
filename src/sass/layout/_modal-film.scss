@@ -4,7 +4,7 @@
     pointer-events: none;
     width: 100vw;
     height: 100vh;
-    padding: 20px;
+    padding: 15px;
     background-color: rgba(0, 0, 0, 0.25);
     background-position: center;
     background-repeat: no-repeat;
@@ -13,7 +13,6 @@
     top: 0;
     left: 0;
     z-index: 12;
-    // overflow: scroll;
     transition: all 300ms ease-in;
 
     @media screen and (max-width: 767px) {
@@ -21,30 +20,32 @@
     }
 
     @include screen('tablet') {
-      padding: 130px 75px;
+      padding: 30px 75px;
     }
 
     @include screen('desktop') {
-      padding: 70px 71px;
+      padding: 20px 71px;
     }
 
-    @media screen and (min-width: 1440px) {
-      padding: 150px 75px;
-    }
+    // @media screen and (min-width: 1440px) {
+    //   padding: 10px 75px;
+    // }
 
     &.is-active {
       pointer-events: all;
       opacity: 1;
       transition: all 300ms ease-in;
+      overflow-x: scroll;
     }
   }
 
   &-modal {
     transform: scale(0);
     transform: rotateX(90deg);
-    background-color: #ffffff80;
+    background-color: rgba(255, 255, 255, 0.842);
     padding: 48px 20px 41px 20px;
     position: relative;
+    border-radius: 15px;
 
     transition: all 300ms ease-in;
 
